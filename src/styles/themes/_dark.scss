@@ -1,5 +1,23 @@
-.dark {
-    --bg: #0F172A;
-    --primary: #3B82F6;
-    color: #fff;
+.dark-theme {
+
+    --background: #020617;
+
+    --surface: #0F172A;
+
+    --surface-secondary: #1E293B;
+
+    --text-primary: #F8FAFC;
+
+    --text-secondary: #CBD5E1;
+
+    --border: #334155;
+
+    --shadow-sm: none;
+
+    --shadow-md: none;
+
+    background: var(--background);
+
+    color: var(--text-primary);
+
 }

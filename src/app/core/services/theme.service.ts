@@ -1,1 +1,0 @@
-export class ThemeService{toggle(){document.body.classList.toggle('dark')}}

@@ -1,0 +1,52 @@
+/* ==========================================================
+   Enterprise Theme Variables
+   School Management System
+========================================================== */
+
+:root {
+
+    /* Brand */
+
+    --primary: #2563EB;
+    --primary-hover: #1D4ED8;
+    --primary-light: #DBEAFE;
+
+    --secondary: #475569;
+
+    --success: #16A34A;
+    --warning: #F59E0B;
+    --danger: #DC2626;
+    --info: #0EA5E9;
+
+    /* Background */
+
+    --background: #F8FAFC;
+    --surface: #FFFFFF;
+    --surface-secondary: #F1F5F9;
+
+    /* Text */
+
+    --text-primary: #0F172A;
+    --text-secondary: #64748B;
+    --text-disabled: #94A3B8;
+
+    /* Border */
+
+    --border: #E2E8F0;
+
+    /* Radius */
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    /* Shadows */
+
+    --shadow-sm: 0 2px 4px rgba(15, 23, 42, .06);
+
+    --shadow-md: 0 8px 24px rgba(15, 23, 42, .08);
+
+    --shadow-lg: 0 16px 48px rgba(15, 23, 42, .12);
+
+}
