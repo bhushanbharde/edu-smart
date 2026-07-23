@@ -1,0 +1,145 @@
+:host {
+  display: inline-flex;
+}
+
+.avatar {
+  position: relative;
+
+  display: inline-flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+
+  user-select: none;
+
+  font-weight: 600;
+
+  color: white;
+
+  transition: 0.25s;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.square {
+  border-radius: var(--radius-lg);
+}
+
+/* Sizes */
+
+.xs {
+  width: 24px;
+  height: 24px;
+  font-size: 10px;
+}
+
+.sm {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+
+.md {
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+}
+
+.lg {
+  width: 56px;
+  height: 56px;
+  font-size: 18px;
+}
+
+.xl {
+  width: 72px;
+  height: 72px;
+  font-size: 22px;
+}
+
+img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.icon {
+  font-size: 1.2em;
+}
+
+.initials {
+  letter-spacing: 0.5px;
+}
+
+/* Status */
+
+.status {
+  position: absolute;
+
+  right: 2px;
+
+  bottom: 2px;
+
+  width: 10px;
+
+  height: 10px;
+
+  border-radius: 50%;
+
+  border: 2px solid var(--surface-card);
+}
+
+.status.online {
+  background: var(--color-success);
+}
+
+.status.offline {
+  background: var(--color-neutral);
+}
+
+.status.away {
+  background: var(--color-warning);
+}
+
+.status.busy {
+  background: var(--color-danger);
+}
+
+/* Theme Colors */
+
+.primary {
+  background: var(--color-primary);
+}
+
+.secondary {
+  background: var(--color-secondary);
+}
+
+.success {
+  background: var(--color-success);
+}
+
+.warning {
+  background: var(--color-warning);
+}
+
+.danger {
+  background: var(--color-danger);
+}
+
+.info {
+  background: var(--color-info);
+}
+
+.neutral {
+  background: var(--color-neutral);
+}

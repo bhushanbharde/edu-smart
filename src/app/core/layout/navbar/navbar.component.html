@@ -1,39 +1,53 @@
 <header class="navbar">
   <div class="navbar-left">
-    <button class="icon-btn" (click)="toggleSidebar()">☰</button>
+    <erp-sidebar-toggle />
 
-    <div class="breadcrumb">
-      Dashboard
-
-      <span>/</span>
-
-      Home
+    <div class="page-information">
+      <h1>Dashboard</h1>
+      <span> School Management System </span>
+      <erp-button>Save</erp-button>
+      <erp-button>Delete</erp-button>
     </div>
   </div>
 
   <div class="navbar-center">
-    <div class="search-box">
-      <input type="text" placeholder="Search students, teachers, classes..." />
-    </div>
+    <erp-navbar-search />
   </div>
 
   <div class="navbar-right">
-    <button class="icon-btn" (click)="toggleTheme()">🌙</button>
+    <!-- Theme -->
 
-    <button class="icon-btn" (click)="toggleFullscreen()">⛶</button>
+    <erp-theme-toggle />
 
-    <button class="icon-btn">🔔</button>
+    <!-- Fullscreen -->
 
-    <div class="profile" [matMenuTriggerFor]="menu">
-      <img src="assets/images/avatar.png" alt="Profile" />
-    </div>
+    <erp-fullscreen />
+
+    <!-- Notification -->
+
+    <erp-dropdown>
+      <erp-navbar-action
+        dropdownTrigger
+        icon="bell"
+        [badge]="navbar.unreadCount()"
+      >
+      </erp-navbar-action>
+
+      <erp-notification-panel dropdownContent> </erp-notification-panel>
+    </erp-dropdown>
+
+    <!-- Profile -->
+
+    <erp-dropdown>
+      <button dropdownTrigger class="profile-button">
+        <div class="avatar">A</div>
+
+        <span>
+          {{ navbar.profile().name }}
+        </span>
+      </button>
+
+      <erp-profile-menu dropdownContent> </erp-profile-menu>
+    </erp-dropdown>
   </div>
 </header>
-
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>Profile</button>
-
-  <button mat-menu-item>Settings</button>
-
-  <button mat-menu-item>Logout</button>
-</mat-menu>

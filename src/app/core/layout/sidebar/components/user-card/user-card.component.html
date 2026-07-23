@@ -1,0 +1,35 @@
+<div class="user-card" [class.collapsed]="collapsed">
+
+  <div class="avatar">
+
+    @if (avatarUrl) {
+
+      <img [src]="avatarUrl" [alt]="name">
+
+    } @else {
+
+      <span>{{ name.charAt(0) }}</span>
+
+    }
+
+  </div>
+
+  @if (!collapsed) {
+
+    <div class="details">
+
+      <div class="name">{{ name }}</div>
+
+      <div class="role">{{ role }}</div>
+
+    </div>
+
+    <button type="button" class="more-btn" aria-label="User menu">
+
+      <erp-icon name="ellipsis-vertical" size="sm"></erp-icon>
+
+    </button>
+
+  }
+
+</div>

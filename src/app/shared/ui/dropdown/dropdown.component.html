@@ -1,0 +1,26 @@
+<div
+  class="erp-dropdown"
+  (mouseenter)="trigger === 'hover' && open()"
+  (mouseleave)="trigger === 'hover' && close()">
+
+  <div
+    class="dropdown-trigger"
+    (click)="toggle()">
+
+    <ng-content select="[dropdownTrigger]"></ng-content>
+
+  </div>
+
+  @if (opened()) {
+
+    <div
+      class="dropdown-panel"
+      [ngClass]="position">
+
+      <ng-content select="[dropdownContent]"></ng-content>
+
+    </div>
+
+  }
+
+</div>

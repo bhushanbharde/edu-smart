@@ -1,0 +1,57 @@
+<div class="notification-panel">
+
+    <div class="panel-header">
+
+        <h3>Notifications</h3>
+
+        <span>{{ notifications().length }}</span>
+
+    </div>
+
+    <div class="panel-body">
+
+        @for (item of notifications(); track item.id) {
+
+            <div
+                class="notification-item"
+                [class.unread]="item.unread">
+
+                <div class="content">
+
+                    <div class="title">
+
+                        {{ item.title }}
+
+                    </div>
+
+                    <div class="message">
+
+                        {{ item.message }}
+
+                    </div>
+
+                    <div class="time">
+
+                        {{ item.time }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+
+    </div>
+
+    <div class="panel-footer">
+
+        <a href="#">
+
+            View all notifications
+
+        </a>
+
+    </div>
+
+</div>

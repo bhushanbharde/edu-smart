@@ -1,0 +1,32 @@
+<button
+  class="erp-button"
+  [class]="cssClasses()"
+  [attr.type]="type()"
+  [disabled]="isDisabled()"
+  [attr.aria-label]="ariaLabel() || null"
+  [attr.aria-busy]="loading()"
+  (click)="onClick($event)"
+>
+  @if (loading()) {
+    <span class="erp-button__spinner"></span>
+  } 
+  @else {
+    @if (leftIcon() && !iconOnly()) {
+      <erp-icon class="erp-button__icon" [name]="leftIcon()"> </erp-icon>
+    }
+
+    @if (iconOnly() && icon()) {
+      <erp-icon class="erp-button__icon" [name]="icon()"> </erp-icon>
+    }
+
+    @if (!iconOnly()) {
+      <span class="erp-button__label">
+        <ng-content />
+      </span>
+    }
+
+    @if (rightIcon() && !iconOnly()) {
+      <erp-icon class="erp-button__icon" [name]="rightIcon()"> </erp-icon>
+    }
+  }
+</button>

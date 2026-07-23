@@ -1,0 +1,22 @@
+<span
+    class="badge"
+    [class]="[
+        variant(),
+        size(),
+        rounded() ? 'rounded' : '',
+        outlined() ? 'outlined' : ''
+    ]">
+
+    @if (dot()) {
+
+        <span class="badge-dot"></span>
+
+    }
+
+    @if (displayValue() !== '') {
+
+        {{ displayValue() }}
+
+    }
+
+</span>

@@ -1,0 +1,109 @@
+.notification-panel {
+
+    width: 360px;
+
+}
+
+.panel-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 18px 20px;
+
+    border-bottom: 1px solid var(--border-color);
+
+}
+
+.panel-header h3 {
+
+    margin: 0;
+
+    font-size: 16px;
+
+}
+
+.panel-header span {
+
+    background: var(--color-primary);
+
+    color: white;
+
+    border-radius: 999px;
+
+    padding: 2px 10px;
+
+    font-size: 12px;
+
+}
+
+.panel-body {
+
+    max-height: 420px;
+
+    overflow-y: auto;
+
+}
+
+.notification-item {
+
+    padding: 16px 20px;
+
+    border-bottom: 1px solid var(--border-color);
+
+    cursor: pointer;
+
+    transition: background .2s;
+
+}
+
+.notification-item:hover {
+
+    background: var(--surface-hover);
+
+}
+
+.notification-item.unread {
+
+    border-left: 4px solid var(--color-primary);
+
+}
+
+.title {
+
+    font-weight: 600;
+
+}
+
+.message {
+
+    margin-top: 4px;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+
+}
+
+.time {
+
+    margin-top: 8px;
+
+    font-size: 12px;
+
+    color: var(--text-secondary);
+
+}
+
+.panel-footer {
+
+    padding: 14px;
+
+    text-align: center;
+
+    border-top: 1px solid var(--border-color);
+
+}

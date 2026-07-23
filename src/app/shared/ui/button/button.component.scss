@@ -1,0 +1,214 @@
+:host {
+  display: inline-flex;
+}
+
+:host(.full-width) {
+  width: 100%;
+}
+
+.erp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+
+  font-weight: 600;
+  font-family: inherit;
+}
+
+/* -----------------------------
+   Sizes
+------------------------------ */
+
+.xs {
+  height: 28px;
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+}
+
+.sm {
+  height: 34px;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+}
+
+.md {
+  height: 40px;
+  padding: 0 1.25rem;
+  font-size: 0.9375rem;
+}
+
+.lg {
+  height: 48px;
+  padding: 0 1.5rem;
+  font-size: 1rem;
+}
+
+.xl {
+  height: 56px;
+  padding: 0 2rem;
+  font-size: 1.125rem;
+}
+
+/* -----------------------------
+   Shape
+------------------------------ */
+
+.rounded {
+  border-radius: var(--radius-md);
+}
+
+.square {
+  border-radius: 0;
+}
+
+/* -----------------------------
+   Filled
+------------------------------ */
+
+.primary.filled {
+  background: var(--color-primary);
+  color: white;
+}
+
+.secondary.filled {
+  background: var(--color-secondary);
+  color: white;
+}
+
+.success.filled {
+  background: var(--color-success);
+  color: white;
+}
+
+.warning.filled {
+  background: var(--color-warning);
+  color: white;
+}
+
+.danger.filled {
+  background: var(--color-danger);
+  color: white;
+}
+
+.info.filled {
+  background: var(--color-info);
+  color: white;
+}
+
+/* -----------------------------
+   Outline
+------------------------------ */
+
+.outline {
+  background: transparent;
+
+  border: 1px solid currentColor;
+}
+
+/* -----------------------------
+   Ghost
+------------------------------ */
+
+.ghost {
+  background: transparent;
+}
+
+/* -----------------------------
+   Text
+------------------------------ */
+
+.text {
+  background: transparent;
+
+  padding-inline: 0.5rem;
+}
+
+/* -----------------------------
+   Hover
+------------------------------ */
+
+.erp-button:hover:not(:disabled) {
+  filter: brightness(0.96);
+}
+
+/* -----------------------------
+   Active
+------------------------------ */
+
+.erp-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* -----------------------------
+   Focus
+------------------------------ */
+
+.erp-button:focus-visible {
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
+/* -----------------------------
+   Disabled
+------------------------------ */
+
+.erp-button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+/* -----------------------------
+   Full Width
+------------------------------ */
+
+.full-width {
+  width: 100%;
+}
+
+/* -----------------------------
+   Icon
+------------------------------ */
+
+.erp-button__icon {
+  display: inline-flex;
+}
+
+/* -----------------------------
+   Spinner
+------------------------------ */
+
+.erp-button__spinner {
+  width: 16px;
+
+  height: 16px;
+
+  border-radius: 50%;
+
+  border: 2px solid rgba(255, 255, 255, 0.4);
+
+  border-top-color: currentColor;
+
+  animation: erp-spin 0.8s linear infinite;
+}
+
+@keyframes erp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

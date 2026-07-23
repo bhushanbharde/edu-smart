@@ -1,0 +1,74 @@
+@if (item.children?.length) {
+
+  <div class="menu-group">
+
+    <button
+      type="button"
+      class="group-trigger"
+      [class.expanded]="expanded()"
+      [attr.aria-expanded]="expanded()"
+      (click)="toggle()">
+
+      <div class="left">
+
+        <erp-icon
+          [name]="item.icon"
+          size="md">
+        </erp-icon>
+
+        @if (!collapsed) {
+
+          <span class="label">
+            {{ item.title }}
+          </span>
+
+        }
+
+      </div>
+
+      @if (!collapsed) {
+
+        <erp-icon
+          name="chevron-down"
+          size="sm"
+          class="chevron"
+          [class.rotated]="expanded()">
+        </erp-icon>
+
+      }
+
+    </button>
+
+    @if (expanded() && !collapsed) {
+
+      <div class="children">
+
+        @for (child of item.children; track child.id) {
+
+          @if (child.children?.length) {
+
+            <erp-sidebar-menu-group
+              [item]="child"
+              [collapsed]="collapsed"
+              (navigate)="onNavigate()">
+            </erp-sidebar-menu-group>
+
+          } @else {
+
+            <erp-sidebar-menu-item
+              [item]="child"
+              [collapsed]="collapsed"
+              (navigate)="onNavigate()">
+            </erp-sidebar-menu-item>
+
+          }
+
+        }
+
+      </div>
+
+    }
+
+  </div>
+
+}

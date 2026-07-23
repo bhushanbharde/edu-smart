@@ -1,0 +1,62 @@
+<div
+  class="erp-chip"
+  [class]="cssClasses()"
+  [attr.aria-label]="ariaLabel() || null"
+  [attr.aria-disabled]="disabled()"
+  tabindex="0"
+  role="button"
+  (click)="onClick($event)"
+  (keydown.enter)="onClick($any($event))"
+  (keydown.space)="onClick($any($event)); $event.preventDefault()">
+
+  <!-- Avatar -->
+  @if (avatar() || avatarName()) {
+    <erp-avatar
+      class="erp-chip__avatar"
+      [src]="avatar()"
+      [name]="avatarName()"
+      iconsize="14">
+    </erp-avatar>
+  }
+
+  <!-- Left Icon -->
+  @if (leftIcon()) {
+    <erp-icon
+      class="erp-chip__icon"
+      [name]="leftIcon()"
+      iconsize="14">
+    </erp-icon>
+  }
+
+  <!-- Label -->
+  <span class="erp-chip__label">
+    <ng-content />
+  </span>
+
+  <!-- Right Icon -->
+  @if (rightIcon()) {
+    <erp-icon
+      class="erp-chip__icon"
+      [name]="rightIcon()">
+    </erp-icon>
+  }
+
+  <!-- Remove Button -->
+  @if (removable()) {
+
+    <button
+      type="button"
+      class="erp-chip__remove"
+      aria-label="Remove"
+      (click)="onRemove($event)">
+
+      <erp-icon
+        name="x"
+        iconsize="14">
+      </erp-icon>
+
+    </button>
+
+  }
+
+</div>

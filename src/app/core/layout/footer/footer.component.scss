@@ -1,0 +1,16 @@
+.footer {
+  height: 52px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+
+  border-top: 1px solid var(--border-color);
+
+  background: var(--surface-card);
+
+  color: var(--text-secondary);
+
+  font-size: 13px;
+}

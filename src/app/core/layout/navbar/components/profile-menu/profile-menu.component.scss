@@ -1,0 +1,91 @@
+.profile-menu {
+
+    width: 280px;
+
+}
+
+.profile-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 20px;
+
+}
+
+.avatar {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 50%;
+
+    background: var(--color-primary);
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 700;
+
+}
+
+.name {
+
+    font-weight: 600;
+
+}
+
+.email {
+
+    font-size: 13px;
+
+    color: var(--text-secondary);
+
+}
+
+.divider {
+
+    height: 1px;
+
+    background: var(--border-color);
+
+}
+
+.menu-item {
+
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    text-align: left;
+
+    padding: 14px 20px;
+
+    cursor: pointer;
+
+    transition: background .2s;
+
+}
+
+.menu-item:hover {
+
+    background: var(--surface-hover);
+
+}
+
+.logout {
+
+    color: var(--color-danger);
+
+}

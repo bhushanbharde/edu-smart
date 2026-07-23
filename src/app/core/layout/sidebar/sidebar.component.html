@@ -1,63 +1,26 @@
 <aside
     class="sidebar"
-    [class.collapsed]="collapsed()">
+    [class.collapsed]="state.collapsed()">
 
-    <div class="logo">
+    <erp-sidebar-logo
+        [collapsed]="state.collapsed()">
+    </erp-sidebar-logo>
 
-        SMS
+    <nav class="navigation">
 
-    </div>
+        @for (item of builder.menu(); track item.id) {
 
-    <nav>
+            <erp-sidebar-menu-group
+                [item]="item"
+                [collapsed]="state.collapsed()">
+            </erp-sidebar-menu-group>
 
-        <a
-            routerLink="/dashboard"
-            routerLinkActive="active">
-
-            Dashboard
-
-        </a>
-
-        <a
-            routerLink="/students"
-            routerLinkActive="active">
-
-            Students
-
-        </a>
-
-        <a
-            routerLink="/teachers"
-            routerLinkActive="active">
-
-            Teachers
-
-        </a>
-
-        <a
-            routerLink="/attendance"
-            routerLinkActive="active">
-
-            Attendance
-
-        </a>
-
-        <a
-            routerLink="/fees"
-            routerLinkActive="active">
-
-            Fees
-
-        </a>
-
-        <a
-            routerLink="/reports"
-            routerLinkActive="active">
-
-            Reports
-
-        </a>
+        }
 
     </nav>
+
+    <erp-sidebar-user-card
+        [collapsed]="state.collapsed()">
+    </erp-sidebar-user-card>
 
 </aside>

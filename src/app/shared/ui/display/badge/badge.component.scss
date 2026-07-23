@@ -1,0 +1,111 @@
+:host {
+  display: inline-flex;
+}
+
+.badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  min-width: 20px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  transition: 0.25s;
+}
+
+/* Sizes */
+
+.sm {
+  padding: 2px 8px;
+
+  font-size: 11px;
+}
+
+.md {
+  padding: 4px 10px;
+
+  font-size: 12px;
+}
+
+.lg {
+  padding: 6px 14px;
+
+  font-size: 14px;
+}
+
+/* Shape */
+
+.rounded {
+  border-radius: 999px;
+}
+
+/* Filled Variants */
+
+.primary {
+  background: var(--color-primary);
+
+  color: #fff;
+}
+
+.secondary {
+  background: var(--color-secondary);
+
+  color: #fff;
+}
+
+.success {
+  background: var(--color-success);
+
+  color: #fff;
+}
+
+.warning {
+  background: var(--color-warning);
+
+  color: #fff;
+}
+
+.danger {
+  background: var(--color-danger);
+
+  color: #fff;
+}
+
+.info {
+  background: var(--color-info);
+
+  color: #fff;
+}
+
+.neutral {
+  background: var(--color-neutral);
+
+  color: #fff;
+}
+
+/* Outline */
+
+.outlined {
+  background: transparent;
+
+  border: 1px solid currentColor;
+}
+
+/* Dot */
+
+.badge-dot {
+  width: 8px;
+
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+}

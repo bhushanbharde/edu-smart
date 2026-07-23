@@ -1,0 +1,43 @@
+.search-box {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  width: 420px;
+
+  height: 44px;
+
+  padding: 0 16px;
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 14px;
+
+  background: var(--surface-card);
+}
+
+.search-box input {
+  flex: 1;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  font-size: 14px;
+}
+
+kbd {
+  padding: 4px 8px;
+
+  border-radius: 6px;
+
+  background: var(--surface-hover);
+
+  font-size: 11px;
+
+  color: var(--text-secondary);
+}

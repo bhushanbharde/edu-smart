@@ -1,0 +1,39 @@
+<div class="sidebar-logo">
+
+    @if (logoUrl) {
+
+        <img
+            [src]="logoUrl"
+            [alt]="schoolName">
+
+    } @else {
+
+        <div class="logo-placeholder">
+
+            {{ shortName }}
+
+        </div>
+
+    }
+
+    @if (!collapsed) {
+
+        <div class="brand">
+
+            <span class="title">
+
+                {{ schoolName }}
+
+            </span>
+
+            <span class="subtitle">
+
+                Enterprise ERP
+
+            </span>
+
+        </div>
+
+    }
+
+</div>

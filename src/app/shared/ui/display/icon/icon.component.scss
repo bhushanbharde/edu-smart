@@ -1,0 +1,107 @@
+:host {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+lucide-icon {
+
+    display: inline-flex;
+
+}
+
+/* Sizes */
+
+.xs {
+
+    width: 14px;
+
+    height: 14px;
+
+}
+
+.sm {
+
+    width: 18px;
+
+    height: 18px;
+
+}
+
+.md {
+
+    width: 22px;
+
+    height: 22px;
+
+}
+
+.lg {
+
+    width: 28px;
+
+    height: 28px;
+
+}
+
+.xl {
+
+    width: 36px;
+
+    height: 36px;
+
+}
+
+/* Colors */
+
+.primary {
+
+    color: var(--color-primary);
+
+}
+
+.secondary {
+
+    color: var(--color-secondary);
+
+}
+
+.success {
+
+    color: var(--color-success);
+
+}
+
+.warning {
+
+    color: var(--color-warning);
+
+}
+
+.danger {
+
+    color: var(--color-danger);
+
+}
+
+.info {
+
+    color: var(--color-info);
+
+}
+
+.muted {
+
+    color: var(--text-secondary);
+
+}
+
+.inherit {
+
+    color: inherit;
+
+}

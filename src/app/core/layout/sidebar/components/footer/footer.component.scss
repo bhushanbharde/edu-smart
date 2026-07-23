@@ -1,0 +1,17 @@
+.sidebar-footer {
+  padding: 16px;
+
+  border-top: 1px solid var(--border-color);
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+.version {
+  font-size: 12px;
+
+  color: var(--text-secondary);
+}
