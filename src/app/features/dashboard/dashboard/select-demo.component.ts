@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SelectComponent } from '../../../shared/components/select/select.component';
-import { SelectOption } from '../../../shared/core/interfaces/select-option.interface';
+import { SelectOption } from '../../../shared/interfaces/select-option.interface';
 
 @Component({
   selector: 'app-select-demo',
