@@ -1,52 +1,106 @@
-/* ==========================================================
-   Enterprise Theme Variables
-   School Management System
-========================================================== */
+@use '../abstracts/palette' as c;
 
 :root {
+  /* ==========================================================================
+     Brand
+     ========================================================================== */
 
-    /* Brand */
+  --primary: #{c.color(c.$primary, 600)};
+  --primary-light: #{c.color(c.$primary, 500)};
+  --primary-dark: #{c.color(c.$primary, 700)};
 
-    --primary: #2563EB;
-    --primary-hover: #1D4ED8;
-    --primary-light: #DBEAFE;
+  --secondary: #{c.color(c.$secondary, 500)};
 
-    --secondary: #475569;
+  /* ==========================================================================
+     Semantic
+     ========================================================================== */
 
-    --success: #16A34A;
-    --warning: #F59E0B;
-    --danger: #DC2626;
-    --info: #0EA5E9;
+  --success: #{c.color(c.$success, 500)};
+  --warning: #{c.color(c.$warning, 500)};
+  --error: #{c.color(c.$error, 500)};
+  --info: #{c.color(c.$info, 500)};
 
-    /* Background */
+  /* ==========================================================================
+     Backgrounds
+     ========================================================================== */
 
-    --background: #F8FAFC;
-    --surface: #FFFFFF;
-    --surface-secondary: #F1F5F9;
+  --background: #f4f7fb;
 
-    /* Text */
+  --surface: #ffffff;
 
-    --text-primary: #0F172A;
-    --text-secondary: #64748B;
-    --text-disabled: #94A3B8;
+  --surface-secondary: #f8fafc;
 
-    /* Border */
+  --surface-hover: #eef4ff;
 
-    --border: #E2E8F0;
+  --surface-active: #dbeafe;
 
-    /* Radius */
+  /* ==========================================================================
+     Text
+     ========================================================================== */
 
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
+  --text-primary: #{c.color(c.$gray, 900)};
 
-    /* Shadows */
+  --text-secondary: #{c.color(c.$gray, 600)};
 
-    --shadow-sm: 0 2px 4px rgba(15, 23, 42, .06);
+  --text-muted: #{c.color(c.$gray, 500)};
 
-    --shadow-md: 0 8px 24px rgba(15, 23, 42, .08);
+  --text-disabled: #{c.color(c.$gray, 400)};
 
-    --shadow-lg: 0 16px 48px rgba(15, 23, 42, .12);
+  --text-on-primary: #ffffff;
 
+  /* ==========================================================================
+     Borders
+     ========================================================================== */
+
+  --border-color: #{c.color(c.$gray, 200)};
+
+  --border-light: #{c.color(c.$gray, 100)};
+
+  --divider: #{c.color(c.$gray, 200)};
+
+  /* ==========================================================================
+     Sidebar
+     ========================================================================== */
+
+  --sidebar-bg: #ffffff;
+
+  --sidebar-text: #{c.color(c.$gray, 700)};
+
+  --sidebar-hover: #eef4ff;
+
+  --sidebar-active: #dbeafe;
+
+  /* ==========================================================================
+     Navbar
+     ========================================================================== */
+
+  --navbar-bg: #ffffff;
+
+  --navbar-border: #{c.color(c.$gray, 200)};
+
+  /* ==========================================================================
+     Cards
+     ========================================================================== */
+
+  --card-bg: #ffffff;
+
+  --card-border: #{c.color(c.$gray, 200)};
+
+  /* ==========================================================================
+     Forms
+     ========================================================================== */
+
+  --input-bg: #ffffff;
+
+  --input-border: #{c.color(c.$gray, 300)};
+
+  --input-focus: var(--primary);
+
+  /* ==========================================================================
+     Scrollbar
+     ========================================================================== */
+
+  --scrollbar: #cbd5e1;
+
+  --scrollbar-hover: #94a3b8;
 }

@@ -1,9 +1,12 @@
 <button
-  class="toggle-button"
   type="button"
+  class="toggle-button"
   (click)="toggle()"
-  aria-label="Toggle Sidebar"
->
-  <erp-icon [name]="state.collapsed() ? 'panel-left' : 'panel-right'">
+  [attr.aria-label]="state.collapsed() ? 'Expand sidebar' : 'Collapse sidebar'">
+
+  <erp-icon
+    [name]="state.collapsed() ? 'menu' : 'menu'"
+    size="md">
   </erp-icon>
+
 </button>

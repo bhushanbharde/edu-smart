@@ -1,138 +1,50 @@
-import {
-
-    Injectable,
-
-    inject,
-
-    signal,
-
-    computed
-
-} from '@angular/core';
-
-import { BrowserService } from '../browser/browser.service';
-
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { StorageService } from '../storage/storage.service';
 
-import {
+export type ThemeMode = 'light' | 'dark' | 'system';
 
-    STORAGE_THEME
-
-} from '../storage/storage.constants';
-
-import {
-
-    ThemeMode
-
-} from './theme.types';
+const THEME_KEY = 'erp-theme';
 
 @Injectable({
-
-    providedIn: 'root'
-
+  providedIn: 'root',
 })
 export class ThemeService {
+  private storage = inject(StorageService);
 
-    private browser = inject(BrowserService);
+  private readonly themeState = signal<ThemeMode>(
+    this.storage.get<ThemeMode>(THEME_KEY) ?? 'light',
+  );
 
-    private storage = inject(StorageService);
+  readonly theme = computed(() => this.themeState());
 
-    readonly mode = signal<ThemeMode>(
+  constructor() {
+    this.applyTheme(this.themeState());
+  }
 
-        this.storage.get<ThemeMode>(
+  setTheme(theme: ThemeMode): void {
+    this.themeState.set(theme);
 
-            STORAGE_THEME
+    this.storage.set(THEME_KEY, theme);
 
-        ) ?? 'system'
+    this.applyTheme(theme);
+  }
 
-    );
+  toggle(): void {
+    this.setTheme(this.themeState() === 'light' ? 'dark' : 'light');
+  }
 
-    readonly dark = computed(() => {
+  private applyTheme(theme: ThemeMode): void {
+    const html = document.documentElement;
 
-        if (this.mode() === 'dark') {
+    if (theme === 'system') {
+      const prefersDark = window.matchMedia(
+        '(prefers-color-scheme: dark)',
+      ).matches;
 
-            return true;
-
-        }
-
-        if (this.mode() === 'light') {
-
-            return false;
-
-        }
-
-        return this.browser
-
-            .matchMedia(
-
-                '(prefers-color-scheme: dark)'
-
-            )
-
-            ?.matches ?? false;
-
-    });
-
-    initialize(): void {
-
-        this.apply();
-
+      html.classList.toggle('dark', prefersDark);
+      return;
     }
 
-    setMode(
-
-        mode: ThemeMode
-
-    ): void {
-
-        this.mode.set(mode);
-
-        this.storage.set(
-
-            STORAGE_THEME,
-
-            mode
-
-        );
-
-        this.apply();
-
-    }
-
-    toggle(): void {
-
-        this.setMode(
-
-            this.dark()
-
-                ? 'light'
-
-                : 'dark'
-
-        );
-
-    }
-
-    private apply(): void {
-
-        const html = this.browser.document.documentElement;
-
-        html.classList.toggle(
-
-            'dark-theme',
-
-            this.dark()
-
-        );
-
-        html.classList.toggle(
-
-            'light-theme',
-
-            !this.dark()
-
-        );
-
-    }
-
+    html.classList.toggle('dark', theme === 'dark');
+  }
 }

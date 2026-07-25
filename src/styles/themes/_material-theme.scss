@@ -1,15 +1,28 @@
 @use '@angular/material' as mat;
 
-@include mat.core();
+/* ==========================================================
+   Material Theme
+   ========================================================== */
 
-/*
-|--------------------------------------------------------------------------
-| Material Theme
-|--------------------------------------------------------------------------
-|
-| We intentionally let Angular Material use Material 3 defaults for
-| components like dialogs, menus, snackbars and date pickers.
-| Our application's visual identity comes primarily from the CSS
-| design tokens defined in _theme-variables.scss.
-|
-*/
+html {
+
+  color-scheme: light;
+
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+
+    typography: (
+      plain-family: Inter,
+      brand-family: Inter,
+      bold-weight: 700,
+      medium-weight: 500,
+      regular-weight: 400,
+    ),
+
+    density: 0,
+  ));
+}

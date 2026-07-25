@@ -1,0 +1,166 @@
+.erp-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  height: 28px;
+
+  padding: 0 12px;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.erp-status-chip__dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+}
+
+/* Active */
+
+.erp-status-chip--active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.erp-status-chip--active .erp-status-chip__dot {
+  background: #16a34a;
+}
+
+/* Inactive */
+
+.erp-status-chip--inactive {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.erp-status-chip--inactive .erp-status-chip__dot {
+  background: #6b7280;
+}
+
+/* Pending */
+
+.erp-status-chip--pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.erp-status-chip--pending .erp-status-chip__dot {
+  background: #f59e0b;
+}
+
+/* Approved */
+
+.erp-status-chip--approved {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.erp-status-chip--approved .erp-status-chip__dot {
+  background: #22c55e;
+}
+
+/* Rejected */
+
+.erp-status-chip--rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.erp-status-chip--rejected .erp-status-chip__dot {
+  background: #ef4444;
+}
+
+/* Present */
+
+.erp-status-chip--present {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.erp-status-chip--present .erp-status-chip__dot {
+  background: #22c55e;
+}
+
+/* Absent */
+
+.erp-status-chip--absent {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.erp-status-chip--absent .erp-status-chip__dot {
+  background: #ef4444;
+}
+
+/* Late */
+
+.erp-status-chip--late {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.erp-status-chip--late .erp-status-chip__dot {
+  background: #f59e0b;
+}
+
+/* Paid */
+
+.erp-status-chip--paid {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.erp-status-chip--paid .erp-status-chip__dot {
+  background: #16a34a;
+}
+
+/* Unpaid */
+
+.erp-status-chip--unpaid {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.erp-status-chip--unpaid .erp-status-chip__dot {
+  background: #ef4444;
+}
+
+/* Draft */
+
+.erp-status-chip--draft {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.erp-status-chip--draft .erp-status-chip__dot {
+  background: #6b7280;
+}
+
+/* Completed */
+
+.erp-status-chip--completed {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.erp-status-chip--completed .erp-status-chip__dot {
+  background: #2563eb;
+}
+
+/* Cancelled */
+
+.erp-status-chip--cancelled {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.erp-status-chip--cancelled .erp-status-chip__dot {
+  background: #9ca3af;
+}

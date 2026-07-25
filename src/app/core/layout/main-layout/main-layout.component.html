@@ -1,25 +1,17 @@
 <div class="layout">
+  <!-- Sidebar -->
 
-    <!-- Sidebar -->
+  <aside class="layout-sidebar">
+    <erp-sidebar />
+  </aside>
 
-    <aside class="layout-sidebar">
+  <!-- Main Content -->
 
-        <erp-sidebar />
+  <div class="layout-main">
+    <erp-navbar />
 
-    </aside>
-
-    <!-- Main Content -->
-
-    <div class="layout-main">
-
-        <erp-navbar />
-
-        <main class="layout-content">
-
-            <router-outlet />
-
-        </main>
-
-    </div>
-
+    <main class="layout-content">
+      <router-outlet />
+    </main>
+  </div>
 </div>

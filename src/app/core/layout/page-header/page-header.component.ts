@@ -10,12 +10,12 @@ import { CommonModule } from '@angular/common';
 
 import { LayoutService } from '../services/layout.service';
 import { PageAction } from '../models/page-action.model';
-import { IconComponent } from '../../../shared/ui/display/icon';
+// import { IconComponent } from '../../../shared/ui/display/icon';
 
 @Component({
   selector: 'sms-page-header',
   standalone: true,
-  imports: [CommonModule, IconComponent],
+  imports: [CommonModule],
   templateUrl: './page-header.component.html',
   styleUrls: ['./page-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

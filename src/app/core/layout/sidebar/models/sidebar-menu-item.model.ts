@@ -1,27 +1,18 @@
-import { SidebarBadge } from './badge.model';
+import { IconName } from '../../../../shared/ui/display/icon/icon.types';
 
 export interface SidebarMenuItem {
   id: string;
-
   title: string;
 
-  icon: string;
+  icon: IconName;
 
   route?: string;
 
+  badge?: string;
+
   permission?: string;
-
-  badge?: SidebarBadge;
-
-  children?: SidebarMenuItem[];
 
   expanded?: boolean;
 
-  hidden?: boolean;
-
-  disabled?: boolean;
-
-  divider?: boolean;
-
-  external?: boolean;
+  children?: SidebarMenuItem[];
 }

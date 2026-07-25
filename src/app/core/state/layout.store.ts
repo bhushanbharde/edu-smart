@@ -1,9 +1,4 @@
-import {
-    Injectable,
-    computed,
-    inject,
-    signal
-} from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 
 import { ThemeService } from '../services/theme/theme.service';
 import { FullscreenService } from '../services/fullscreen/fullscreen.service';
@@ -11,80 +6,50 @@ import { ViewportService } from '../services/viewport/viewport.service';
 import { Breadcrumb } from '../models/breadcrumb.model';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class LayoutStore {
+  private readonly theme = inject(ThemeService);
 
-    private readonly theme =
-        inject(ThemeService);
+  private readonly fullscreen = inject(FullscreenService);
 
-    private readonly fullscreen =
-        inject(FullscreenService);
+  readonly viewport = inject(ViewportService);
 
-    readonly viewport =
-        inject(ViewportService);
+  readonly sidebarCollapsed = signal(false);
 
-    readonly sidebarCollapsed =
-        signal(false);
+  readonly mobileSidebarOpen = signal(false);
 
-    readonly mobileSidebarOpen =
-        signal(false);
+  readonly breadcrumbs = signal<Breadcrumb[]>([]);
 
-    readonly breadcrumbs =
-        signal<Breadcrumb[]>([]);
+  readonly sidebarWidth = computed(() => (this.sidebarCollapsed() ? 80 : 260));
 
-    readonly sidebarWidth = computed(() =>
-        this.sidebarCollapsed()
-            ? 80
-            : 260
-    );
+  readonly darkMode = computed(() => this.theme.theme());
 
-    readonly darkMode = computed(() =>
-        this.theme.dark()
-    );
+  toggleSidebar(): void {
+    this.sidebarCollapsed.update((v) => !v);
+  }
 
-    toggleSidebar(): void {
+  openSidebar(): void {
+    this.mobileSidebarOpen.set(true);
+  }
 
-        this.sidebarCollapsed.update(v => !v);
+  closeSidebar(): void {
+    this.mobileSidebarOpen.set(false);
+  }
 
-    }
+  toggleTheme(): void {
+    this.theme.toggle();
+  }
 
-    openSidebar(): void {
+  initializeTheme(): void {
+    this.theme.setTheme('light');
+  }
 
-        this.mobileSidebarOpen.set(true);
+  async toggleFullscreen(): Promise<void> {
+    await this.fullscreen.toggle();
+  }
 
-    }
-
-    closeSidebar(): void {
-
-        this.mobileSidebarOpen.set(false);
-
-    }
-
-    toggleTheme(): void {
-
-        this.theme.toggle();
-
-    }
-
-    initializeTheme(): void {
-
-        this.theme.initialize();
-
-    }
-
-    async toggleFullscreen(): Promise<void> {
-
-        await this.fullscreen.toggle();
-
-    }
-
-    setBreadcrumbs(
-        breadcrumbs: Breadcrumb[]
-    ): void {
-
-        this.breadcrumbs.set(breadcrumbs);
-
-    }
-
+  setBreadcrumbs(breadcrumbs: Breadcrumb[]): void {
+    this.breadcrumbs.set(breadcrumbs);
+  }
 }

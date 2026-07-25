@@ -1,0 +1,31 @@
+<div class="erp-input">
+  @if (label()) {
+    <label class="erp-input__label">
+      {{ label() }}
+
+      @if (required()) {
+        <span>*</span>
+      }
+    </label>
+  }
+
+  <div class="erp-input__wrapper">
+    <ng-content select="[prefix]"></ng-content>
+
+    <input
+      [type]="type()"
+      [placeholder]="placeholder()"
+      [value]="value"
+      [disabled]="disabled()"
+      (input)="update($any($event.target).value)"
+    />
+
+    <ng-content select="[suffix]"></ng-content>
+  </div>
+
+  @if (error()) {
+    <small class="erp-input__error">
+      {{ error() }}
+    </small>
+  }
+</div>

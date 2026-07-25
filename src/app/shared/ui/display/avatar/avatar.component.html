@@ -1,44 +1,7 @@
-<div
-    class="avatar"
-    [class]="[
-      size(),
-      shape(),
-      color()
-    ]">
-
-    @if (src() && imageLoaded()) {
-
-        <img
-            [src]="src()"
-            [alt]="alt() || name()"
-            (error)="onImageError()">
-
-    } @else if (displayInitials()) {
-
-        <span class="initials">
-
-            {{ displayInitials() }}
-
-        </span>
-
-    } @else {
-
-        <span class="material-symbols-rounded icon">
-
-            {{ icon() }}
-
-        </span>
-
-    }
-
-    @if (status() !== 'none') {
-
-        <span
-            class="status"
-            [class]="status()">
-
-        </span>
-
-    }
-
+<div class="erp-avatar" [class]="'erp-avatar erp-avatar--' + size()">
+  @if (src()) {
+    <img [src]="src()" [alt]="name()" />
+  } @else {
+    <span>{{ initials() }}</span>
+  }
 </div>

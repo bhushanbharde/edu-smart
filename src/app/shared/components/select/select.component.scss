@@ -1,0 +1,154 @@
+.erp-select {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+select {
+  height: 44px;
+
+  padding: 0 14px;
+
+  border-radius: 10px;
+
+  border: 1px solid #d1d5db;
+
+  font-size: 14px;
+
+  background: white;
+  outline: none;
+}
+
+select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.erp-select-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+
+  max-height: 300px;
+
+  overflow: auto;
+
+  background: var(--erp-surface);
+
+  border: 1px solid var(--erp-border);
+
+  border-radius: var(--erp-radius-lg);
+
+  box-shadow: var(--erp-shadow-lg);
+
+  z-index: 1000;
+}
+
+.erp-select-option {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 12px 16px;
+
+  cursor: pointer;
+
+  transition: 0.15s;
+}
+
+.erp-select-option:hover {
+  background: var(--erp-primary-50);
+}
+
+.erp-select-option.active {
+  background: var(--erp-primary-100);
+}
+
+.erp-select-option.selected {
+  color: var(--erp-primary);
+
+  font-weight: 600;
+}
+
+.erp-select-option.disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+.erp-select-empty {
+  padding: 20px;
+
+  text-align: center;
+
+  color: var(--erp-text-secondary);
+}
+
+.erp-select-trigger:focus {
+    outline: none;
+    border-color: var(--erp-primary);
+    box-shadow: 0 0 0 3px var(--erp-primary-100);
+}
+
+.erp-select-option.active {
+    background: var(--erp-primary-100);
+}
+
+.erp-select-option.selected.active {
+    font-weight: 600;
+}
+
+// .erp-select {
+//     position: relative;
+//     width: 100%;
+// }
+
+.erp-select-label {
+}
+
+.erp-select-trigger {
+}
+
+.erp-select-panel {
+}
+
+.erp-select-option {
+}
+
+.erp-select-option.active {
+}
+
+.erp-select-option.selected {
+}
+
+.erp-select-option.disabled {
+}
+
+.erp-select-search {
+}
+
+.erp-select-empty {
+}
+
+.erp-select-chip {
+}
+
+.erp-select-footer {
+}
+
+.erp-select-loading {
+}
+
+.erp-select-error {
+}
+
+.erp-select-hint {
+}

@@ -1,4 +1,3 @@
-import { LucideIconData } from 'lucide-angular';
 
 export interface NavigationItem {
 
@@ -6,7 +5,7 @@ export interface NavigationItem {
 
     label: string;
 
-    icon?: LucideIconData;
+    icon?: string;
 
     route?: string;
 

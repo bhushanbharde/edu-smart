@@ -3,6 +3,5 @@ export type BadgeColor =
 
 export interface SidebarBadge {
   text: string;
-
   color: BadgeColor;
 }

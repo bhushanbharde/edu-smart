@@ -1,0 +1,72 @@
+.erp-card {
+  display: flex;
+  flex-direction: column;
+
+  background: #ffffff;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+  padding: 16px;
+}
+
+.erp-card--bordered {
+  border: 1px solid #e5e7eb;
+}
+
+.erp-card--hover {
+  transition:
+    box-shadow .2s ease,
+    transform .2s ease;
+}
+
+.erp-card--hover:hover {
+  box-shadow: 0 8px 24px rgba(15, 23, 42, .08);
+}
+
+.erp-card--no-padding {
+
+  .erp-card__content {
+    padding: 0;
+  }
+
+}
+
+.erp-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 20px 24px;
+
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.erp-card__content {
+  padding: 24px;
+}
+
+.erp-card__footer {
+  padding: 16px 24px;
+
+  border-top: 1px solid #f1f5f9;
+}
+
+.erp-card__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.erp-card__subtitle {
+  margin-top: 4px;
+
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.erp-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

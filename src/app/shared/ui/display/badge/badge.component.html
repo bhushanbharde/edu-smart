@@ -1,22 +1,12 @@
 <span
-    class="badge"
-    [class]="[
-        variant(),
-        size(),
-        rounded() ? 'rounded' : '',
-        outlined() ? 'outlined' : ''
-    ]">
-
-    @if (dot()) {
-
-        <span class="badge-dot"></span>
-
-    }
-
-    @if (displayValue() !== '') {
-
-        {{ displayValue() }}
-
-    }
-
+  class="erp-badge"
+  [class]="
+    'erp-badge--' +
+    variant() +
+    ' erp-badge--' +
+    appearance() +
+    (rounded() ? ' erp-badge--rounded' : '')
+  "
+>
+  {{ text() }}
 </span>

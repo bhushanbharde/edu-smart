@@ -1,12 +1,3 @@
-<lucide-icon
-
-    [name]="name"
-
-    [strokeWidth]="strokeWidth"
-
-    [ngClass]="[
-        size,
-        color
-    ]">
-
-</lucide-icon>
+<mat-icon [ngClass]="[size, color]">
+  {{ icons[name] }}
+</mat-icon>

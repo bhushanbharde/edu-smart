@@ -1,26 +1,26 @@
 <aside
-    class="sidebar"
-    [class.collapsed]="state.collapsed()">
+  class="sidebar"
+  [class.collapsed]="state.collapsed()"
+  [class.mobile-open]="mobileOpen()"
+  [class.mobile]="breakpoint.isMobile()"
+>
+  <erp-sidebar-logo [collapsed]="state.collapsed()"> </erp-sidebar-logo>
 
-    <erp-sidebar-logo
-        [collapsed]="state.collapsed()">
-    </erp-sidebar-logo>
+  <nav class="navigation">
+    @for (section of builder.sections(); track section.id) {
+      @if (!state.collapsed()) {
+        <div class="section-title">
+          {{ section.title }}
+        </div>
+      }
 
-    <nav class="navigation">
+      @for (item of section.items; track item.id) {
+        <erp-sidebar-menu-group [item]="item" [collapsed]="state.collapsed()">
+        </erp-sidebar-menu-group>
+      }
+    }
+  </nav>
 
-        @for (item of builder.menu(); track item.id) {
-
-            <erp-sidebar-menu-group
-                [item]="item"
-                [collapsed]="state.collapsed()">
-            </erp-sidebar-menu-group>
-
-        }
-
-    </nav>
-
-    <erp-sidebar-user-card
-        [collapsed]="state.collapsed()">
-    </erp-sidebar-user-card>
-
+  <erp-sidebar-user-card [collapsed]="state.collapsed()">
+  </erp-sidebar-user-card>
 </aside>

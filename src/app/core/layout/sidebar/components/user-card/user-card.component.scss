@@ -1,59 +1,31 @@
+:host {
+  display: block;
+}
+
 .user-card {
   display: flex;
   align-items: center;
   gap: 12px;
 
-  padding: 14px 16px;
-  margin: 16px 12px;
+  padding: 16px;
 
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
+  border-top: 1px solid var(--border-color);
 
-  background: var(--surface-card);
+  background: var(--surface-color);
 
-  transition: all .25s ease;
-
-  &.collapsed {
-    justify-content: center;
-    padding: 12px;
-  }
-}
-
-.avatar {
-  width: 42px;
-  height: 42px;
-
-  border-radius: 14px;
-
-  overflow: hidden;
-
-  background: var(--color-primary);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: white;
-  font-weight: 700;
-  font-size: 16px;
-
-  flex-shrink: 0;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  transition: all 0.25s ease;
 }
 
 .details {
   flex: 1;
-  min-width: 0;
+
+  overflow: hidden;
 }
 
 .name {
   font-size: 14px;
   font-weight: 600;
+
   color: var(--text-primary);
 
   white-space: nowrap;
@@ -62,31 +34,30 @@
 }
 
 .role {
+  margin-top: 2px;
+
   font-size: 12px;
+
   color: var(--text-secondary);
 }
 
-.more-btn {
-  width: 32px;
-  height: 32px;
-
-  border: none;
-  border-radius: 10px;
-
-  background: transparent;
-
+.menu-btn {
   display: flex;
   align-items: center;
   justify-content: center;
 
+  width: 32px;
+  height: 32px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
   cursor: pointer;
 
-  color: var(--text-secondary);
+  transition: background 0.2s ease;
+}
 
-  transition: all .2s ease;
-
-  &:hover {
-    background: rgba(148, 163, 184, .12);
-    color: var(--text-primary);
-  }
+.menu-btn:hover {
+  background: var(--surface-hover);
 }

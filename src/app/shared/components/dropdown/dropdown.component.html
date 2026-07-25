@@ -1,0 +1,17 @@
+<button mat-icon-button [matMenuTriggerFor]="menu">
+  <ng-content select="[trigger]"></ng-content>
+</button>
+
+<mat-menu #menu="matMenu">
+  @for (item of items(); track item.id) {
+    <button mat-menu-item [disabled]="item.disabled" (click)="select(item)">
+      @if (item.icon) {
+        <erp-icon name="add"> </erp-icon>
+      }
+
+      <span [class.erp-dropdown-danger]="item.danger">
+        {{ item.label }}
+      </span>
+    </button>
+  }
+</mat-menu>

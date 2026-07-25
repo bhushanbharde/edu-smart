@@ -12,8 +12,10 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
 import { FullscreenComponent } from './components/fullscreen/fullscreen.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { NavbarActionComponent } from './components/action/navbar-action.component';
-import { DropdownComponent } from "../../../shared/ui/dropdown";
-import { ButtonComponent } from '../../../shared/ui/button';
+import { BreakpointService } from '../../services/breakpoint/breakpoint.service';
+import { ThemeService } from '../../services/theme/theme.service';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { DropdownComponent } from '../../../shared/components/dropdown';
 
 @Component({
   selector: 'erp-navbar',
@@ -28,8 +30,9 @@ import { ButtonComponent } from '../../../shared/ui/button';
     NotificationComponent,
     NavbarActionComponent,
     DropdownComponent,
-    ButtonComponent
-],
+    ButtonComponent,
+    // IconComponent,
+  ],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,4 +40,21 @@ import { ButtonComponent } from '../../../shared/ui/button';
 export class NavbarComponent {
   readonly sidebar = inject(SidebarStateService);
   readonly navbar = inject(NavbarService);
+
+  private breakpoint = inject(BreakpointService);
+  private sidebarState = inject(SidebarStateService);
+  theme = inject(ThemeService)
+
+  toggleTheme(): void {
+    this.theme.toggle();
+  }
+
+  toggleSidebar(): void {
+    if (this.breakpoint.isMobile()) {
+      this.sidebarState.toggleMobile();
+      return;
+    }
+
+    this.sidebarState.toggle();
+  }
 }

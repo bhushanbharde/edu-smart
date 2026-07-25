@@ -1,111 +1,156 @@
-:host {
+.erp-badge {
   display: inline-flex;
-}
-
-.badge {
-  display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
 
-  gap: 6px;
-
-  min-width: 20px;
-
-  font-weight: 600;
-
-  white-space: nowrap;
-
-  transition: 0.25s;
-}
-
-/* Sizes */
-
-.sm {
-  padding: 2px 8px;
-
-  font-size: 11px;
-}
-
-.md {
   padding: 4px 10px;
 
+  min-height: 24px;
+
   font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+
+  white-space: nowrap;
 }
 
-.lg {
-  padding: 6px 14px;
-
-  font-size: 14px;
-}
-
-/* Shape */
-
-.rounded {
+.erp-badge--rounded {
   border-radius: 999px;
 }
 
-/* Filled Variants */
+.erp-badge:not(.erp-badge--rounded) {
+  border-radius: 8px;
+}
 
-.primary {
-  background: var(--color-primary);
+/*=========================
+= Primary
+=========================*/
 
+.erp-badge--primary.erp-badge--soft {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.erp-badge--primary.erp-badge--solid {
+  background: #2563eb;
   color: #fff;
 }
 
-.secondary {
-  background: var(--color-secondary);
+.erp-badge--primary.erp-badge--outline {
+  border: 1px solid #2563eb;
+  color: #2563eb;
+}
 
+/*=========================
+= Success
+=========================*/
+
+.erp-badge--success.erp-badge--soft {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.erp-badge--success.erp-badge--solid {
+  background: #16a34a;
   color: #fff;
 }
 
-.success {
-  background: var(--color-success);
+.erp-badge--success.erp-badge--outline {
+  border: 1px solid #16a34a;
+  color: #16a34a;
+}
 
+/*=========================
+= Danger
+=========================*/
+
+.erp-badge--danger.erp-badge--soft {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.erp-badge--danger.erp-badge--solid {
+  background: #dc2626;
   color: #fff;
 }
 
-.warning {
-  background: var(--color-warning);
+.erp-badge--danger.erp-badge--outline {
+  border: 1px solid #dc2626;
+  color: #dc2626;
+}
 
+/*=========================
+= Warning
+=========================*/
+
+.erp-badge--warning.erp-badge--soft {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.erp-badge--warning.erp-badge--solid {
+  background: #f59e0b;
   color: #fff;
 }
 
-.danger {
-  background: var(--color-danger);
+.erp-badge--warning.erp-badge--outline {
+  border: 1px solid #f59e0b;
+  color: #b45309;
+}
 
+/*=========================
+= Info
+=========================*/
+
+.erp-badge--info.erp-badge--soft {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.erp-badge--info.erp-badge--solid {
+  background: #0ea5e9;
   color: #fff;
 }
 
-.info {
-  background: var(--color-info);
+.erp-badge--info.erp-badge--outline {
+  border: 1px solid #0ea5e9;
+  color: #0284c7;
+}
 
+/*=========================
+= Secondary
+=========================*/
+
+.erp-badge--secondary.erp-badge--soft {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.erp-badge--secondary.erp-badge--solid {
+  background: #6b7280;
   color: #fff;
 }
 
-.neutral {
-  background: var(--color-neutral);
+.erp-badge--secondary.erp-badge--outline {
+  border: 1px solid #6b7280;
+  color: #374151;
+}
 
+/*=========================
+= Neutral
+=========================*/
+
+.erp-badge--neutral.erp-badge--soft {
+  background: #f9fafb;
+  color: #6b7280;
+}
+
+.erp-badge--neutral.erp-badge--solid {
+  background: #4b5563;
   color: #fff;
 }
 
-/* Outline */
-
-.outlined {
-  background: transparent;
-
-  border: 1px solid currentColor;
-}
-
-/* Dot */
-
-.badge-dot {
-  width: 8px;
-
-  height: 8px;
-
-  border-radius: 50%;
-
-  background: currentColor;
+.erp-badge--neutral.erp-badge--outline {
+  border: 1px solid #d1d5db;
+  color: #374151;
 }

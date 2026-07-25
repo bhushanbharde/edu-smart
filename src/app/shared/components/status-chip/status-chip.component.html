@@ -1,0 +1,7 @@
+<span class="erp-status-chip" [class]="'erp-status-chip--' + status()">
+  @if (showDot()) {
+    <span class="erp-status-chip__dot"></span>
+  }
+
+  {{ label() }}
+</span>

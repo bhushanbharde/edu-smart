@@ -1,15 +1,14 @@
+
 export interface UserMenuItem {
+  id: string;
 
-    id: string;
+  label: string;
 
-    label: string;
+  icon: string;
 
-    icon: string;
+  action?: string;
 
-    action?: string;
+  route?: string;
 
-    route?: string;
-
-    divider?: boolean;
-
+  divider?: boolean;
 }

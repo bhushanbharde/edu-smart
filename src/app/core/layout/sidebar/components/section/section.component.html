@@ -1,0 +1,37 @@
+@if (section.items.length) {
+
+<div class="sidebar-section">
+
+  @if (!collapsed) {
+    <div class="section-title">
+      {{ section.title }}
+    </div>
+  }
+
+  <div class="section-items">
+
+    @for (item of section.items; track item.id) {
+
+      @if (item.children?.length) {
+
+        <erp-sidebar-menu-group
+          [item]="item"
+          [collapsed]="collapsed">
+        </erp-sidebar-menu-group>
+
+      } @else {
+
+        <erp-sidebar-menu-item
+          [item]="item"
+          [collapsed]="collapsed">
+        </erp-sidebar-menu-item>
+
+      }
+
+    }
+
+  </div>
+
+</div>
+
+}

@@ -1,0 +1,46 @@
+.erp-input {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.erp-input__label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.erp-input__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  height: 44px;
+
+  padding: 0 14px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+
+  transition: 0.2s;
+}
+
+.erp-input__wrapper:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+input {
+  flex: 1;
+
+  border: none;
+  outline: none;
+
+  font-size: 14px;
+
+  background: none;
+}
+
+.erp-input__error {
+  font-size: 12px;
+  color: #dc2626;
+}

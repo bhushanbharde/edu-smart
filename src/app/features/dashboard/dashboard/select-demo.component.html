@@ -1,0 +1,64 @@
+<div style="padding:40px; max-width:700px; display:flex; flex-direction:column; gap:32px;">
+
+  <h2>ERP Select Demo</h2>
+
+  <!-- Basic -->
+
+  <erp-select
+    label="Country"
+    placeholder="Select Country"
+    [options]="$any(countryOptions)">
+  </erp-select>
+
+  <!-- Search -->
+
+  <erp-select
+    label="Employee"
+    placeholder="Search Employee"
+    [searchable]="true"
+    [clearable]="true"
+    [options]="$any(employeeOptions)">
+  </erp-select>
+
+  <!-- Reactive Form -->
+
+  <erp-select
+    label="Student Status"
+    hint="Only active students can login."
+    [options]="$any(studentStatusOptions)"
+    [formControl]="studentControl">
+  </erp-select>
+
+  <!-- Disabled -->
+
+  <erp-select
+    label="Disabled Select"
+    [disabled]="true"
+    [options]="$any(countryOptions)">
+  </erp-select>
+
+  <!-- Required -->
+
+  <erp-select
+    label="Required"
+    [required]="true"
+    [options]="$any(countryOptions)">
+  </erp-select>
+
+  <!-- Error -->
+
+  <erp-select
+    label="Validation"
+    error="Please select a value."
+    [options]="$any(countryOptions)">
+  </erp-select>
+
+  <!-- Success -->
+
+  <erp-select
+    label="Success"
+    success="Looks good."
+    [options]="$any(countryOptions)">
+  </erp-select>
+
+</div>

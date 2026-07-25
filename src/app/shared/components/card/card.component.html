@@ -1,0 +1,13 @@
+<div
+    class="erp-card"
+    [class.erp-card--bordered]="bordered()"
+    [class.erp-card--hover]="hover()"
+    [class.erp-card--no-padding]="noPadding()">
+
+    <ng-content select="[erpCardHeader]"></ng-content>
+
+    <ng-content select="[erpCardContent]"></ng-content>
+
+    <ng-content select="[erpCardFooter]"></ng-content>
+
+</div>

@@ -6,7 +6,7 @@ export const STUDENT_MENU: SidebarMenuItem[] = [
 
     title: 'Students',
 
-    icon: 'graduation-cap',
+    icon: 'users',
 
     expanded: true,
 
@@ -26,7 +26,7 @@ export const STUDENT_MENU: SidebarMenuItem[] = [
 
         title: 'Admission',
 
-        icon: 'user-plus',
+        icon: 'add',
 
         route: '/students/create',
       },
@@ -36,7 +36,7 @@ export const STUDENT_MENU: SidebarMenuItem[] = [
 
         title: 'Promote Student',
 
-        icon: 'arrow-up',
+        icon: 'arrowUp',
 
         route: '/students/promote',
       },

@@ -2,11 +2,16 @@
   <div class="navbar-left">
     <erp-sidebar-toggle />
 
+    <erp-button
+      variant="outline"
+      size="md"
+      label="Dark Mode"
+      (click)="toggleTheme()"
+    ></erp-button>
+
     <div class="page-information">
       <h1>Dashboard</h1>
       <span> School Management System </span>
-      <erp-button>Save</erp-button>
-      <erp-button>Delete</erp-button>
     </div>
   </div>
 
@@ -25,7 +30,7 @@
 
     <!-- Notification -->
 
-    <erp-dropdown>
+    <erp-dropdown [items]="[]">
       <erp-navbar-action
         dropdownTrigger
         icon="bell"
@@ -38,7 +43,7 @@
 
     <!-- Profile -->
 
-    <erp-dropdown>
+    <erp-dropdown [items]="[]">
       <button dropdownTrigger class="profile-button">
         <div class="avatar">A</div>
 

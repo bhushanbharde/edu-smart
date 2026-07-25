@@ -1,15 +1,14 @@
+
 export interface Notification {
+  id: number;
 
-    id: number;
+  title: string;
 
-    title: string;
+  message: string;
 
-    message: string;
+  icon: string;
 
-    icon: string;
+  read: boolean;
 
-    read: boolean;
-
-    createdAt: string;
-
+  createdAt: string;
 }

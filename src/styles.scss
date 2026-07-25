@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+@use './styles/abstracts/palette';
+@use './styles/abstracts/spacings';
+@use './styles/abstracts/radius';
+@use './styles/abstracts/shadows';
+@use './styles/abstracts/transitions';
+@use 'styles/abstracts/tokens';
+
+@use './styles/base/reset';
+@use './styles/base/base';
+@use './styles/base/typography';
+@use './styles/base/scrollbar';
+@use './styles/base/animations';
+
+@use './styles/themes/light';
+@use './styles/themes/dark';
+@use './styles/themes/material-theme';
+
+@use './styles/utilities/display';
+@use './styles/utilities/flex';
+@use './styles/utilities/helpers';
+@use './styles/utilities/spacing';
+@use './styles/utilities/text';
+
+@use './styles/components/buttons';
+@use './styles/components/cards';
+@use './styles/components/forms';
+@use './styles/components/tables';
+@use './styles/layout/grid';

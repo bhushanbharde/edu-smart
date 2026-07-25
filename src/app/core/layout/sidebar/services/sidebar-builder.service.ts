@@ -1,15 +1,17 @@
 import { Injectable, signal } from '@angular/core';
+
+import { SIDEBAR_SECTIONS } from '../config/sidebar.config';
+import { SidebarSection } from '../models/sidebar-section.model';
 import { SidebarMenuItem } from '../models/sidebar-menu-item.model';
-import { SIDEBAR_MENU } from '../config/sidebar.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SidebarBuilderService {
-  readonly menu = signal<SidebarMenuItem[]>(SIDEBAR_MENU);
+  readonly sections = signal<SidebarSection[]>(SIDEBAR_SECTIONS);
 
-  getMenu(): SidebarMenuItem[] {
-    return this.menu();
+  getSections(): SidebarSection[] {
+    return this.sections();
   }
 
   setExpanded(id: string, expanded: boolean): void {
@@ -20,24 +22,31 @@ export class SidebarBuilderService {
         children: item.children ? updateItems(item.children) : undefined,
       }));
 
-    this.menu.set(updateItems(this.menu()));
+    this.sections.update((sections) =>
+      sections.map((section) => ({
+        ...section,
+        items: updateItems(section.items),
+      })),
+    );
   }
 
-  filterByPermissions(permissions: string[]): void {
-    const filterItems = (items: SidebarMenuItem[]): SidebarMenuItem[] =>
-      items
-        .filter(
-          (item) => !item.permission || permissions.includes(item.permission),
-        )
-        .map((item) => ({
-          ...item,
-          children: item.children ? filterItems(item.children) : undefined,
-        }));
+  collapseAll(): void {
+    const collapseItems = (items: SidebarMenuItem[]): SidebarMenuItem[] =>
+      items.map((item) => ({
+        ...item,
+        expanded: false,
+        children: item.children ? collapseItems(item.children) : undefined,
+      }));
 
-    this.menu.set(filterItems(SIDEBAR_MENU));
+    this.sections.update((sections) =>
+      sections.map((section) => ({
+        ...section,
+        items: collapseItems(section.items),
+      })),
+    );
   }
 
-  reset(): void {
-    this.menu.set(SIDEBAR_MENU);
+  expandParents(_url: string): void {
+    // We'll implement this in the next step.
   }
 }

@@ -1,1 +1,88 @@
-<p>dashboard works!</p>
+<h3>Avatars</h3>
+<erp-avatar name="John Doe"> </erp-avatar>
+
+<erp-avatar name="Suchitra Pakhale"> </erp-avatar>
+
+<br /><br />
+
+<h3>Badges</h3>
+
+<erp-badge text="New"> </erp-badge>
+
+<erp-badge text="Active" variant="success"> </erp-badge>
+
+<erp-badge text="Pending" variant="warning"> </erp-badge>
+
+<erp-badge text="Rejected" variant="danger"> </erp-badge>
+
+<erp-badge text="Administrator" appearance="solid"> </erp-badge>
+
+<erp-badge text="Teacher" appearance="outline"> </erp-badge>
+
+<br /><br />
+<h3>Status Chips</h3>
+<erp-status-chip status="active" label="Active"> </erp-status-chip>
+
+<erp-status-chip status="pending" label="Pending Approval"> </erp-status-chip>
+
+<erp-status-chip status="paid" label="Paid"> </erp-status-chip>
+
+<erp-status-chip status="present" label="Present"> </erp-status-chip>
+
+<erp-status-chip status="absent" label="Absent"> </erp-status-chip>
+
+<erp-status-chip status="completed" label="Completed" [showDot]="false">
+</erp-status-chip>
+
+<br /><br />
+<h3>Card</h3>
+<erp-card [hover]="true">
+  <div erpCardHeader>
+    <div>
+      <div erpCardTitle>Student Statistics</div>
+
+      <div erpCardSubtitle>Current academic year</div>
+    </div>
+
+    <div erpCardActions>
+      <erp-icon-button ariaLabel="Refresh">
+        <erp-icon name="refresh"> </erp-icon>
+      </erp-icon-button>
+    </div>
+  </div>
+
+  <div erpCardContent>Dashboard content goes here...</div>
+
+  <div erpCardFooter>Last updated: 2 minutes ago</div>
+</erp-card>
+
+<h3>Dropdown</h3>
+<erp-dropdown [items]="menuItems" (itemSelected)="onMenuClick($event)">
+  <erp-avatar trigger name="John Doe"> </erp-avatar>
+</erp-dropdown>
+
+<br /><br />
+<h3>Input</h3>
+
+<div class="row">
+  <div class="col-3">
+    <erp-input label="Email" placeholder="Enter your email">
+      <!-- <erp-icon prefix name="add"> </erp-icon> -->
+    </erp-input>
+  </div>
+
+  <div class="col-3">
+    <erp-input
+      label="Password"
+      placeholder="Enter your password"
+      type="password"
+    >
+      <erp-icon prefix name="user"> </erp-icon>
+    </erp-input>
+  </div>
+</div>
+
+<h3>Select</h3>
+<div class="">
+  <app-select-demo></app-select-demo>
+</div>

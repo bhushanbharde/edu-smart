@@ -1,0 +1,22 @@
+@use 'palette' as c;
+
+/* ==========================================================
+   Semantic Tokens
+   ========================================================== */
+
+$color-primary: c.color(c.$primary, 600);
+$color-primary-hover: c.color(c.$primary, 700);
+$color-primary-light: c.color(c.$primary, 50);
+
+$color-success: c.color(c.$success, 500);
+$color-warning: c.color(c.$warning, 500);
+$color-error: c.color(c.$error, 500);
+$color-info: c.color(c.$info, 500);
+
+$surface: #ffffff;
+$background: #f4f7fb;
+
+$text-primary: c.color(c.$gray, 900);
+$text-secondary: c.color(c.$gray, 600);
+
+$border: c.color(c.$gray, 200);

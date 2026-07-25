@@ -1,39 +1,11 @@
-<div class="sidebar-logo">
+<a class="logo" routerLink="/dashboard">
+  <div class="logo-icon">😂</div>
 
-    @if (logoUrl) {
+  @if (!collapsed) {
+    <div class="logo-content">
+      <div class="title">Edu Smart</div>
 
-        <img
-            [src]="logoUrl"
-            [alt]="schoolName">
-
-    } @else {
-
-        <div class="logo-placeholder">
-
-            {{ shortName }}
-
-        </div>
-
-    }
-
-    @if (!collapsed) {
-
-        <div class="brand">
-
-            <span class="title">
-
-                {{ schoolName }}
-
-            </span>
-
-            <span class="subtitle">
-
-                Enterprise ERP
-
-            </span>
-
-        </div>
-
-    }
-
-</div>
+      <div class="subtitle">School ERP</div>
+    </div>
+  }
+</a>

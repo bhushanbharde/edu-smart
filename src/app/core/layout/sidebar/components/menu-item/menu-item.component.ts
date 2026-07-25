@@ -4,8 +4,9 @@ import {
   EventEmitter,
   Input,
   Output,
+  inject,
 } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { SidebarMenuItem } from '../../models/sidebar-menu-item.model';
@@ -14,7 +15,7 @@ import { IconComponent } from '../../../../../shared/ui/display/icon/icon.compon
 @Component({
   selector: 'erp-sidebar-menu-item',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, IconComponent],
+  imports: [CommonModule, RouterLink, RouterLinkActive, IconComponent],
   templateUrl: './menu-item.component.html',
   styleUrls: ['./menu-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

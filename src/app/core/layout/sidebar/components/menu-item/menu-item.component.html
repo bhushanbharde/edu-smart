@@ -1,43 +1,18 @@
 <a
+  class="menu-item"
+  [routerLink]="item.route"
+  routerLinkActive="active"
+  [routerLinkActiveOptions]="{ exact: true }"
+  (click)="onNavigate()"
+>
+  <erp-icon
+    [name]="item.icon"
+    size="md">
+  </erp-icon>
 
-    class="menu-item"
-
-    [routerLink]="item.route"
-
-    routerLinkActive="active"
-
-    (click)="onNavigate()">
-
-    <erp-icon
-
-        [name]="item.icon"
-
-        size="md">
-
-    </erp-icon>
-
-    @if (!collapsed) {
-
-        <span class="label">
-
-            {{ item.title }}
-
-        </span>
-
-    }
-
-    @if (item.badge && !collapsed) {
-
-        <span
-
-            class="badge"
-
-            [class]="item.badge.color">
-
-            {{ item.badge.text }}
-
-        </span>
-
-    }
-
+  @if (!collapsed) {
+    <span class="label">
+      {{ item.title }}
+    </span>
+  }
 </a>

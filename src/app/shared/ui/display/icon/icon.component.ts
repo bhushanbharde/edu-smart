@@ -1,28 +1,29 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { NgClass } from '@angular/common';
-import { LucideAngularModule } from 'lucide-angular';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
-import { IconColor, IconSize } from './icon.types';
+import { IconColor, IconSize, IconName } from './icon.types';
+
+import { APP_ICONS } from './icon.registry';
 
 @Component({
   selector: 'erp-icon',
   standalone: true,
-  imports: [NgClass, LucideAngularModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent {
   @Input({ required: true })
-  name!: string;
+  name!: IconName;
 
   @Input()
-  size: IconSize = 'md';
+  size: IconSize = 'sm';
 
   @Input()
   color: IconColor = 'inherit';
 
-  @Input()
-  strokeWidth = 2;
+  readonly icons = APP_ICONS;
 }

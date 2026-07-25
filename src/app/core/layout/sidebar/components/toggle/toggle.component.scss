@@ -1,20 +1,21 @@
-.toggle-button {
-  width: 40px;
+:host {
+  display: block;
+}
 
+.toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
   height: 40px;
 
   border: none;
+  outline: none;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   background: transparent;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
   cursor: pointer;
 
   transition: all 0.2s ease;
@@ -22,4 +23,8 @@
 
 .toggle-button:hover {
   background: var(--surface-hover);
+}
+
+.toggle-button:active {
+  transform: scale(0.96);
 }

@@ -1,34 +1,60 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, signal, inject } from '@angular/core';
+import { StorageService } from '../../../services/storage/storage.service';
+import { BreakpointService } from '../../../services/breakpoint/breakpoint.service';
+
+const SIDEBAR_KEY = 'erp_sidebar_collapsed';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SidebarStateService {
-  readonly collapsed = signal(false);
+  private storage = inject(StorageService);
 
-  readonly mobileOpen = signal(false);
+  private breakpoint = inject(BreakpointService);
 
-  readonly isDesktop = signal(true);
+  private readonly mobileOpenState = signal(false);
 
-  readonly width = computed(() => (this.collapsed() ? 72 : 280));
+  readonly mobileOpen = computed(() => this.mobileOpenState());
+
+  private readonly collapsedState = signal(
+    this.storage.get<boolean>(SIDEBAR_KEY) ?? false,
+  );
+
+  readonly collapsed = computed(() => this.collapsedState());
 
   toggle(): void {
-    this.collapsed.update((value) => !value);
-  }
+    const value = !this.collapsedState();
 
-  expand(): void {
-    this.collapsed.set(false);
+    this.collapsedState.set(value);
+
+    this.save(value);
   }
 
   collapse(): void {
-    this.collapsed.set(true);
+    this.collapsedState.set(true);
+
+    this.save(true);
+  }
+
+  expand(): void {
+    this.collapsedState.set(false);
+
+    this.save(false);
+  }
+
+  private save(value: boolean): void {
+    this.storage.set(SIDEBAR_KEY, value);
+  }
+
+  toggleMobile(): void {
+    this.mobileOpenState.update((value) => !value);
   }
 
   openMobile(): void {
-    this.mobileOpen.set(true);
+    this.mobileOpenState.set(true);
   }
 
   closeMobile(): void {
-    this.mobileOpen.set(false);
+    this.mobileOpenState.set(false);
   }
 }

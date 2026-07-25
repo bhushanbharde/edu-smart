@@ -1,0 +1,76 @@
+.erp-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition: all .2s ease;
+
+  &:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+}
+
+/* Sizes */
+
+.erp-icon-btn--sm {
+  width: 34px;
+  height: 34px;
+}
+
+.erp-icon-btn--md {
+  width: 40px;
+  height: 40px;
+}
+
+.erp-icon-btn--lg {
+  width: 46px;
+  height: 46px;
+}
+
+/* Variants */
+
+.erp-icon-btn--ghost {
+  background: transparent;
+}
+
+.erp-icon-btn--ghost:hover:not(:disabled) {
+  background: #f3f4f6;
+}
+
+.erp-icon-btn--secondary {
+  background: #f9fafb;
+}
+
+.erp-icon-btn--secondary:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.erp-icon-btn--primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.erp-icon-btn--primary:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.erp-icon-btn--danger {
+  background: #dc2626;
+  color: #fff;
+}
+
+.erp-icon-btn--danger:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+.erp-icon-btn ::ng-deep svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}

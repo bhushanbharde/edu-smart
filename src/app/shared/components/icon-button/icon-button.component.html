@@ -1,0 +1,14 @@
+<button
+    class="erp-icon-btn"
+    [class]="
+        'erp-icon-btn--' + variant() +
+        ' erp-icon-btn--' + size()
+    "
+    [disabled]="disabled()"
+    [attr.aria-label]="ariaLabel()"
+    type="button"
+    (click)="onClick()">
+
+    <ng-content />
+
+</button>

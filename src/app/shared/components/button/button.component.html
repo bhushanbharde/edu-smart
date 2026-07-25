@@ -1,0 +1,20 @@
+<button
+    class="erp-btn"
+    [class]="
+        'erp-btn--' + variant() +
+        ' erp-btn--' + size() +
+        (fullWidth() ? ' erp-btn--block' : '')
+    "
+    [disabled]="disabled() || loading()"
+    [type]="type()"
+    (click)="onClick()">
+
+    @if (loading()) {
+
+        <span class="erp-btn__spinner"></span>
+
+    }
+
+    {{ label() }}
+
+</button>

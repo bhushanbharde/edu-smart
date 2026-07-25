@@ -1,0 +1,15 @@
+@use "../abstracts/tokens" as *;
+
+:root {
+  --primary: #{$color-primary};
+
+  --background: #{$background};
+
+  --surface: #{$surface};
+
+  --text-primary: #{$text-primary};
+
+  --text-secondary: #{$text-secondary};
+
+  --border-color: #{$border};
+}

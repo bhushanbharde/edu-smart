@@ -1,0 +1,164 @@
+<div class="erp-select">
+  <!-- Label -->
+  @if (label) {
+    <label class="erp-select-label">
+      {{ label }}
+
+      @if (required) {
+        <span class="required">*</span>
+      }
+    </label>
+  }
+
+  <!-- Trigger -->
+  <div
+    class="erp-select-trigger"
+    tabindex="0"
+    role="combobox"
+    aria-haspopup="listbox"
+    [attr.aria-expanded]="isOpen"
+    [attr.aria-disabled]="disabled"
+    [class.open]="isOpen"
+    [class.disabled]="disabled"
+    [class.readonly]="readonly"
+    (click)="toggle()"
+    (keydown)="onKeyDown($event)"
+  >
+    <!-- Prefix Icon -->
+    @if (prefixIcon) {
+      <erp-icon class="prefix-icon" [name]="prefixIcon"> </erp-icon>
+    }
+
+    <!-- Value -->
+    <div class="erp-select-value">
+      @if (!displayValue) {
+        <span class="placeholder">
+          {{ placeholder }}
+        </span>
+      } @else {
+        <span class="value">
+          {{ displayValue }}
+        </span>
+      }
+    </div>
+
+    <!-- Clear -->
+    @if (clearable && value !== null && value !== undefined) {
+      <button
+        type="button"
+        class="clear-btn"
+        tabindex="-1"
+        (click)="clear($event)"
+      >
+        <erp-icon name="close"></erp-icon>
+      </button>
+    }
+
+    <!-- Dropdown Icon -->
+    <erp-icon
+      class="dropdown-icon"
+      [name]="isOpen ? 'chevronUp' : 'chevronDown'"
+    >
+    </erp-icon>
+  </div>
+
+  <!-- Panel -->
+  @if (isOpen) {
+    <div class="erp-select-panel" role="listbox">
+      <!-- Search -->
+      @if (searchable) {
+        <div class="erp-select-search">
+          <erp-icon name="search"></erp-icon>
+
+          <input
+            type="text"
+            [(ngModel)]="searchText"
+            placeholder="Search..."
+            autocomplete="off"
+            (input)="filter()"
+          />
+        </div>
+      }
+
+      <!-- Options -->
+
+      <div class="erp-select-options">
+        @for (option of filteredOptions; track option.value; let i = $index) {
+          <div
+            #optionElement
+            class="erp-select-option"
+            role="option"
+            [attr.aria-selected]="isSelected(option)"
+            [attr.aria-disabled]="option.disabled"
+            [class.selected]="isSelected(option)"
+            [class.active]="highlightedIndex === i"
+            [class.disabled]="option.disabled"
+            (click)="select(option)"
+          >
+            <!-- Left Icon -->
+            @if (option.icon) {
+              <erp-icon class="option-icon" [name]="option.icon"> </erp-icon>
+            }
+
+            <!-- Content -->
+
+            <div class="option-content">
+              <div class="option-label">
+                {{ option.label }}
+              </div>
+
+              @if (option.description) {
+                <div class="option-description">
+                  {{ option.description }}
+                </div>
+              }
+            </div>
+
+            <!-- Selected -->
+            @if (isSelected(option)) {
+              <erp-icon class="selected-icon" name="check"> </erp-icon>
+            }
+          </div>
+        }
+
+        <!-- Empty State -->
+
+        @if (filteredOptions.length === 0) {
+          <div class="erp-select-empty">
+            <erp-icon name="search"></erp-icon>
+
+            <span>{{ emptyMessage }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- Hint -->
+
+  @if (!error && hint) {
+    <div class="erp-select-hint">
+      {{ hint }}
+    </div>
+  }
+
+  <!-- Error -->
+
+  @if (error) {
+    <div class="erp-select-error">
+      <erp-icon name="alertCircle"></erp-icon>
+
+      {{ error }}
+    </div>
+  }
+
+  <!-- Success -->
+
+  @if (success && !error) {
+    <div class="erp-select-success">
+      <erp-icon name="checkCircle"></erp-icon>
+
+      {{ success }}
+    </div>
+  }
+</div>

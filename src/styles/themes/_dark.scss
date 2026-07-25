@@ -1,23 +1,31 @@
-.dark-theme {
+[data-theme='dark'] {
 
-    --background: #020617;
+  --background: #0f172a;
 
-    --surface: #0F172A;
+  --surface: #1e293b;
 
-    --surface-secondary: #1E293B;
+  --surface-secondary: #334155;
 
-    --text-primary: #F8FAFC;
+  --surface-hover: #475569;
 
-    --text-secondary: #CBD5E1;
+  --surface-active: #2563eb;
 
-    --border: #334155;
+  --text-primary: #ffffff;
 
-    --shadow-sm: none;
+  --text-secondary: #cbd5e1;
 
-    --shadow-md: none;
+  --text-muted: #94a3b8;
 
-    background: var(--background);
+  --border-color: #334155;
 
-    color: var(--text-primary);
+  --sidebar-bg: #1e293b;
+
+  --navbar-bg: #1e293b;
+
+  --card-bg: #1e293b;
+
+  --input-bg: #334155;
+
+  --input-border: #475569;
 
 }

@@ -1,12 +1,15 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
-import { BadgeSize, BadgeVariant } from './badge.types';
-import { AvatarSize } from '../avatar';
+export type BadgeVariant =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'info'
+  | 'neutral';
+
+export type BadgeAppearance = 'soft' | 'solid' | 'outline';
 
 @Component({
   selector: 'erp-badge',
@@ -16,27 +19,11 @@ import { AvatarSize } from '../avatar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeComponent {
-  readonly value = input<string | number>('');
+  readonly text = input.required<string>();
 
   readonly variant = input<BadgeVariant>('primary');
 
-  readonly size = input<AvatarSize>('md');
+  readonly appearance = input<BadgeAppearance>('soft');
 
   readonly rounded = input(true);
-
-  readonly outlined = input(false);
-
-  readonly dot = input(false);
-
-  readonly max = input(99);
-
-  readonly displayValue = computed(() => {
-    const value = this.value();
-
-    if (typeof value !== 'number') {
-      return value;
-    }
-
-    return value > this.max() ? `${this.max()}+` : value;
-  });
 }

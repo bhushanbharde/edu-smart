@@ -6,7 +6,7 @@
     (click)="onClick()">
 
     <erp-icon
-        [name]="icon">
+        [name]="$any(icon)">
     </erp-icon>
 
     @if (badge && badge > 0) {
