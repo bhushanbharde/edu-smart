@@ -1,0 +1,45 @@
+<div
+  class="time-picker"
+  [class.time-picker--disabled]="disabled"
+  [class.time-picker--error]="!!error"
+>
+  @if (label) {
+    <label class="time-picker__label">
+      {{ label }}
+
+      @if (required) {
+        <span class="time-picker__required">*</span>
+      }
+    </label>
+  }
+
+  <div
+    class="time-picker__control"
+    [class.time-picker__control--sm]="size === 'sm'"
+    [class.time-picker__control--md]="size === 'md'"
+    [class.time-picker__control--lg]="size === 'lg'"
+  >
+    <input
+      type="time"
+      class="time-picker__input"
+      [value]="value"
+      [min]="min"
+      [max]="max"
+      [disabled]="disabled"
+      [readOnly]="readonly"
+      [attr.aria-invalid]="!!error"
+      [attr.aria-label]="label || placeholder"
+      (input)="onValueChange($any($event.target).value)"
+    />
+  </div>
+
+  @if (error) {
+    <span class="time-picker__error">
+      {{ error }}
+    </span>
+  } @else if (hint) {
+    <span class="time-picker__hint">
+      {{ hint }}
+    </span>
+  }
+</div>

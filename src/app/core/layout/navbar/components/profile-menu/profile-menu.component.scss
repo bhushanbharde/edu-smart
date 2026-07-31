@@ -1,91 +1,120 @@
-.profile-menu {
-
-    width: 280px;
-
+:host {
+  display: block;
 }
 
+.profile-menu {
+  width: 240px;
+
+  padding: 6px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+
+  box-shadow: var(--shadow-lg);
+}
+
+/* Profile header */
+
 .profile-header {
+  display: flex;
+  align-items: center;
 
-    display: flex;
+  gap: 10px;
 
-    align-items: center;
-
-    gap: 14px;
-
-    padding: 20px;
-
+  padding: 10px;
 }
 
 .avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    width: 48px;
+  width: 36px;
+  height: 36px;
 
-    height: 48px;
+  flex-shrink: 0;
 
-    border-radius: 50%;
+  border-radius: 50%;
 
-    background: var(--color-primary);
+  background: var(--primary-light);
+  color: var(--primary);
 
-    color: white;
+  font-size: 13px;
+  font-weight: 700;
+}
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-weight: 700;
-
+.profile-details {
+  min-width: 0;
 }
 
 .name {
+  color: var(--text-primary);
 
-    font-weight: 600;
-
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .email {
+  margin-top: 3px;
 
-    font-size: 13px;
+  color: var(--text-secondary);
 
-    color: var(--text-secondary);
+  font-size: 11px;
 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
+/* Divider */
 
 .divider {
+  height: 1px;
 
-    height: 1px;
+  margin: 6px 4px;
 
-    background: var(--border-color);
-
+  background: var(--border-color);
 }
 
+/* Menu items */
+
 .menu-item {
+  display: flex;
+  align-items: center;
 
-    width: 100%;
+  width: 100%;
+  min-height: 38px;
 
-    border: none;
+  padding: 0 10px;
 
-    background: transparent;
+  border: 0;
+  border-radius: 6px;
 
-    text-align: left;
+  background: transparent;
 
-    padding: 14px 20px;
+  color: var(--text-primary);
 
-    cursor: pointer;
+  font: inherit;
+  font-size: 12px;
 
-    transition: background .2s;
+  text-align: left;
 
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .menu-item:hover {
-
-    background: var(--surface-hover);
-
+  background: var(--surface-hover);
 }
 
-.logout {
+.menu-item.logout {
+  color: var(--danger);
+}
 
-    color: var(--color-danger);
-
+.menu-item.logout:hover {
+  background: var(--danger-light);
 }

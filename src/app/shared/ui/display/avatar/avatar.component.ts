@@ -1,37 +1,47 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+import { CommonModule } from '@angular/common';
+
+import { AvatarSize, AvatarStatus } from './avatar.types';
 
 @Component({
   selector: 'erp-avatar',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './avatar.component.html',
-  styleUrl: './avatar.component.scss',
+  styleUrls: ['./avatar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarComponent {
-  readonly src = input<string>();
+  @Input()
+  src?: string;
 
-  readonly name = input('');
+  @Input()
+  alt = '';
 
-  readonly size = input<AvatarSize>('md');
+  @Input()
+  name = '';
 
-  readonly initials = computed(() => {
-    if (!this.name()) {
+  @Input()
+  size: AvatarSize = 'md';
+
+  @Input()
+  status?: AvatarStatus;
+
+  @Input()
+  rounded = true;
+
+  get initials(): string {
+    if (!this.name.trim()) {
       return '?';
     }
 
-    return this.name()
-      .trim()
-      .split(' ')
-      .slice(0, 2)
-      .map((part) => part[0])
-      .join('')
-      .toUpperCase();
-  });
+    const parts = this.name.trim().split(/\s+/);
+
+    if (parts.length === 1) {
+      return parts[0].slice(0, 2).toUpperCase();
+    }
+
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
 }

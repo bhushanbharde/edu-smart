@@ -1,0 +1,39 @@
+<label
+  class="erp-checkbox"
+  [class.erp-checkbox--checked]="checked"
+  [class.erp-checkbox--disabled]="disabled"
+  [class.erp-checkbox--indeterminate]="indeterminate"
+>
+  <input
+    type="checkbox"
+    [checked]="checked"
+    [disabled]="disabled"
+    (change)="toggle()"
+  />
+
+  <span class="erp-checkbox__box">
+    @if (indeterminate) {
+      <erp-icon name="minus"></erp-icon>
+    } @else if (checked) {
+      <erp-icon name="check"></erp-icon>
+    }
+  </span>
+
+  <span class="erp-checkbox__content">
+    @if (label) {
+      <span class="erp-checkbox__label">
+        {{ label }}
+
+        @if (required) {
+          <span class="required">*</span>
+        }
+      </span>
+    }
+
+    @if (description) {
+      <span class="erp-checkbox__description">
+        {{ description }}
+      </span>
+    }
+  </span>
+</label>

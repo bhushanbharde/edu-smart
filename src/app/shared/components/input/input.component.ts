@@ -1,21 +1,31 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   forwardRef,
-  input,
+  Input,
+  Output,
 } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
 import {
   ControlValueAccessor,
   FormsModule,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 
+import { ComponentSize, ComponentStatus, IconName } from '../../types';
+import { InputType } from './input.types';
+import { IconComponent } from '../../ui/display/icon';
+import { BaseValueAccessor } from '../../base';
+
 @Component({
   selector: 'erp-input',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule, IconComponent],
   templateUrl: './input.component.html',
-  styleUrl: './input.component.scss',
+  styleUrls: ['./input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -23,46 +33,61 @@ import {
       multi: true,
     },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputComponent implements ControlValueAccessor {
-  readonly label = input('');
+export class InputComponent extends BaseValueAccessor<string> {
+  @Input() type: InputType = 'text';
 
-  readonly placeholder = input('');
+  @Input() label = '';
 
-  readonly type = input('text');
+  @Input() placeholder = '';
 
-  readonly disabled = input(false);
+  @Input() hint = '';
 
-  readonly required = input(false);
+  @Input() error = '';
 
-  readonly error = input('');
+  @Input() required = false;
 
-  value = '';
+  @Input() readonly = false;
 
-  onChange = (_: string) => {};
+  // @Input() disabled = false;
 
-  onTouched = () => {};
+  @Input() clearable = false;
 
-  writeValue(value: string): void {
-    this.value = value ?? '';
-  }
+  @Input() autocomplete = 'off';
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
+  @Input() maxLength?: number;
 
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
+  @Input() prefixIcon?: IconName;
 
-  setDisabledState(disabled: boolean): void {
-    this.value = this.value;
-  }
+  @Input() suffixIcon?: IconName;
+
+  @Input() size: ComponentSize = 'md';
+
+  @Input() status: ComponentStatus = 'default';
+
+  @Output() valueChange = new EventEmitter<string>();
+
+  hidePassword = true;
 
   update(value: string): void {
-    this.value = value;
-    this.onChange(value);
-    this.onTouched();
+    this.updateValue(value);
+
+    this.valueChange.emit(value);
+  }
+
+  clear(): void {
+    this.update('');
+  }
+
+  togglePassword(): void {
+    this.hidePassword = !this.hidePassword;
+  }
+
+  get inputType(): string {
+    if (this.type === 'password') {
+      return this.hidePassword ? 'password' : 'text';
+    }
+
+    return this.type;
   }
 }

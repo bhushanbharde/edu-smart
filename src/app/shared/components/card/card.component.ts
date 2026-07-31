@@ -1,16 +1,19 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'erp-card',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './card.component.html',
-  styleUrl: './card.component.scss',
+  styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
-  readonly bordered = input(true);
+  @Input()
+  elevated = false;
 
-  readonly hover = input(false);
-
-  readonly noPadding = input(false);
+  @Input()
+  bordered = true;
 }

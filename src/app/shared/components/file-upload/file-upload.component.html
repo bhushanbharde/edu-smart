@@ -1,0 +1,11 @@
+<label class="erp-upload">
+  <input type="file" [accept]="accept" (change)="select($event)" />
+
+  <div class="erp-upload__content">
+    📁
+
+    <p>{{ label || "Choose File" }}</p>
+
+    <small>Click or Drag & Drop</small>
+  </div>
+</label>

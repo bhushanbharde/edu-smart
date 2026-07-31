@@ -5,22 +5,258 @@
   margin-left: -15px;
 }
 .col-3 {
-    flex: 0 0 25%;
-    max-width: 25%;
-    padding-right: 15px;
-    padding-left: 15px;
+  flex: 0 0 25%;
+  max-width: 25%;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 .col-4 {
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
-    padding-right: 15px;
-    padding-left: 15px;
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 .col-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
-    padding-right: 15px;
-    padding-left: 15px;
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
+.demo-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: white;
+  padding: 2rem 2rem 3rem;
+  border-radius: 28px;
+  box-shadow: 0 20px 40px -12px rgba(0, 20, 30, 0.15);
+}
+
+/* ---------- GRID SYSTEM (rows/cols) ---------- */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -0.75rem;
+}
+
+.col-3 {
+  flex: 0 0 25%;
+  max-width: 25%;
+  padding: 0 0.75rem;
+}
+.col-4 {
+  flex: 0 0 33.3333%;
+  max-width: 33.3333%;
+  padding: 0 0.75rem;
+}
+.col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 0 0.75rem;
+}
+.col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding: 0 0.75rem;
+}
+
+/* spacing & margin cleanup */
+h3 {
+  margin: 1.8rem 0 0.8rem 0;
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+  color: #0b2b3d;
+}
+
+/* component cards / containers */
+.component-section {
+  margin-bottom: 1.8rem;
+}
+
+.flex-wrap-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: center;
+}
+
+/* custom elements – treat as inline-block */
+erp-badge,
+erp-stat-card,
+erp-card,
+erp-button,
+erp-date-picker,
+erp-file-upload,
+erp-checkbox,
+erp-radio-group,
+erp-radio,
+erp-textarea,
+erp-input,
+erp-avatar,
+erp-status-chip,
+erp-icon-button,
+erp-icon,
+erp-dropdown,
+erp-card-header,
+erp-card-body,
+erp-card-footer {
+  display: inline-block; /* fallback */
+}
+
+/* some components naturally block */
+erp-stat-card,
+erp-card,
+erp-date-picker,
+erp-file-upload,
+erp-textarea,
+erp-input,
+.col-4 erp-button,
+.col-3 erp-input {
+  display: block;
+  width: 100%;
+}
+
+/* custom spacing for avatar/badge rows */
+.avatar-stack,
+.badge-stack,
+.chip-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.2rem;
+  align-items: center;
+  margin: 0.5rem 0 0.2rem;
+}
+
+/* extra helper */
+.mt-1 {
+  margin-top: 0.5rem;
+}
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+
+/* simulate erp-card body with basic styling */
+erp-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  border: 1px solid #eef2f6;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  width: 100%;
+}
+
+erp-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+erp-card-body,
+erp-card-footer {
+  display: block;
+  width: 100%;
+}
+
+erp-card-footer {
+  border-top: 1px solid #e9edf2;
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+  color: #5b6f82;
+  font-size: 0.85rem;
+}
+
+/* button groups */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+}
+
+/* inline-block for checkboxes */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+erp-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* radio group */
+erp-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* demo app-select placeholder */
+app-select-demo {
+  display: block;
+  background: #f0f4fa;
+  padding: 0.75rem 1rem;
+  border-radius: 40px;
+  color: #1f3a4b;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  border: 1px dashed #b8cddd;
+}
+
+/* remove all <br> – they are not used */
+br {
+  display: none;
+}
+
+/* adjust for nested row within sections */
+.row .col-4 erp-stat-card {
+  margin-bottom: 0.5rem;
+}
+
+/* special: stat card row */
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 0;
+}
+
+/* demo only: show label for custom elements */
+erp-input,
+erp-textarea,
+erp-select {
+  margin-bottom: 0.8rem;
+}
+
+.input-demo-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.mr-2 {
+  margin: 5px 16px;
+}
+
+.avatar-group {
+  display: flex;
+  align-items: center;
+
+  erp-avatar {
+    margin-left: -8px;
+
+    border: 2px solid var(--surface);
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

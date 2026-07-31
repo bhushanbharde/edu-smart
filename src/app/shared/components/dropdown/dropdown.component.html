@@ -1,17 +1,67 @@
-<button mat-icon-button [matMenuTriggerFor]="menu">
-  <ng-content select="[trigger]"></ng-content>
-</button>
+<div
+  class="erp-dropdown"
+  [class.erp-dropdown--open]="isOpen"
+  [class.erp-dropdown--disabled]="disabled"
+  [class.erp-dropdown--bottom-start]="position === 'bottom-start'"
+  [class.erp-dropdown--bottom-end]="position === 'bottom-end'"
+  [class.erp-dropdown--top-start]="position === 'top-start'"
+  [class.erp-dropdown--top-end]="position === 'top-end'"
+>
+  <!-- ==================================================
+       Trigger
+  =================================================== -->
 
-<mat-menu #menu="matMenu">
-  @for (item of items(); track item.id) {
-    <button mat-menu-item [disabled]="item.disabled" (click)="select(item)">
-      @if (item.icon) {
-        <erp-icon name="add"> </erp-icon>
-      }
+  <div
+    class="erp-dropdown__trigger"
+    [attr.aria-expanded]="isOpen"
+    aria-haspopup="menu"
+    (click)="toggle()"
+  >
+    <ng-content select="[dropdownTrigger]"></ng-content>
+  </div>
 
-      <span [class.erp-dropdown-danger]="item.danger">
-        {{ item.label }}
-      </span>
-    </button>
+  <!-- ==================================================
+       Projected Content
+  =================================================== -->
+
+  @if (isOpen) {
+    <div
+      class="erp-dropdown__content"
+      role="menu"
+      (click)="$event.stopPropagation()"
+    >
+      <ng-content select="[dropdownContent]"></ng-content>
+    </div>
   }
-</mat-menu>
+
+  <!-- ==================================================
+       Standard Dropdown Menu
+  =================================================== -->
+
+  @if (isOpen && items.length > 0) {
+    <div class="erp-dropdown__menu" role="menu">
+      @for (item of items; track item.value) {
+        @if (item.divider) {
+          <div class="erp-dropdown__divider" role="separator"></div>
+        } @else {
+          <button
+            type="button"
+            class="erp-dropdown__item"
+            [class.erp-dropdown__item--danger]="item.danger"
+            [disabled]="item.disabled"
+            role="menuitem"
+            (click)="select(item)"
+          >
+            @if (item.icon) {
+              <erp-icon [name]="item.icon" size="sm"> </erp-icon>
+            }
+
+            <span class="erp-dropdown__label">
+              {{ item.label }}
+            </span>
+          </button>
+        }
+      }
+    </div>
+  }
+</div>

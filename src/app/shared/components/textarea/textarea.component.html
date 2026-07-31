@@ -1,0 +1,52 @@
+<div
+  class="erp-textarea"
+  [class.erp-textarea--sm]="size === 'sm'"
+  [class.erp-textarea--md]="size === 'md'"
+  [class.erp-textarea--lg]="size === 'lg'"
+  [class.erp-textarea--error]="status === 'danger'"
+  [class.erp-textarea--success]="status === 'success'"
+  [class.erp-textarea--disabled]="disabled"
+>
+  @if (label) {
+    <label class="erp-textarea__label">
+      {{ label }}
+
+      @if (required) {
+        <span>*</span>
+      }
+    </label>
+  }
+
+  <div class="erp-textarea__wrapper">
+    <textarea
+      [rows]="rows"
+      [value]="value"
+      [readonly]="readonly"
+      [disabled]="disabled"
+      [attr.maxlength]="maxLength"
+      [placeholder]="placeholder"
+      [style.resize]="resize"
+      (input)="update($any($event.target).value)"
+      (blur)="onTouched()"
+    >
+    </textarea>
+  </div>
+
+  @if (hint && !error) {
+    <small class="erp-textarea__hint">
+      {{ hint }}
+    </small>
+  }
+
+  @if (error) {
+    <small class="erp-textarea__error">
+      {{ error }}
+    </small>
+  }
+
+  @if (maxLength) {
+    <small class="erp-textarea__counter">
+      {{ getStringValue().length }} / {{ maxLength }}
+    </small>
+  }
+</div>

@@ -1,51 +1,46 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-export type ButtonVariant =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'danger'
-  | 'warning'
-  | 'info'
-  | 'ghost'
-  | 'outline';
+import { CommonModule } from '@angular/common';
 
-export type ButtonSize = 'sm' | 'md' | 'lg';
+import { ButtonVariant, ButtonSize } from './button.types';
+import { IconComponent } from "../../../shared/ui/display/icon/icon.component";
 
 @Component({
   selector: 'erp-button',
   standalone: true,
+  imports: [CommonModule, IconComponent],
   templateUrl: './button.component.html',
-  styleUrl: './button.component.scss',
+  styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  readonly label = input('');
+  @Input()
+  variant: ButtonVariant = 'primary';
 
-  readonly type = input<'button' | 'submit' | 'reset'>('button');
+  @Input()
+  size: ButtonSize = 'md';
 
-  readonly variant = input<ButtonVariant>('primary');
+  @Input()
+  label = '';
 
-  readonly size = input<ButtonSize>('md');
+  @Input()
+  leftIcon?: any;
 
-  readonly disabled = input(false);
+  @Input()
+  rightIcon?: any;
 
-  readonly loading = input(false);
+  @Input()
+  disabled = false;
 
-  readonly fullWidth = input(false);
+  @Input()
+  loading = false;
 
-  readonly clicked = output<void>();
+  @Input()
+  fullWidth = false;
 
-  onClick(): void {
-    if (this.disabled() || this.loading()) {
-      return;
-    }
+  @Input()
+  rounded = false;
 
-    this.clicked.emit();
-  }
+  @Input()
+  type: 'button' | 'submit' | 'reset' = 'button';
 }

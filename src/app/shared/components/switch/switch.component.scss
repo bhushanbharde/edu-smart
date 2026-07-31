@@ -1,0 +1,153 @@
+:host {
+  display: inline-flex;
+}
+
+.switch-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.switch-wrapper--disabled {
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------
+   Switch
+-------------------------------------------------- */
+
+.switch {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+
+  background: var(--surface-muted);
+
+  cursor: pointer;
+  margin: 10px;
+
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.switch:hover:not(:disabled) {
+  border-color: var(--primary);
+}
+
+.switch:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 15%);
+}
+
+.switch:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* --------------------------------------------------
+   Thumb
+-------------------------------------------------- */
+
+.switch__thumb {
+  display: block;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  box-shadow: 0 1px 3px rgb(15 23 42 / 20%);
+
+  transform: translateX(2px);
+
+  transition: transform var(--transition-fast);
+}
+
+/* --------------------------------------------------
+   Checked
+-------------------------------------------------- */
+
+.switch--checked {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+
+.switch--checked .switch__thumb {
+  transform: translateX(calc(100% + 2px));
+}
+
+/* --------------------------------------------------
+   Sizes
+-------------------------------------------------- */
+
+.switch--xs {
+  width: 28px;
+  height: 16px;
+}
+
+.switch--xs .switch__thumb {
+  width: 12px;
+  height: 12px;
+}
+
+.switch--sm {
+  width: 36px;
+  height: 20px;
+}
+
+.switch--sm .switch__thumb {
+  width: 14px;
+  height: 14px;
+}
+
+.switch--md {
+  width: 44px;
+  height: 24px;
+}
+
+.switch--md .switch__thumb {
+  width: 18px;
+  height: 18px;
+}
+
+.switch--lg {
+  width: 52px;
+  height: 28px;
+}
+
+.switch--lg .switch__thumb {
+  width: 22px;
+  height: 22px;
+}
+
+/* --------------------------------------------------
+   Content
+-------------------------------------------------- */
+
+.switch__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.switch__label {
+  color: var(--text-primary);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.switch__description {
+  color: var(--text-secondary);
+  font-size: var(--font-xs);
+  line-height: 1.4;
+}

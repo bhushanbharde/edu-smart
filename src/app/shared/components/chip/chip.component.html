@@ -1,0 +1,38 @@
+<span
+  class="erp-chip"
+  [class.erp-chip--sm]="size === 'sm'"
+  [class.erp-chip--md]="size === 'md'"
+  [class.erp-chip--lg]="size === 'lg'"
+  [class.erp-chip--default]="variant === 'default'"
+  [class.erp-chip--primary]="variant === 'primary'"
+  [class.erp-chip--success]="variant === 'success'"
+  [class.erp-chip--warning]="variant === 'warning'"
+  [class.erp-chip--danger]="variant === 'danger'"
+  [class.erp-chip--disabled]="disabled"
+>
+  @if (icon) {
+    <erp-icon
+      [name]="icon"
+      size="xs">
+    </erp-icon>
+  }
+
+  <span class="erp-chip__label">
+    {{ label }}
+  </span>
+
+  @if (removable) {
+    <button
+      type="button"
+      class="erp-chip__remove"
+      [disabled]="disabled"
+      aria-label="Remove"
+      (click)="onRemove()"
+    >
+      <erp-icon
+        name="close"
+        size="xs">
+      </erp-icon>
+    </button>
+  }
+</span>

@@ -2,6 +2,11 @@ export const APP_ICONS = {
   // ======================================================
   // Layout
   // ======================================================
+  minus: 'remove',
+  minimize: 'fullscreen',
+  maximize: 'fullscreen_exit',
+  DarkMode: 'dark_mode',
+  LightMode: 'light_mode',
 
   menu: 'menu',
   close: 'close',
@@ -206,6 +211,6 @@ export const APP_ICONS = {
   check: 'check',
 } as const;
 
-export type AppIconName = keyof typeof APP_ICONS;
+// export type AppIconName = keyof typeof APP_ICONS;
 
-export type MaterialIconName = (typeof APP_ICONS)[AppIconName];
+// export type MaterialIconName = (typeof APP_ICONS)[AppIconName];

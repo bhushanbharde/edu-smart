@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+.erp-radio-group {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 24px;
+
+  flex-wrap: wrap;
+}
+
+.erp-radio-group--column {
+  flex-direction: column;
+
+  gap: 16px;
+}

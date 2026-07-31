@@ -1,0 +1,17 @@
+<div class="erp-input">
+  @if (label) {
+    <label class="erp-input__label">
+      {{ label }}
+    </label>
+  }
+
+  <div class="erp-input__wrapper">
+    <input
+      type="date"
+      [value]="value"
+      (input)="update($any($event.target).value)"
+    />
+
+    <erp-icon name="calendar"> </erp-icon>
+  </div>
+</div>

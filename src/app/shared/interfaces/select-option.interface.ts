@@ -1,6 +1,5 @@
-import { BaseOption } from './base-option.interface';
 
-export interface SelectOption<T = unknown> extends BaseOption<T> {
+export interface SelectOption<T = unknown> {
   group?: string;
   data?: unknown;
 }

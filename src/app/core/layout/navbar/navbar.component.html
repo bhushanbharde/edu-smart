@@ -2,13 +2,6 @@
   <div class="navbar-left">
     <erp-sidebar-toggle />
 
-    <erp-button
-      variant="outline"
-      size="md"
-      label="Dark Mode"
-      (click)="toggleTheme()"
-    ></erp-button>
-
     <div class="page-information">
       <h1>Dashboard</h1>
       <span> School Management System </span>
@@ -33,7 +26,7 @@
     <erp-dropdown [items]="[]">
       <erp-navbar-action
         dropdownTrigger
-        icon="bell"
+        icon="notifications"
         [badge]="navbar.unreadCount()"
       >
       </erp-navbar-action>

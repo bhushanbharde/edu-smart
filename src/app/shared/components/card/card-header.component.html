@@ -1,0 +1,15 @@
+<div class="erp-card-header">
+  <div>
+    @if (title) {
+      <h3>{{ title }}</h3>
+    }
+
+    @if (subtitle) {
+      <p>{{ subtitle }}</p>
+    }
+  </div>
+
+  <div class="erp-card-header__actions">
+    <ng-content></ng-content>
+  </div>
+</div>

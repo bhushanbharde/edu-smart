@@ -1,22 +1,15 @@
 <button
-    type="button"
-    class="action-button"
-    [class.active]="active"
-    [attr.aria-label]="ariaLabel"
-    (click)="onClick()">
+  type="button"
+  class="action-button"
+  [class.active]="active"
+  [attr.aria-label]="ariaLabel"
+  (click)="onClick()"
+>
+  <erp-icon [name]="$any(icon)"> </erp-icon>
 
-    <erp-icon
-        [name]="$any(icon)">
-    </erp-icon>
-
-    @if (badge && badge > 0) {
-
-        <span class="badge">
-
-            {{ badge }}
-
-        </span>
-
-    }
-
+  @if (badge && badge > 0) {
+    <span class="badge">
+      {{ badge }}
+    </span>
+  }
 </button>

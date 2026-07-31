@@ -1,0 +1,88 @@
+:host {
+  display: inline-block;
+}
+
+.erp-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  cursor: pointer;
+  user-select: none;
+
+  input {
+    display: none;
+  }
+
+  &__circle {
+    width: 18px;
+    height: 18px;
+
+    border: 2px solid var(--border-color);
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.2s ease;
+
+    flex-shrink: 0;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: var(--primary);
+
+    transform: scale(0);
+
+    transition: transform 0.2s ease;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &__description {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .required {
+    color: var(--danger);
+  }
+
+  &--checked {
+    .erp-radio__circle {
+      border-color: var(--primary);
+    }
+
+    .erp-radio__dot {
+      transform: scale(1);
+    }
+  }
+
+  &:hover:not(.erp-radio--disabled) {
+    .erp-radio__circle {
+      border-color: var(--primary);
+    }
+  }
+
+  &--disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+  }
+}

@@ -1,4 +1,4 @@
-import { IconName } from '../../../../shared/ui/display/icon/icon.types';
+import { IconName } from "../../../../shared/types";
 
 export interface SidebarMenuItem {
   id: string;

@@ -1,0 +1,44 @@
+<div
+  class="erp-progress"
+  [class.erp-progress--sm]="size === 'sm'"
+  [class.erp-progress--md]="size === 'md'"
+  [class.erp-progress--lg]="size === 'lg'"
+>
+  @if (label || showValue) {
+    <div class="erp-progress__header">
+      @if (label) {
+        <span class="erp-progress__label">
+          {{ label }}
+        </span>
+      }
+
+      @if (showValue) {
+        <span class="erp-progress__value">
+          {{ displayValue }}
+        </span>
+      }
+    </div>
+  }
+
+  <div
+    class="erp-progress__track"
+    role="progressbar"
+    [attr.aria-valuenow]="value"
+    [attr.aria-valuemin]="0"
+    [attr.aria-valuemax]="max"
+    [attr.aria-label]="label || 'Progress'"
+  >
+    <div
+      class="erp-progress__bar"
+      [class.erp-progress__bar--primary]="color === 'primary'"
+      [class.erp-progress__bar--secondary]="color === 'secondary'"
+      [class.erp-progress__bar--success]="color === 'success'"
+      [class.erp-progress__bar--warning]="color === 'warning'"
+      [class.erp-progress__bar--danger]="color === 'danger'"
+      [class.erp-progress__bar--muted]="color === 'muted'"
+      [class.erp-progress__bar--striped]="striped"
+      [class.erp-progress__bar--animated]="animated"
+      [style.width.%]="percentage"
+    ></div>
+  </div>
+</div>

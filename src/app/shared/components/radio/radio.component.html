@@ -1,0 +1,34 @@
+<label
+  class="erp-radio"
+  [class.erp-radio--checked]="checked"
+  [class.erp-radio--disabled]="disabled"
+>
+  <input
+    type="radio"
+    [checked]="checked"
+    [disabled]="disabled"
+    (click)="select()"
+  />
+
+  <span class="erp-radio__circle">
+    <span class="erp-radio__dot"></span>
+  </span>
+
+  <span class="erp-radio__content">
+    @if (label) {
+      <span class="erp-radio__label">
+        {{ label }}
+
+        @if (required) {
+          <span class="required">*</span>
+        }
+      </span>
+    }
+
+    @if (description) {
+      <span class="erp-radio__description">
+        {{ description }}
+      </span>
+    }
+  </span>
+</label>

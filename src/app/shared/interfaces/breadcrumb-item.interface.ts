@@ -1,4 +1,4 @@
-import { IconName } from '../core/types';
+import { IconName } from "../types";
 
 export interface BreadcrumbItem {
   label: string;

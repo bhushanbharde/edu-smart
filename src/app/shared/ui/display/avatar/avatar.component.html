@@ -1,7 +1,32 @@
-<div class="erp-avatar" [class]="'erp-avatar erp-avatar--' + size()">
-  @if (src()) {
-    <img [src]="src()" [alt]="name()" />
+<span
+  class="erp-avatar"
+  [class.erp-avatar--xs]="size === 'xs'"
+  [class.erp-avatar--sm]="size === 'sm'"
+  [class.erp-avatar--md]="size === 'md'"
+  [class.erp-avatar--lg]="size === 'lg'"
+  [class.erp-avatar--xl]="size === 'xl'"
+  [class.erp-avatar--rounded]="rounded"
+>
+  @if (src) {
+    <img
+      class="erp-avatar__image"
+      [src]="src"
+      [alt]="alt || name"
+    />
   } @else {
-    <span>{{ initials() }}</span>
+    <span class="erp-avatar__initials">
+      {{ initials }}
+    </span>
   }
-</div>
+
+  @if (status) {
+    <span
+      class="erp-avatar__status"
+      [class.erp-avatar__status--online]="status === 'online'"
+      [class.erp-avatar__status--offline]="status === 'offline'"
+      [class.erp-avatar__status--busy]="status === 'busy'"
+      [class.erp-avatar__status--away]="status === 'away'"
+      aria-hidden="true">
+    </span>
+  }
+</span>

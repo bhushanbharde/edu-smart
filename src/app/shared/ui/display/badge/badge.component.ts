@@ -1,29 +1,36 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-export type BadgeVariant =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'warning'
-  | 'danger'
-  | 'info'
-  | 'neutral';
+import { CommonModule } from '@angular/common';
 
-export type BadgeAppearance = 'soft' | 'solid' | 'outline';
+import { IconComponent } from '../../../../shared/ui/display/icon/icon.component';
+import { IconName } from '../../../types';
+
+import { BadgeVariant, BadgeSize } from './badge.types';
 
 @Component({
   selector: 'erp-badge',
   standalone: true,
+  imports: [CommonModule, IconComponent],
   templateUrl: './badge.component.html',
-  styleUrl: './badge.component.scss',
+  styleUrls: ['./badge.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeComponent {
-  readonly text = input.required<string>();
+  @Input()
+  text = '';
 
-  readonly variant = input<BadgeVariant>('primary');
+  @Input()
+  variant: BadgeVariant = 'primary';
 
-  readonly appearance = input<BadgeAppearance>('soft');
+  @Input()
+  size: BadgeSize = 'md';
 
-  readonly rounded = input(true);
+  @Input()
+  rounded = false;
+
+  @Input()
+  dot = false;
+
+  @Input()
+  icon?: IconName;
 }

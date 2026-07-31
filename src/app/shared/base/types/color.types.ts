@@ -5,4 +5,5 @@ export type ComponentColor =
   | 'warning'
   | 'danger'
   | 'info'
+  | 'muted'
   | 'neutral';

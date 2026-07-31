@@ -1,54 +1,128 @@
+:host {
+  display: inline-flex;
+}
+
 .erp-avatar {
+  position: relative;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 50%;
+  flex-shrink: 0;
+
+  overflow: visible;
+
+  background: var(--primary-light);
+  color: var(--primary);
+
+  font-weight: 600;
+  user-select: none;
+}
+
+.erp-avatar__image,
+.erp-avatar__initials {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   overflow: hidden;
 
-  background: #2563eb;
-  color: white;
-
-  font-weight: 600;
-
-  user-select: none;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  border-radius: inherit;
 }
 
-/* Sizes */
+.erp-avatar__image {
+  object-fit: cover;
+}
+
+.erp-avatar__initials {
+  background: var(--primary-light);
+}
+
+/* --------------------------------------------------
+   Sizes
+-------------------------------------------------- */
 
 .erp-avatar--xs {
   width: 24px;
   height: 24px;
+
   font-size: 10px;
 }
 
 .erp-avatar--sm {
   width: 32px;
   height: 32px;
+
   font-size: 12px;
 }
 
 .erp-avatar--md {
   width: 40px;
   height: 40px;
+
   font-size: 14px;
 }
 
 .erp-avatar--lg {
-  width: 52px;
-  height: 52px;
-  font-size: 18px;
+  width: 48px;
+  height: 48px;
+
+  font-size: 16px;
 }
 
 .erp-avatar--xl {
-  width: 72px;
-  height: 72px;
-  font-size: 24px;
+  width: 64px;
+  height: 64px;
+
+  font-size: 20px;
+}
+
+/* --------------------------------------------------
+   Shape
+-------------------------------------------------- */
+
+.erp-avatar--rounded {
+  border-radius: 50%;
+}
+
+.erp-avatar:not(.erp-avatar--rounded) {
+  border-radius: var(--radius-md);
+}
+
+/* --------------------------------------------------
+   Status
+-------------------------------------------------- */
+
+.erp-avatar__status {
+  position: absolute;
+
+  right: -1px;
+  bottom: -1px;
+
+  width: 10px;
+  height: 10px;
+
+  border: 2px solid var(--surface);
+
+  border-radius: 50%;
+}
+
+.erp-avatar__status--online {
+  background: var(--success);
+}
+
+.erp-avatar__status--offline {
+  background: var(--text-muted);
+}
+
+.erp-avatar__status--busy {
+  background: var(--danger);
+}
+
+.erp-avatar__status--away {
+  background: var(--warning);
 }

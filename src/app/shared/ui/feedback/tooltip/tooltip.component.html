@@ -1,0 +1,18 @@
+<span
+  class="erp-tooltip-wrapper"
+  [class.erp-tooltip-wrapper--disabled]="disabled"
+  [class.erp-tooltip-wrapper--top]="position === 'top'"
+  [class.erp-tooltip-wrapper--right]="position === 'right'"
+  [class.erp-tooltip-wrapper--bottom]="position === 'bottom'"
+  [class.erp-tooltip-wrapper--left]="position === 'left'"
+>
+  <ng-content></ng-content>
+
+  @if (text && !disabled) {
+    <span
+      class="erp-tooltip"
+      role="tooltip">
+      {{ text }}
+    </span>
+  }
+</span>

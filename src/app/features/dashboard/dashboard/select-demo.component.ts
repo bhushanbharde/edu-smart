@@ -37,7 +37,7 @@ export class SelectDemoComponent {
       value: 4,
       icon: 'user',
     },
-  ];
+  ] as unknown as SelectOption[];
 
   countryOptions: SelectOption[] = [
     {
@@ -56,7 +56,7 @@ export class SelectDemoComponent {
       label: 'Germany',
       value: 'DE',
     },
-  ];
+  ] as unknown as SelectOption[];
 
   studentStatusOptions: SelectOption[] = [
     {
@@ -76,5 +76,5 @@ export class SelectDemoComponent {
       label: 'Graduated',
       value: 'graduated',
     },
-  ];
+  ] as unknown as SelectOption[];
 }

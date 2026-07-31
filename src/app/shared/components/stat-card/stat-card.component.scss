@@ -1,0 +1,97 @@
+.erp-stat-card {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+
+  padding: 24px;
+}
+
+.erp-stat-card__header {
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+.erp-stat-card__icon {
+  width: 52px;
+
+  height: 52px;
+
+  border-radius: 12px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #fff;
+}
+
+.primary {
+  background: var(--primary);
+}
+
+.success {
+  background: var(--success);
+}
+
+.warning {
+  background: var(--warning);
+}
+
+.danger {
+  background: var(--danger);
+}
+
+.erp-stat-card__title {
+  font-size: 14px;
+
+  color: var(--text-secondary);
+}
+
+.erp-stat-card__value {
+  font-size: 32px;
+
+  font-weight: 700;
+
+  color: var(--text-primary);
+}
+
+.erp-stat-card__footer {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  font-size: 13px;
+}
+
+.up {
+  color: var(--success);
+
+  font-weight: 600;
+}
+
+.down {
+  color: var(--danger);
+
+  font-weight: 600;
+}
+
+.comparison {
+  color: var(--text-secondary);
+}
+
+.erp-stat-card--clickable {
+  cursor: pointer;
+
+  transition: var(--transition-base);
+}
+
+.erp-stat-card--clickable:hover {
+  transform: translateY(-2px);
+}

@@ -1,31 +1,76 @@
-<div class="erp-input">
-  @if (label()) {
+<div
+  class="erp-input"
+  [class.erp-input--sm]="size === 'sm'"
+  [class.erp-input--md]="size === 'md'"
+  [class.erp-input--lg]="size === 'lg'"
+  [class.erp-input--disabled]="disabled"
+  [class.erp-input--error]="status === 'danger'"
+  [class.erp-input--success]="status === 'success'"
+>
+  @if (label) {
     <label class="erp-input__label">
-      {{ label() }}
+      {{ label }}
 
-      @if (required()) {
+      @if (required) {
         <span>*</span>
       }
     </label>
   }
 
   <div class="erp-input__wrapper">
-    <ng-content select="[prefix]"></ng-content>
+    @if (prefixIcon) {
+      <erp-icon class="erp-input__icon" [name]="prefixIcon"> </erp-icon>
+    }
 
     <input
-      [type]="type()"
-      [placeholder]="placeholder()"
+      [type]="inputType"
       [value]="value"
-      [disabled]="disabled()"
+      [readonly]="readonly"
+      [disabled]="disabled"
+      [placeholder]="placeholder"
+      [attr.maxlength]="maxLength"
+      [autocomplete]="autocomplete"
       (input)="update($any($event.target).value)"
+      (blur)="onTouched()"
     />
 
-    <ng-content select="[suffix]"></ng-content>
+    @if (clearable && value) {
+      <button type="button" class="erp-input__action" (click)="clear()">
+        <erp-icon name="close"> </erp-icon>
+      </button>
+    }
+
+    @if (type === "password") {
+      <button
+        type="button"
+        class="erp-input__action"
+        (click)="togglePassword()"
+      >
+        <erp-icon [name]="hidePassword ? 'visibility' : 'visibilityOff'">
+        </erp-icon>
+      </button>
+    }
+
+    @if (suffixIcon) {
+      <erp-icon [name]="suffixIcon"> </erp-icon>
+    }
   </div>
 
-  @if (error()) {
+  @if (hint && !error) {
+    <small class="erp-input__hint">
+      {{ hint }}
+    </small>
+  }
+
+  @if (error) {
     <small class="erp-input__error">
-      {{ error() }}
+      {{ error }}
+    </small>
+  }
+
+  @if (maxLength) {
+    <small class="erp-input__counter">
+      {{ getStringValue().length }} / {{ maxLength }}
     </small>
   }
 </div>

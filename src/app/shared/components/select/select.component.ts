@@ -4,9 +4,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
-  HostListener,
   Input,
-  input,
   Output,
   QueryList,
   SimpleChanges,
@@ -20,7 +18,8 @@ import {
 } from '@angular/forms';
 
 import { SelectOption } from './select-option.model';
-import { IconComponent, IconName } from '../../ui/display/icon';
+import { IconComponent } from '../../ui/display/icon';
+import { IconName } from '../../types';
 
 @Component({
   selector: 'erp-select',
@@ -91,10 +90,6 @@ export class SelectComponent implements ControlValueAccessor {
   @Output() searchChange = new EventEmitter<string>();
 
   @Output() cleared = new EventEmitter<void>();
-
-  // readonly label = input('');
-  // readonly options = input<SelectOption[]>([]);
-  // readonly placeholder = input('Select');
 
   isOpen = false;
 
@@ -405,7 +400,7 @@ export class SelectComponent implements ControlValueAccessor {
     return this.compare(option.value, this.value);
   }
 
-  @HostListener('document:click', ['$event'])
+  // @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     if (!this.isOpen) {
       return;

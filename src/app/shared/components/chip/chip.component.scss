@@ -1,0 +1,137 @@
+:host {
+  display: inline-flex;
+  min-width: 0;
+}
+
+.erp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  min-width: 0;
+
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+
+  font-weight: 500;
+  white-space: nowrap;
+
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+/* --------------------------------------------------
+   Sizes
+-------------------------------------------------- */
+
+.erp-chip--sm {
+  min-height: 24px;
+  padding: 2px 7px;
+
+  font-size: var(--font-xs);
+}
+
+.erp-chip--md {
+  min-height: 30px;
+  padding: 4px 9px;
+
+  font-size: var(--font-sm);
+}
+
+.erp-chip--lg {
+  min-height: 36px;
+  padding: 6px 11px;
+
+  font-size: var(--font-md);
+}
+
+/* --------------------------------------------------
+   Variants
+-------------------------------------------------- */
+
+.erp-chip--default {
+  background: var(--surface);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.erp-chip--primary {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.erp-chip--success {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.erp-chip--warning {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.erp-chip--danger {
+  background: #fee2e2;
+  color: var(--danger);
+}
+
+/* --------------------------------------------------
+   Label
+-------------------------------------------------- */
+
+.erp-chip__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --------------------------------------------------
+   Remove
+-------------------------------------------------- */
+
+.erp-chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+  height: 18px;
+
+  margin: 0 -3px 0 0;
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: transparent;
+  color: currentColor;
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.erp-chip__remove:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.erp-chip__remove:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 1px;
+}
+
+.erp-chip__remove:disabled {
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------
+   Disabled
+-------------------------------------------------- */
+
+.erp-chip--disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}

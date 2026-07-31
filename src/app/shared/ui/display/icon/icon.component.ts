@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
-import { IconColor, IconSize, IconName } from './icon.types';
+// import { IconColor, IconSize, IconName } from './icon.types';
+import { ComponentColor, ComponentSize, IconName } from '../../../types';
 
 import { APP_ICONS } from './icon.registry';
 
@@ -20,10 +21,10 @@ export class IconComponent {
   name!: IconName;
 
   @Input()
-  size: IconSize = 'sm';
+  size: ComponentSize = 'sm';
 
   @Input()
-  color: IconColor = 'inherit';
+  color: ComponentColor = 'inherit';
 
   readonly icons = APP_ICONS;
 }

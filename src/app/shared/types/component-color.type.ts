@@ -4,9 +4,9 @@
  * Maps to your design tokens (CSS variables/theme).
  *
  * Example:
- * primary   -> --erp-primary
- * secondary -> --erp-secondary
- * success   -> --erp-success
+ * primary   -> --primary
+ * secondary -> --secondary
+ * success   -> --success
  */
 export type ComponentColor =
   | 'primary'
@@ -17,4 +17,5 @@ export type ComponentColor =
   | 'danger'
   | 'info'
   | 'neutral'
+  | 'muted'
   | 'inherit';

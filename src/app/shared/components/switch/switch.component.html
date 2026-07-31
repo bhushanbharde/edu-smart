@@ -1,0 +1,36 @@
+<div class="switch-wrapper" [class.switch-wrapper--disabled]="disabled">
+  <button
+    type="button"
+    class="switch"
+    [class.switch--checked]="checked"
+    [class.switch--disabled]="disabled"
+    [class.switch--xs]="size === 'xs'"
+    [class.switch--sm]="size === 'sm'"
+    [class.switch--md]="size === 'md'"
+    [class.switch--lg]="size === 'lg'"
+    role="switch"
+    [attr.aria-checked]="checked"
+    [attr.aria-disabled]="disabled"
+    [disabled]="disabled"
+    (click)="toggle()"
+    (keydown)="onKeydown($event)"
+  >
+    <span class="switch__thumb"></span>
+  </button>
+
+  @if (label || description) {
+    <div class="switch__content">
+      @if (label) {
+        <span class="switch__label">
+          {{ label }}
+        </span>
+      }
+
+      @if (description) {
+        <span class="switch__description">
+          {{ description }}
+        </span>
+      }
+    </div>
+  }
+</div>

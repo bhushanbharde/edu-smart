@@ -1,12 +1,26 @@
 <span
-  class="erp-badge"
-  [class]="
-    'erp-badge--' +
-    variant() +
-    ' erp-badge--' +
-    appearance() +
-    (rounded() ? ' erp-badge--rounded' : '')
-  "
->
-  {{ text() }}
+    class="erp-badge"
+    [class]="
+        'erp-badge--' + variant + ' ' +
+        'erp-badge--' + size
+    "
+    [class.erp-badge--rounded]="rounded">
+
+    @if(dot){
+
+        <span class="erp-badge__dot"></span>
+
+    }
+
+    @if(icon){
+
+        <erp-icon
+            [name]="icon!"
+            size="xs">
+        </erp-icon>
+
+    }
+
+    {{ text }}
+
 </span>

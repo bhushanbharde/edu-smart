@@ -1,13 +1,11 @@
-import { IconName } from "../../ui/display/icon";
+import { IconName } from '../../types';
 
 export interface SelectOption<T = any> {
+  value: T;
   label: string;
 
-  value: T;
-
+  description?: string;
   icon?: IconName;
 
   disabled?: boolean;
-
-  description?: string;
 }

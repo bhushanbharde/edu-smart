@@ -1,8 +1,13 @@
-<div class="erp-select">
+<div
+  class="erp-select"
+  [class.fill]="appearance === 'fill'"
+  [class.has-error]="!!error"
+  [class.has-success]="!!success && !error"
+>
   <!-- Label -->
   @if (label) {
     <label class="erp-select-label">
-      {{ label }}
+      <span>{{ label }}</span>
 
       @if (required) {
         <span class="required">*</span>
@@ -13,20 +18,28 @@
   <!-- Trigger -->
   <div
     class="erp-select-trigger"
+    [class.sm]="size === 'sm'"
+    [class.md]="size === 'md'"
+    [class.lg]="size === 'lg'"
+    [class.open]="isOpen"
+    [class.disabled]="disabled"
+    [class.readonly]="readonly"
     tabindex="0"
     role="combobox"
     aria-haspopup="listbox"
     [attr.aria-expanded]="isOpen"
     [attr.aria-disabled]="disabled"
-    [class.open]="isOpen"
-    [class.disabled]="disabled"
-    [class.readonly]="readonly"
     (click)="toggle()"
     (keydown)="onKeyDown($event)"
   >
-    <!-- Prefix Icon -->
+    <!-- Prefix -->
     @if (prefixIcon) {
-      <erp-icon class="prefix-icon" [name]="prefixIcon"> </erp-icon>
+      <erp-icon
+        class="prefix-icon"
+        [name]="prefixIcon"
+        size="sm"
+        color="muted"
+      />
     }
 
     <!-- Value -->
@@ -43,32 +56,53 @@
     </div>
 
     <!-- Clear -->
-    @if (clearable && value !== null && value !== undefined) {
+    @if (
+      clearable &&
+      value !== null &&
+      value !== undefined &&
+      !disabled &&
+      !readonly
+    ) {
       <button
         type="button"
         class="clear-btn"
         tabindex="-1"
+        aria-label="Clear selection"
         (click)="clear($event)"
       >
-        <erp-icon name="close"></erp-icon>
+        <erp-icon
+          name="close"
+          size="xs"
+          color="muted"
+        />
       </button>
     }
 
-    <!-- Dropdown Icon -->
+    <!-- Dropdown -->
     <erp-icon
       class="dropdown-icon"
       [name]="isOpen ? 'chevronUp' : 'chevronDown'"
-    >
-    </erp-icon>
+      size="sm"
+      color="muted"
+    />
   </div>
 
-  <!-- Panel -->
+  <!-- Dropdown Panel -->
   @if (isOpen) {
-    <div class="erp-select-panel" role="listbox">
+    <div
+  class="erp-select-panel"
+  role="listbox"
+  [style.width]="panelWidth === 'auto' ? '100%' : panelWidth"
+  [style.max-height.px]="maxHeight"
+>
       <!-- Search -->
       @if (searchable) {
         <div class="erp-select-search">
-          <erp-icon name="search"></erp-icon>
+          <erp-icon
+            name="search"
+            size="sm"
+            color="muted"
+          />
 
           <input
             type="text"
@@ -81,9 +115,12 @@
       }
 
       <!-- Options -->
-
       <div class="erp-select-options">
-        @for (option of filteredOptions; track option.value; let i = $index) {
+        @for (
+          option of filteredOptions;
+          track option.value;
+          let i = $index
+        ) {
           <div
             #optionElement
             class="erp-select-option"
@@ -95,13 +132,17 @@
             [class.disabled]="option.disabled"
             (click)="select(option)"
           >
-            <!-- Left Icon -->
+            <!-- Option Icon -->
             @if (option.icon) {
-              <erp-icon class="option-icon" [name]="option.icon"> </erp-icon>
+              <erp-icon
+                class="option-icon"
+                [name]="option.icon"
+                size="sm"
+                color="muted"
+              />
             }
 
             <!-- Content -->
-
             <div class="option-content">
               <div class="option-label">
                 {{ option.label }}
@@ -116,16 +157,24 @@
 
             <!-- Selected -->
             @if (isSelected(option)) {
-              <erp-icon class="selected-icon" name="check"> </erp-icon>
+              <erp-icon
+                class="selected-icon"
+                name="check"
+                size="sm"
+                color="primary"
+              />
             }
           </div>
         }
 
-        <!-- Empty State -->
-
+        <!-- Empty -->
         @if (filteredOptions.length === 0) {
           <div class="erp-select-empty">
-            <erp-icon name="search"></erp-icon>
+            <erp-icon
+              name="search"
+              size="md"
+              color="muted"
+            />
 
             <span>{{ emptyMessage }}</span>
           </div>
@@ -135,7 +184,6 @@
   }
 
   <!-- Hint -->
-
   @if (!error && hint) {
     <div class="erp-select-hint">
       {{ hint }}
@@ -143,22 +191,28 @@
   }
 
   <!-- Error -->
-
   @if (error) {
     <div class="erp-select-error">
-      <erp-icon name="alertCircle"></erp-icon>
+      <erp-icon
+        name="alertCircle"
+        size="xs"
+        color="danger"
+      />
 
-      {{ error }}
+      <span>{{ error }}</span>
     </div>
   }
 
   <!-- Success -->
-
   @if (success && !error) {
     <div class="erp-select-success">
-      <erp-icon name="checkCircle"></erp-icon>
+      <erp-icon
+        name="checkCircle"
+        size="xs"
+        color="success"
+      />
 
-      {{ success }}
+      <span>{{ success }}</span>
     </div>
   }
 </div>

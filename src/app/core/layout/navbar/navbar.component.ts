@@ -30,7 +30,6 @@ import { DropdownComponent } from '../../../shared/components/dropdown';
     NotificationComponent,
     NavbarActionComponent,
     DropdownComponent,
-    ButtonComponent,
     // IconComponent,
   ],
   templateUrl: './navbar.component.html',

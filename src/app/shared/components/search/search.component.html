@@ -1,0 +1,39 @@
+<div
+  class="erp-search"
+  [class.erp-search--sm]="size === 'sm'"
+  [class.erp-search--md]="size === 'md'"
+  [class.erp-search--lg]="size === 'lg'"
+  [class.erp-search--disabled]="disabled"
+>
+  <erp-icon
+    name="search"
+    size="sm"
+    color="muted"
+  />
+
+  <input
+    type="search"
+    [value]="value"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [readOnly]="readonly"
+    [attr.aria-label]="ariaLabel"
+    (input)="onInput($event)"
+    (keydown)="onKeydown($event)"
+  />
+
+  @if (clearable && value && !disabled && !readonly) {
+    <button
+      type="button"
+      class="erp-search__clear"
+      aria-label="Clear search"
+      (click)="clear()"
+    >
+      <erp-icon
+        name="close"
+        size="xs"
+        color="muted"
+      />
+    </button>
+  }
+</div>

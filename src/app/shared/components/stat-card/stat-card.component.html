@@ -1,0 +1,45 @@
+<erp-card>
+  <div class="erp-stat-card" [class.erp-stat-card--clickable]="clickable">
+    <div class="erp-stat-card__header">
+      <div
+        class="erp-stat-card__icon"
+        [class.primary]="color === 'primary'"
+        [class.success]="color === 'success'"
+        [class.warning]="color === 'warning'"
+        [class.danger]="color === 'danger'"
+      >
+        <erp-icon [name]="icon"> </erp-icon>
+      </div>
+    </div>
+
+    <div class="erp-stat-card__title">
+      {{ title }}
+    </div>
+
+    <div class="erp-stat-card__value">
+      {{ value }}
+    </div>
+
+    <div class="erp-stat-card__footer">
+      @switch (trend) {
+        @case ("up") {
+          <span class="up"> ▲ {{ percentage }} </span>
+        }
+
+        @case ("down") {
+          <span class="down"> ▼ {{ percentage }} </span>
+        }
+
+        @default {
+          <span>
+            {{ percentage }}
+          </span>
+        }
+      }
+
+      <span class="comparison">
+        {{ comparison }}
+      </span>
+    </div>
+  </div>
+</erp-card>

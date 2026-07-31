@@ -1,0 +1,106 @@
+:host {
+  display: inline-flex;
+}
+
+.erp-tooltip-wrapper {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.erp-tooltip {
+  position: absolute;
+  z-index: var(--z-tooltip);
+
+  width: max-content;
+  max-width: 240px;
+
+  padding: 6px 9px;
+
+  border-radius: var(--radius-sm);
+
+  background: #111827;
+  color: #ffffff;
+
+  font-size: var(--font-xs);
+  font-weight: 500;
+  line-height: 1.4;
+
+  white-space: normal;
+  text-align: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity var(--transition-fast),
+    visibility var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+/* --------------------------------------------------
+   Position
+-------------------------------------------------- */
+
+.erp-tooltip-wrapper--top .erp-tooltip {
+  bottom: calc(100% + 8px);
+  left: 50%;
+
+  transform: translate(-50%, 4px);
+}
+
+.erp-tooltip-wrapper--right .erp-tooltip {
+  top: 50%;
+  left: calc(100% + 8px);
+
+  transform: translate(4px, -50%);
+}
+
+.erp-tooltip-wrapper--bottom .erp-tooltip {
+  top: calc(100% + 8px);
+  left: 50%;
+
+  transform: translate(-50%, -4px);
+}
+
+.erp-tooltip-wrapper--left .erp-tooltip {
+  top: 50%;
+  right: calc(100% + 8px);
+
+  transform: translate(-4px, -50%);
+}
+
+/* --------------------------------------------------
+   Show
+-------------------------------------------------- */
+
+.erp-tooltip-wrapper:not(.erp-tooltip-wrapper--disabled):hover .erp-tooltip,
+.erp-tooltip-wrapper:not(.erp-tooltip-wrapper--disabled):focus-within
+  .erp-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.erp-tooltip-wrapper--top:hover .erp-tooltip,
+.erp-tooltip-wrapper--top:focus-within .erp-tooltip {
+  transform: translate(-50%, 0);
+}
+
+.erp-tooltip-wrapper--right:hover .erp-tooltip,
+.erp-tooltip-wrapper--right:focus-within .erp-tooltip {
+  transform: translate(0, -50%);
+}
+
+.erp-tooltip-wrapper--bottom:hover .erp-tooltip,
+.erp-tooltip-wrapper--bottom:focus-within .erp-tooltip {
+  transform: translate(-50%, 0);
+}
+
+.erp-tooltip-wrapper--left:hover .erp-tooltip,
+.erp-tooltip-wrapper--left:focus-within .erp-tooltip {
+  transform: translate(0, -50%);
+}
