@@ -1,0 +1,156 @@
+<!-- TOP RIGHT -->
+<div
+  class="erp-toast-container erp-toast-container--top-right"
+  aria-live="polite"
+  aria-atomic="true"
+>
+  @for (toast of getToastsByPosition("top-right"); track toast.id) {
+    <ng-container
+      *ngTemplateOutlet="toastTemplate; context: { $implicit: toast }"
+    />
+  }
+</div>
+
+<!-- TOP LEFT -->
+<div
+  class="erp-toast-container erp-toast-container--top-left"
+  aria-live="polite"
+  aria-atomic="true"
+>
+  @for (toast of getToastsByPosition("top-left"); track toast.id) {
+    <ng-container
+      *ngTemplateOutlet="toastTemplate; context: { $implicit: toast }"
+    />
+  }
+</div>
+
+<!-- TOP CENTER -->
+<div
+  class="erp-toast-container erp-toast-container--top-center"
+  aria-live="polite"
+  aria-atomic="true"
+>
+  @for (toast of getToastsByPosition("top-center"); track toast.id) {
+    <ng-container
+      *ngTemplateOutlet="toastTemplate; context: { $implicit: toast }"
+    />
+  }
+</div>
+
+<!-- BOTTOM RIGHT -->
+<div
+  class="erp-toast-container erp-toast-container--bottom-right"
+  aria-live="polite"
+  aria-atomic="true"
+>
+  @for (toast of getToastsByPosition("bottom-right"); track toast.id) {
+    <ng-container
+      *ngTemplateOutlet="toastTemplate; context: { $implicit: toast }"
+    />
+  }
+</div>
+
+<!-- BOTTOM LEFT -->
+<div
+  class="erp-toast-container erp-toast-container--bottom-left"
+  aria-live="polite"
+  aria-atomic="true"
+>
+  @for (toast of getToastsByPosition("bottom-left"); track toast.id) {
+    <ng-container
+      *ngTemplateOutlet="toastTemplate; context: { $implicit: toast }"
+    />
+  }
+</div>
+
+<!-- BOTTOM CENTER -->
+<div
+  class="erp-toast-container erp-toast-container--bottom-center"
+  aria-live="polite"
+  aria-atomic="true"
+>
+  @for (toast of getToastsByPosition("bottom-center"); track toast.id) {
+    <ng-container
+      *ngTemplateOutlet="toastTemplate; context: { $implicit: toast }"
+    />
+  }
+</div>
+
+<!-- TOAST TEMPLATE -->
+<ng-template #toastTemplate let-toast>
+  <div
+    class="erp-toast"
+    [class.erp-toast--success]="toast.type === 'success'"
+    [class.erp-toast--error]="toast.type === 'error'"
+    [class.erp-toast--warning]="toast.type === 'warning'"
+    [class.erp-toast--info]="toast.type === 'info'"
+    [class.erp-toast--loading]="toast.type === 'loading'"
+    role="status"
+  >
+    <!-- ICON -->
+    <div class="erp-toast-icon">
+      @if (toast.type === "success") {
+        <erp-icon name="checkCircle" />
+      }
+
+      @if (toast.type === "error") {
+        <erp-icon name="close" />
+      }
+
+      @if (toast.type === "warning") {
+        <erp-icon name="alertCircle" />
+      }
+
+      @if (toast.type === "info") {
+        <erp-icon name="info" />
+      }
+
+      @if (toast.type === "loading") {
+        <span class="erp-toast-spinner"></span>
+      }
+    </div>
+
+    <!-- CONTENT -->
+    <div class="erp-toast-content">
+      @if (toast.title) {
+        <div class="erp-toast-title">
+          {{ toast.title }}
+        </div>
+      }
+
+      <div class="erp-toast-message">
+        {{ toast.message }}
+      </div>
+
+      @if (toast.actionLabel) {
+        <button
+          type="button"
+          class="erp-toast-action"
+          (click)="handleAction(toast)"
+        >
+          {{ toast.actionLabel }}
+        </button>
+      }
+    </div>
+
+    <!-- CLOSE -->
+    @if (toast.dismissible) {
+      <button
+        type="button"
+        class="erp-toast-close"
+        aria-label="Close notification"
+        (click)="dismiss(toast.id)"
+      >
+        <erp-icon name="close" />
+      </button>
+    }
+
+    <!-- PROGRESS -->
+    @if (toast.duration > 0 && toast.type !== "loading") {
+      <div
+        class="erp-toast-progress"
+        [style.animation-duration.ms]="toast.duration"
+      ></div>
+    }
+  </div>
+</ng-template>

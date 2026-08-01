@@ -1,0 +1,47 @@
+@if (visible) {
+  <div
+    class="erp-alert"
+    [class.erp-alert--success]="status === 'success'"
+    [class.erp-alert--warning]="status === 'warning'"
+    [class.erp-alert--danger]="status === 'danger'"
+    [class.erp-alert--info]="status === 'info'"
+    role="alert"
+  >
+    <div class="erp-alert__icon">
+      <erp-icon
+        [name]="icon"
+        size="sm"
+      />
+    </div>
+
+    <div class="erp-alert__content">
+      @if (title) {
+        <div class="erp-alert__title">
+          {{ title }}
+        </div>
+      }
+
+      @if (message) {
+        <div class="erp-alert__message">
+          {{ message }}
+        </div>
+      }
+
+      <ng-content></ng-content>
+    </div>
+
+    @if (dismissible) {
+      <button
+        type="button"
+        class="erp-alert__close"
+        aria-label="Dismiss alert"
+        (click)="dismiss()"
+      >
+        <erp-icon
+          name="close"
+          size="xs"
+        />
+      </button>
+    }
+  </div>
+}

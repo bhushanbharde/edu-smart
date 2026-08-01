@@ -1,0 +1,136 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.erp-alert {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  width: 100%;
+
+  padding: 12px 14px;
+
+  border: 1px solid;
+  border-radius: var(--radius-md);
+
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------
+   Icon
+-------------------------------------------------- */
+
+.erp-alert__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  margin-top: 1px;
+}
+
+/* --------------------------------------------------
+   Content
+-------------------------------------------------- */
+
+.erp-alert__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.erp-alert__title {
+  margin-bottom: 2px;
+
+  font-size: var(--font-sm);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.erp-alert__message {
+  font-size: var(--font-sm);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------
+   Close
+-------------------------------------------------- */
+
+.erp-alert__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  width: 28px;
+  height: 28px;
+
+  margin: -3px -4px 0 0;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: var(--radius-sm);
+
+  background: transparent;
+
+  color: inherit;
+
+  cursor: pointer;
+
+  opacity: 0.7;
+}
+
+.erp-alert__close:hover {
+  opacity: 1;
+  background: rgb(0 0 0 / 5%);
+}
+
+.erp-alert__close:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 1px;
+}
+
+/* --------------------------------------------------
+   Success
+-------------------------------------------------- */
+
+.erp-alert--success {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #166534;
+}
+
+/* --------------------------------------------------
+   Warning
+-------------------------------------------------- */
+
+.erp-alert--warning {
+  border-color: #fde68a;
+  background: #fffbeb;
+  color: #92400e;
+}
+
+/* --------------------------------------------------
+   Danger
+-------------------------------------------------- */
+
+.erp-alert--danger {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+/* --------------------------------------------------
+   Info
+-------------------------------------------------- */
+
+.erp-alert--info {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+  color: #1e40af;
+}

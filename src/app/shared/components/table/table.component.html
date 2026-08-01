@@ -1,0 +1,207 @@
+<div
+  class="erp-table-wrapper"
+  [class.erp-table-wrapper--bordered]="bordered"
+  [class.erp-table-wrapper--striped]="striped"
+>
+  <!-- ======================================================
+       TABLE
+       ====================================================== -->
+
+  <div class="erp-table-scroll">
+    <table class="erp-table">
+      <!-- ==================================================
+           HEADER
+           ================================================== -->
+
+      <thead>
+        <tr>
+          <!-- Selection -->
+
+          @if (selectable) {
+            <th class="erp-table-selection-column">
+              <label class="erp-checkbox">
+                <input
+                  type="checkbox"
+                  [checked]="isAllSelected()"
+                  [indeterminate]="isSomeSelected()"
+                  (change)="toggleAllSelection()"
+                />
+
+                <span class="erp-checkbox-box"></span>
+              </label>
+            </th>
+          }
+
+          <!-- Columns -->
+
+          @for (column of visibleColumns; track trackByColumn($index, column)) {
+            <th
+              [style.width]="column.width"
+              [class.erp-table-cell--center]="column.align === 'center'"
+              [class.erp-table-cell--right]="column.align === 'right'"
+              [class.erp-table-header--sortable]="column.sortable"
+              (click)="sort(column)"
+            >
+              <div class="erp-table-header-content">
+                @if (column.icon) {
+                  <erp-icon [name]="column.icon"></erp-icon>
+                }
+
+                <span>
+                  {{ column.label }}
+                </span>
+
+                @if (column.sortable) {
+                  <span class="erp-table-sort">
+                    @if (!isSorted(column)) {
+                      <erp-icon name="chevronUpDown"></erp-icon>
+                    }
+
+                    @if (isAscending(column)) {
+                      <erp-icon name="chevronUp"></erp-icon>
+                    }
+
+                    @if (isSorted(column) && !isAscending(column)) {
+                      <erp-icon name="chevronDown"></erp-icon>
+                    }
+                  </span>
+                }
+              </div>
+            </th>
+          }
+
+          <!-- Actions -->
+
+          @if (rowActions.length) {
+            <th class="erp-table-actions-column">Actions</th>
+          }
+        </tr>
+      </thead>
+
+      <!-- ==================================================
+           BODY
+           ================================================== -->
+
+      <tbody>
+        <!-- Loading -->
+
+        @if (loading) {
+          <tr>
+            <td
+              class="erp-table-state"
+              [attr.colspan]="
+                visibleColumns.length +
+                (selectable ? 1 : 0) +
+                (rowActions.length ? 1 : 0)
+              "
+            >
+              <div class="erp-table-loading">
+                <span class="erp-table-loader"></span>
+
+                <span> Loading records... </span>
+              </div>
+            </td>
+          </tr>
+        }
+
+        <!-- Empty -->
+
+        @else if (!data.length) {
+          <tr>
+            <td
+              class="erp-table-state"
+              [attr.colspan]="
+                visibleColumns.length +
+                (selectable ? 1 : 0) +
+                (rowActions.length ? 1 : 0)
+              "
+            >
+              <div class="erp-table-empty">
+                {{ emptyMessage }}
+              </div>
+            </td>
+          </tr>
+        }
+
+        <!-- Rows -->
+
+        @else {
+          @for (row of data; track trackByRow($index, row)) {
+            <tr
+              [class.erp-table-row--selected]="isSelected(row)"
+              [class.erp-table-row--clickable]="hoverable"
+              (click)="onRowClick(row)"
+            >
+              <!-- Selection -->
+
+              @if (selectable) {
+                <td
+                  class="erp-table-selection-column"
+                  (click)="$event.stopPropagation()"
+                >
+                  <label class="erp-checkbox">
+                    <input
+                      type="checkbox"
+                      [checked]="isSelected(row)"
+                      (change)="toggleRowSelection(row)"
+                    />
+
+                    <span class="erp-checkbox-box"></span>
+                  </label>
+                </td>
+              }
+
+              <!-- Cells -->
+
+              @for (
+                column of visibleColumns;
+                track trackByColumn($index, column)
+              ) {
+                <td
+                  [class.erp-table-cell--center]="column.align === 'center'"
+                  [class.erp-table-cell--right]="column.align === 'right'"
+                >
+                  <span class="erp-table-cell-content">
+                    {{ getValue(row, column.key) }}
+                  </span>
+                </td>
+              }
+
+              <!-- Actions -->
+
+              @if (rowActions.length) {
+                <td
+                  class="erp-table-actions-column"
+                  (click)="$event.stopPropagation()"
+                >
+                  <div class="erp-table-action-wrapper">
+                    <button
+                      type="button"
+                      class="erp-table-action-button"
+                      aria-label="Row actions"
+                      [attr.aria-expanded]="openActionRow === row"
+                      (click)="toggleActionMenu($event, row)"
+                    >
+                      <erp-icon name="more"></erp-icon>
+                    </button>
+
+                    @if (openActionRow === row) {
+                      <div class="erp-table-action-menu">
+                        <erp-menu
+                          [items]="getRowMenuItems(row)"
+                          [minWidth]="170"
+                          (itemSelected)="onActionSelected(row, $event)"
+                          (closed)="closeActionMenu()"
+                        ></erp-menu>
+                      </div>
+                    }
+                  </div>
+                </td>
+              }
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

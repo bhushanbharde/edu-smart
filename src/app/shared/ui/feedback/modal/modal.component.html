@@ -1,0 +1,65 @@
+@if (open) {
+  <div class="erp-modal-backdrop" (click)="onBackdropClick($event)">
+    <section
+      class="erp-modal"
+      [class.erp-modal--sm]="size === 'sm'"
+      [class.erp-modal--md]="size === 'md'"
+      [class.erp-modal--lg]="size === 'lg'"
+      [class.erp-modal--xl]="size === 'xl'"
+      [class.erp-modal--full]="size === 'full'"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="title || 'Dialog'"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Accent -->
+      <div class="erp-modal-accent"></div>
+
+      <!-- Header -->
+      <header class="erp-modal-header">
+        <div class="erp-modal-header-content">
+          <div class="erp-modal-title-row">
+            <div class="erp-modal-title-icon">
+              <erp-icon name="add"></erp-icon>
+            </div>
+
+            <div class="erp-modal-heading">
+              @if (title) {
+                <h2 class="erp-modal-title">
+                  {{ title }}
+                </h2>
+              }
+
+              @if (subtitle) {
+                <p class="erp-modal-subtitle">
+                  {{ subtitle }}
+                </p>
+              }
+            </div>
+          </div>
+        </div>
+
+        @if (showClose) {
+          <button
+            type="button"
+            class="erp-modal-close"
+            aria-label="Close modal"
+            (click)="close()"
+          >
+            <erp-icon name="close"></erp-icon>
+          </button>
+        }
+      </header>
+
+      <!-- Body -->
+      <div class="erp-modal-body">
+        <ng-content></ng-content>
+      </div>
+
+      <!-- Footer -->
+      <div class="erp-modal-footer">
+        <ng-content select="[modal-footer]"></ng-content>
+      </div>
+    </section>
+  </div>
+}

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ComponentColor, ComponentSize } from '../../base/types';
+import { ComponentSize } from '../../types';
+import { ComponentColor } from '../../base/types';
 
 
 @Component({

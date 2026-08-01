@@ -1,0 +1,43 @@
+<div class="erp-menu" [style.min-width.px]="minWidth" role="menu">
+  @for (item of items; track trackByLabel($index, item)) {
+    @if (item.divider) {
+      <div class="erp-menu-divider" role="separator"></div>
+    } @else {
+      <button
+        type="button"
+        class="erp-menu-item"
+        [class.erp-menu-item--danger]="item.danger"
+        [class.erp-menu-item--disabled]="item.disabled"
+        [disabled]="item.disabled"
+        role="menuitem"
+        (click)="selectItem(item)"
+      >
+        @if (item.icon) {
+          <span class="erp-menu-icon">
+            <erp-icon [name]="item.icon"></erp-icon>
+          </span>
+        }
+
+        <span class="erp-menu-label">
+          {{ item.label }}
+        </span>
+
+        @if (item.shortcut) {
+          <span class="erp-menu-shortcut">
+            {{ item.shortcut }}
+          </span>
+        }
+
+        @if (item.children?.length) {
+          <span class="erp-menu-arrow">
+            <erp-icon name="chevronRight"></erp-icon>
+          </span>
+        }
+      </button>
+    }
+  }
+
+  @if (!items.length) {
+    <div class="erp-menu-empty">No options available</div>
+  }
+</div>

@@ -1,0 +1,109 @@
+:host {
+  display: inline-flex;
+}
+
+.erp-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  color: var(--primary);
+}
+
+.erp-spinner__circle {
+  display: block;
+
+  flex-shrink: 0;
+
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+
+  border-radius: 50%;
+
+  animation: erp-spinner-rotate 0.7s linear infinite;
+}
+
+.erp-spinner__label {
+  color: var(--text-secondary);
+
+  font-size: var(--font-sm);
+}
+
+/* ---------------------------------------------
+   Sizes
+--------------------------------------------- */
+
+.erp-spinner--xs .erp-spinner__circle {
+  width: 12px;
+  height: 12px;
+
+  border-width: 2px;
+}
+
+.erp-spinner--sm .erp-spinner__circle {
+  width: 16px;
+  height: 16px;
+
+  border-width: 2px;
+}
+
+.erp-spinner--md .erp-spinner__circle {
+  width: 22px;
+  height: 22px;
+
+  border-width: 2px;
+}
+
+.erp-spinner--lg .erp-spinner__circle {
+  width: 30px;
+  height: 30px;
+
+  border-width: 3px;
+}
+
+.erp-spinner--xl .erp-spinner__circle {
+  width: 40px;
+  height: 40px;
+
+  border-width: 3px;
+}
+
+/* ---------------------------------------------
+   Colors
+--------------------------------------------- */
+
+.erp-spinner--primary {
+  color: var(--primary);
+}
+
+.erp-spinner--secondary {
+  color: var(--text-secondary);
+}
+
+.erp-spinner--success {
+  color: var(--success);
+}
+
+.erp-spinner--warning {
+  color: var(--warning);
+}
+
+.erp-spinner--danger {
+  color: var(--danger);
+}
+
+.erp-spinner--muted {
+  color: var(--text-secondary);
+}
+
+/* ---------------------------------------------
+   Animation
+--------------------------------------------- */
+
+@keyframes erp-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

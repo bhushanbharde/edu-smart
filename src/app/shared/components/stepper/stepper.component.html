@@ -1,0 +1,88 @@
+<div
+  class="erp-stepper"
+  [class.erp-stepper--horizontal]="
+    orientation === 'horizontal'
+  "
+  [class.erp-stepper--vertical]="
+    orientation === 'vertical'
+  "
+>
+
+  @for (
+    step of steps;
+    track trackByStep($index, step);
+    let last = $last
+  ) {
+
+    <div
+      class="erp-step"
+      [class.erp-step--active]="
+        isActive($index)
+      "
+      [class.erp-step--completed]="
+        isCompleted($index)
+      "
+      [class.erp-step--error]="
+        step.error
+      "
+      [class.erp-step--disabled]="
+        isDisabled(step, $index)
+      "
+    >
+
+      <button
+        type="button"
+        class="erp-step-indicator"
+        [disabled]="isDisabled(step, $index)"
+        (click)="selectStep(step, $index)"
+      >
+
+        @if (step.icon && !isCompleted($index)) {
+
+          <erp-icon
+            [name]="step.icon"
+          ></erp-icon>
+
+        } @else if (isCompleted($index)) {
+
+          <erp-icon name="check"></erp-icon>
+
+        } @else {
+
+          <span class="erp-step-number">
+            {{ $index + 1 }}
+          </span>
+
+        }
+
+      </button>
+
+
+      <div class="erp-step-content">
+
+        <div class="erp-step-label">
+          {{ step.label }}
+        </div>
+
+        @if (step.description) {
+
+          <div class="erp-step-description">
+            {{ step.description }}
+          </div>
+
+        }
+
+      </div>
+
+
+      @if (!last) {
+
+        <div class="erp-step-connector"></div>
+
+      }
+
+    </div>
+
+  }
+
+</div>

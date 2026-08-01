@@ -1,0 +1,36 @@
+@if (variant === "text" && lines > 1) {
+  <div class="erp-skeleton-group" [style.width]="width">
+    @for (line of [].constructor(lines); track $index) {
+      <span
+        class="erp-skeleton"
+        [class.erp-skeleton--xs]="size === 'xs'"
+        [class.erp-skeleton--sm]="size === 'sm'"
+        [class.erp-skeleton--md]="size === 'md'"
+        [class.erp-skeleton--lg]="size === 'lg'"
+        [class.erp-skeleton--xl]="size === 'xl'"
+        [class.erp-skeleton--text]="variant === 'text'"
+        [class.erp-skeleton--pulse]="animation === 'pulse'"
+        [class.erp-skeleton--wave]="animation === 'wave'"
+        [class.erp-skeleton--none]="animation === 'none'"
+        [style.height]="height || null"
+      ></span>
+    }
+  </div>
+} @else {
+  <span
+    class="erp-skeleton"
+    [class.erp-skeleton--xs]="size === 'xs'"
+    [class.erp-skeleton--sm]="size === 'sm'"
+    [class.erp-skeleton--md]="size === 'md'"
+    [class.erp-skeleton--lg]="size === 'lg'"
+    [class.erp-skeleton--xl]="size === 'xl'"
+    [class.erp-skeleton--text]="variant === 'text'"
+    [class.erp-skeleton--rectangular]="variant === 'rectangular'"
+    [class.erp-skeleton--circular]="variant === 'circular'"
+    [class.erp-skeleton--pulse]="animation === 'pulse'"
+    [class.erp-skeleton--wave]="animation === 'wave'"
+    [class.erp-skeleton--none]="animation === 'none'"
+    [style.width]="width"
+    [style.height]="height || null"
+  ></span>
+}

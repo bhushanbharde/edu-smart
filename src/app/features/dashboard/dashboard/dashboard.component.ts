@@ -29,7 +29,33 @@ import {
 import { SwitchComponent } from '../../../shared/components/switch';
 import { TimePickerComponent } from '../../../shared/components/time-picker';
 import { SearchComponent } from '../../../shared/components/search';
-import { ProgressComponent } from "../../../shared/components/progress";
+import { ProgressComponent } from '../../../shared/components/progress';
+import { SpinnerComponent } from '../../../shared/components/spinner';
+import { SkeletonComponent } from '../../../shared/components/skeleton';
+import { AlertComponent } from '../../../shared/components/alert';
+import { ToastComponent } from '../../../shared/ui/feedback/toast/toast.component';
+import { ToastService } from '../../../shared/ui/feedback/toast/toast.service';
+import { ModalComponent } from '../../../shared/ui/feedback/modal/modal.component';
+import { ConfirmDialogComponent } from '../../../shared/ui/feedback/confirm-dialog/confirm-dialog.component';
+import { MenuComponent } from '../../../shared/components/menu/menu.component';
+import { MenuItem } from '../../../shared/components/menu/menu.types';
+import { PopoverComponent } from '../../../shared/components/popover/popover.component';
+import { TabsComponent } from '../../../shared/components/tabs/tabs.component';
+import { AccordionComponent } from '../../../shared/components/accordion/accordion.component';
+import { AccordionItem } from '../../../shared/components/accordion/accordion.types';
+import {
+  TableAction,
+  TableColumn,
+  TableRowAction,
+  TableSort,
+} from '../../../shared/components/table/table.types';
+import { TableComponent } from '../../../shared/components/table/table.component';
+import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
+import { EmptyStateComponent } from "../../../shared/components/empty-state/empty-state.component";
+import { StepperComponent } from "../../../shared/components/stepper/stepper.component";
+import { StepperItem } from '../../../shared/components/stepper/stepper.types';
+import { DividerComponent } from "../../../shared/components/divider/divider.component";
+import { TagComponent } from "../../../shared/components/tag/tag.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -59,20 +85,351 @@ import { ProgressComponent } from "../../../shared/components/progress";
     SwitchComponent,
     TimePickerComponent,
     SearchComponent,
-    ProgressComponent
-],
+    ProgressComponent,
+    SpinnerComponent,
+    SkeletonComponent,
+    AlertComponent,
+    // ToastComponent,
+    ModalComponent,
+    ConfirmDialogComponent,
+    MenuComponent,
+    PopoverComponent,
+    TabsComponent,
+    AccordionComponent,
+    TableComponent,
+    PaginationComponent,
+    EmptyStateComponent,
+    StepperComponent,
+    DividerComponent,
+    TagComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
+  removeClass() {
+    throw new Error('Method not implemented.');
+  }
+  clearFilters() {
+    throw new Error('Method not implemented.');
+  }
+  addStudent() {
+    throw new Error('Method not implemented.');
+  }
+  currentPage: number = 1;
+  totalStudents: number = 1;
+  showDialog: boolean = false;
+  showModal: any;
+  showDeleteDialog: boolean = false;
+  deleting: boolean = false;
   notificationsEnabled: any;
   autoSave: any;
   startTime: any;
   endTime: any;
   searchTerm = '';
+  bordered: any;
+  striped: any;
+  showPopover: boolean = false;
+  showInfo: any;
+  activeTab: string = '';
+  tabs: any;
+  removable:boolean = true;
+
+  steps: StepperItem[] = [
+    {
+      label: 'Student Details',
+      description: 'Basic information',
+    },
+    {
+      label: 'Parent Details',
+      description: 'Contact information',
+    },
+    {
+      label: 'Documents',
+      description: 'Upload documents',
+    },
+    {
+      label: 'Confirmation',
+      description: 'Review information',
+    },
+  ];
+
+  currentStep = 1;
+
+  menuItems: MenuItem[] = [
+    {
+      label: 'Edit',
+      value: 'edit',
+      icon: 'edit',
+    },
+    {
+      label: 'Duplicate',
+      value: 'duplicate',
+      icon: 'copy',
+    },
+    {
+      divider: true,
+      label: '',
+    },
+    {
+      label: 'Delete',
+      value: 'delete',
+      icon: 'delete',
+      danger: true,
+    },
+  ];
+
+  accordionItems: AccordionItem[] = [
+    {
+      title: 'Student Information',
+      icon: 'user',
+      content: 'Basic student information and contact details.',
+    },
+    {
+      title: 'Attendance',
+      icon: 'calendar',
+      content: 'View attendance records and attendance history.',
+    },
+    {
+      title: 'Fee Details',
+      icon: 'fees',
+      content: 'View fee structure and payment history.',
+    },
+  ];
+
+  columns: TableColumn<any>[] = [
+    {
+      key: 'name',
+      label: 'Student',
+    },
+    {
+      key: 'class',
+      label: 'Class',
+      sortable: true,
+    },
+    {
+      key: 'status',
+      label: 'Status',
+    },
+    {
+      key: 'admissionNo',
+      label: 'Admission No.',
+    },
+  ];
+
+  // students = [
+  //   {
+  //     name: 'Aarav Sharma',
+  //     class: 'Class 8',
+  //     status: 'Active',
+  //     admissionNo: 'ADM-001',
+  //   },
+  //   {
+  //     name: 'Anaya Patil',
+  //     class: 'Class 7',
+  //     status: 'Active',
+  //     admissionNo: 'ADM-002',
+  //   },
+  // ];
+
+  students: any[] = [
+    {
+      id: 1,
+      name: 'Aarav Sharma',
+      admissionNo: 'ADM-001',
+      class: 'VIII',
+      section: 'A',
+      status: 'Active',
+    },
+    {
+      id: 2,
+      name: 'Anaya Patil',
+      admissionNo: 'ADM-002',
+      class: 'VII',
+      section: 'B',
+      status: 'Active',
+    },
+    {
+      id: 3,
+      name: 'Rahul Joshi',
+      admissionNo: 'ADM-003',
+      class: 'VIII',
+      section: 'A',
+      status: 'Inactive',
+    },
+  ];
+
+  studentColumns: TableColumn<any>[] = [
+    {
+      key: 'name',
+      label: 'Student',
+    },
+    {
+      key: 'admissionNo',
+      label: 'Admission No.',
+      sortable: true,
+    },
+    {
+      key: 'class',
+      label: 'Class',
+      sortable: true,
+    },
+    {
+      key: 'section',
+      label: 'Section',
+    },
+    {
+      key: 'status',
+      label: 'Status',
+    },
+  ];
+
+  studentActions: TableAction<any>[] = [
+    {
+      label: 'View',
+      value: 'view',
+      icon: 'add',
+    },
+    {
+      label: 'Edit',
+      value: 'edit',
+      icon: 'edit',
+    },
+    {
+      label: 'Delete',
+      value: 'delete',
+      icon: 'delete',
+      danger: true,
+    },
+  ];
+
+  constructor(private readonly toast: ToastService) {}
+
+  ngOnInit() {
+    // this.saveStudent();
+  }
+
+  onSelectionChange(rows: Student[]): void {
+    console.log('Selected:', rows);
+  }
+
+  onActionSelected(event: TableRowAction<Student>): void {
+    switch (event.action.value) {
+      case 'view':
+        // open student
+        break;
+
+      case 'edit':
+        // edit student
+        break;
+
+      case 'delete':
+        // delete student
+        break;
+    }
+  }
+
+  onSortChange($event: TableSort) {
+    throw new Error('Method not implemented.');
+  }
+
+  onSort($event: TableSort) {
+    throw new Error('Method not implemented.');
+  }
+  onStudentClick($event: {
+    name: string;
+    class: string;
+    status: string;
+    admissionNo: string;
+  }) {
+    throw new Error('Method not implemented.');
+  }
+
+  saveStudent(): void {
+    // API call...
+
+    this.toast.success('Student created successfully.');
+
+    this.toast.error('Unable to save student.');
+
+    this.toast.warning('This student is already registered.');
+
+    this.toast.info('Attendance has been updated.');
+
+    this.toast.loading('Saving student...');
+
+    this.toast.success('Student has been created successfully.', {
+      title: 'Toast with Title - Student Created',
+    });
+
+    this.toast.success('Profile updated successfully.', {
+      duration: 30000,
+    });
+
+    this.toast.error('Persistent toast', {
+      duration: 0,
+    });
+
+    this.toast.warning('Student has been moved to the archive.', {
+      title: 'Student Archived',
+      actionLabel: 'Undo',
+      onAction: () => {
+        console.log('Undo archive');
+      },
+    });
+
+    this.toast.success('Toast with Different position - bottom-right', {
+      position: 'bottom-left',
+    });
+  }
+
+  onMenuItemSelected(item: MenuItem): void {
+    switch (item.value) {
+      case 'edit':
+        this.edit();
+        break;
+
+      case 'duplicate':
+        this.duplicate();
+        break;
+
+      case 'delete':
+        this.delete();
+        break;
+    }
+  }
+  delete() {
+    throw new Error('Method not implemented.');
+  }
+  duplicate() {
+    throw new Error('Method not implemented.');
+  }
+  edit() {
+    throw new Error('Method not implemented.');
+  }
+
+  openConfirmDialog() {
+    this.showDialog = true;
+  }
+
+  openConfirmDialogDelete() {
+    this.showDeleteDialog = true;
+  }
+
+  deleteStudent() {
+    throw new Error('Method not implemented.');
+  }
+
+  deactivateStudent() {
+    throw new Error('Method not implemented.');
+  }
 
   onSearch(value: string): void {
     console.log('Searching:', value);
+  }
+
+  onAlertDismissed() {
+    throw new Error('Method not implemented.');
   }
 
   onStudentAction(item: DropdownItem): void {
@@ -91,24 +448,24 @@ export class DashboardComponent {
     }
   }
 
-  studentActions: DropdownItem[] = [
-    {
-      label: 'View Student',
-      value: 'view',
-      icon: 'profile',
-    },
-    {
-      label: 'Edit Student',
-      value: 'edit',
-      icon: 'edit',
-    },
-    {
-      label: 'Delete Student',
-      value: 'delete',
-      icon: 'delete',
-      danger: true,
-    },
-  ];
+  // studentActions: DropdownItem[] = [
+  //   {
+  //     label: 'View Student',
+  //     value: 'view',
+  //     icon: 'profile',
+  //   },
+  //   {
+  //     label: 'Edit Student',
+  //     value: 'edit',
+  //     icon: 'edit',
+  //   },
+  //   {
+  //     label: 'Delete Student',
+  //     value: 'delete',
+  //     icon: 'delete',
+  //     danger: true,
+  //   },
+  // ];
 
   onMenuClick(item: DropdownItem): void {
     console.log('Menu item clicked:', item);

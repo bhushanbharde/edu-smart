@@ -1,1 +1,24 @@
-<p>spinner works!</p>
+<div
+  class="erp-spinner"
+  [class.erp-spinner--xs]="size === 'xs'"
+  [class.erp-spinner--sm]="size === 'sm'"
+  [class.erp-spinner--md]="size === 'md'"
+  [class.erp-spinner--lg]="size === 'lg'"
+  [class.erp-spinner--xl]="size === 'xl'"
+  [class.erp-spinner--primary]="color === 'primary'"
+  [class.erp-spinner--secondary]="color === 'secondary'"
+  [class.erp-spinner--success]="color === 'success'"
+  [class.erp-spinner--warning]="color === 'warning'"
+  [class.erp-spinner--danger]="color === 'danger'"
+  [class.erp-spinner--muted]="color === 'muted'"
+  role="status"
+  [attr.aria-label]="label"
+>
+  <span class="erp-spinner__circle"></span>
+
+  @if (label) {
+    <span class="erp-spinner__label">
+      {{ label }}
+    </span>
+  }
+</div>

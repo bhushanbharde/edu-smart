@@ -1,0 +1,39 @@
+<div
+  class="erp-popover-wrapper"
+  [class.erp-popover-wrapper--open]="open"
+>
+
+  <!-- Trigger -->
+  <div class="erp-popover-trigger">
+    <ng-content select="[popover-trigger]"></ng-content>
+  </div>
+
+
+  <!-- Content -->
+  @if (open) {
+    <div
+      class="erp-popover"
+      [class.erp-popover--top]="placement === 'top'"
+      [class.erp-popover--bottom]="placement === 'bottom'"
+      [class.erp-popover--left]="placement === 'left'"
+      [class.erp-popover--right]="placement === 'right'"
+      [class.erp-popover--start]="align === 'start'"
+      [class.erp-popover--center]="align === 'center'"
+      [class.erp-popover--end]="align === 'end'"
+      [class.erp-popover--no-arrow]="!showArrow"
+      [style.width.px]="width"
+      role="dialog"
+    >
+
+      @if (showArrow) {
+        <span class="erp-popover-arrow"></span>
+      }
+
+      <div class="erp-popover-content">
+        <ng-content></ng-content>
+      </div>
+
+    </div>
+  }
+
+</div>

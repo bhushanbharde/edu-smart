@@ -1,0 +1,165 @@
+:host {
+  display: block;
+}
+
+/* =========================================================
+   PAGINATION
+   ========================================================= */
+
+.erp-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  min-height: 52px;
+
+  padding: 8px 4px;
+}
+
+/* =========================================================
+   INFO
+   ========================================================= */
+
+.erp-pagination-info {
+  color: var(--text-secondary, #64748b);
+
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.erp-pagination-info strong {
+  color: var(--text-primary, #374151);
+
+  font-weight: 600;
+}
+
+/* =========================================================
+   CONTROLS
+   ========================================================= */
+
+.erp-pagination-controls {
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+}
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.erp-pagination-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 32px;
+  height: 32px;
+
+  padding: 0 8px;
+
+  border: 1px solid transparent;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: var(--text-secondary, #64748b);
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+
+.erp-pagination-button:hover:not(:disabled) {
+  background: var(--surface-hover, #f5f7fa);
+
+  color: var(--text-primary, #374151);
+}
+
+.erp-pagination-button--active {
+  background: var(--primary, #2563eb);
+
+  color: #ffffff;
+
+  font-weight: 600;
+}
+
+.erp-pagination-button--active:hover {
+  background: var(--primary, #2563eb);
+
+  color: #ffffff;
+}
+
+.erp-pagination-button:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+}
+
+.erp-pagination-button:focus-visible {
+  outline: 2px solid var(--primary, #2563eb);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   ARROWS
+   ========================================================= */
+
+.erp-pagination-arrow {
+  border-color: var(--border-color, #e5e7eb);
+
+  background: var(--surface, #ffffff);
+}
+
+.erp-pagination-arrow:hover:not(:disabled) {
+  border-color: var(--border-color, #d1d5db);
+
+  background: var(--surface-hover, #f8fafc);
+}
+
+/* =========================================================
+   ELLIPSIS
+   ========================================================= */
+
+.erp-pagination-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 32px;
+
+  color: var(--text-muted, #9ca3af);
+
+  font-size: 12px;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .erp-pagination {
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 8px;
+  }
+
+  .erp-pagination-info {
+    text-align: center;
+  }
+
+  .erp-pagination-controls {
+    justify-content: center;
+  }
+}

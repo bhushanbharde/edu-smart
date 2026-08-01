@@ -1,0 +1,101 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+.erp-divider {
+  display: flex;
+  align-items: center;
+
+  color: var(--text-secondary, #64748b);
+}
+
+/* =========================================================
+   HORIZONTAL
+   ========================================================= */
+
+.erp-divider--horizontal {
+  width: 100%;
+}
+
+.erp-divider--horizontal .erp-divider-line {
+  flex: 1;
+
+  height: 1px;
+
+  background: var(--border-color, #e5e7eb);
+}
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.erp-divider-label {
+  flex-shrink: 0;
+
+  padding: 0 12px;
+
+  color: var(--text-secondary, #64748b);
+
+  font-size: 11px;
+  font-weight: 500;
+
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* =========================================================
+   VERTICAL
+   ========================================================= */
+
+.erp-divider--vertical {
+  width: 1px;
+  height: 100%;
+
+  min-height: 20px;
+
+  flex-direction: column;
+}
+
+.erp-divider--vertical .erp-divider-line {
+  width: 1px;
+  height: 100%;
+
+  background: var(--border-color, #e5e7eb);
+}
+
+/* =========================================================
+   SPACING
+   ========================================================= */
+
+.erp-divider--horizontal.erp-divider--sm {
+  margin: 8px 0;
+}
+
+.erp-divider--horizontal.erp-divider--md {
+  margin: 16px 0;
+}
+
+.erp-divider--horizontal.erp-divider--lg {
+  margin: 24px 0;
+}
+
+/* =========================================================
+   VARIANTS
+   ========================================================= */
+
+.erp-divider--dashed .erp-divider-line {
+  background: none;
+
+  border-top: 1px dashed var(--border-color, #e5e7eb);
+}
+
+.erp-divider--dotted .erp-divider-line {
+  background: none;
+
+  border-top: 1px dotted var(--border-color, #e5e7eb);
+}

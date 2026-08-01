@@ -1,0 +1,365 @@
+:host {
+  display: contents;
+}
+
+
+/* =========================================================
+   BACKDROP
+   ========================================================= */
+
+.erp-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(15, 23, 42, 0.32);
+
+  backdrop-filter: blur(3px);
+
+  animation: modal-backdrop-in 180ms ease-out;
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.erp-modal {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-height: calc(100vh - 48px);
+
+  background: var(--surface, #ffffff);
+
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 14px;
+
+  box-shadow:
+    0 24px 60px rgba(15, 23, 42, 0.14),
+    0 8px 24px rgba(15, 23, 42, 0.08);
+
+  overflow: hidden;
+
+  animation: modal-enter 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* =========================================================
+   ACCENT
+   ========================================================= */
+
+.erp-modal-accent {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background: var(--primary, #2563eb);
+}
+
+
+/* =========================================================
+   SIZES
+   ========================================================= */
+
+.erp-modal--sm {
+  max-width: 420px;
+}
+
+.erp-modal--md {
+  max-width: 560px;
+}
+
+.erp-modal--lg {
+  max-width: 720px;
+}
+
+.erp-modal--xl {
+  max-width: 960px;
+}
+
+.erp-modal--full {
+  width: 100%;
+  max-width: none;
+
+  height: 100%;
+  max-height: none;
+
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.erp-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 22px 24px 18px;
+
+  background: var(--surface, #ffffff);
+
+  border-bottom: 1px solid var(--border-color, #eef0f3);
+}
+
+
+.erp-modal-header-content {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.erp-modal-title-row {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+}
+
+
+.erp-modal-title-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 34px;
+
+  width: 34px;
+  height: 34px;
+
+  margin-top: 1px;
+
+  border-radius: 8px;
+
+  background: color-mix(
+    in srgb,
+    var(--primary, #2563eb) 10%,
+    transparent
+  );
+
+  color: var(--primary, #2563eb);
+}
+
+
+.erp-modal-heading {
+  min-width: 0;
+}
+
+
+.erp-modal-title {
+  margin: 0;
+
+  color: var(--text-primary, #111827);
+
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 24px;
+
+  letter-spacing: -0.01em;
+}
+
+
+.erp-modal-subtitle {
+  max-width: 620px;
+
+  margin: 4px 0 0;
+
+  color: var(--text-secondary, #6b7280);
+
+  font-size: 13px;
+  line-height: 19px;
+}
+
+
+/* =========================================================
+   CLOSE
+   ========================================================= */
+
+.erp-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 34px;
+
+  width: 34px;
+  height: 34px;
+
+  margin: -3px -5px 0 0;
+
+  padding: 0;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: var(--text-secondary, #64748b);
+
+  cursor: pointer;
+
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+
+.erp-modal-close:hover {
+  background: var(--surface-hover, #f8fafc);
+
+  border-color: var(--border-color, #e5e7eb);
+
+  color: var(--text-primary, #111827);
+}
+
+
+.erp-modal-close:active {
+  transform: scale(0.94);
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+.erp-modal-body {
+  flex: 1;
+
+  min-height: 0;
+
+  padding: 24px;
+
+  overflow-y: auto;
+
+  background: var(--surface, #ffffff);
+
+  color: var(--text-primary, #111827);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.erp-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  min-height: 68px;
+
+  padding: 14px 24px;
+
+  background: var(--surface-subtle, #fafbfc);
+
+  border-top: 1px solid var(--border-color, #eef0f3);
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.erp-modal-close:focus-visible {
+  outline: 2px solid var(--primary, #2563eb);
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes modal-backdrop-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  .erp-modal-backdrop {
+    align-items: flex-end;
+
+    padding: 12px;
+  }
+
+
+  .erp-modal {
+    max-height: calc(100vh - 24px);
+
+    border-radius: 14px 14px 10px 10px;
+  }
+
+
+  .erp-modal--sm,
+  .erp-modal--md,
+  .erp-modal--lg,
+  .erp-modal--xl {
+    max-width: none;
+  }
+
+
+  .erp-modal-header {
+    padding: 18px 18px 16px;
+  }
+
+
+  .erp-modal-body {
+    padding: 18px;
+  }
+
+
+  .erp-modal-footer {
+    min-height: 64px;
+
+    padding: 12px 18px;
+  }
+}

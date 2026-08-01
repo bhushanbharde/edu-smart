@@ -1,19 +1,12 @@
 import { IconName } from "../types";
 
 export interface MenuItem {
-  id: string;
-
   label: string;
-
+  value?: string;
   icon?: IconName;
-
-  route?: string;
-
-  url?: string;
-
   disabled?: boolean;
-
-  badge?: string;
-
+  danger?: boolean;
+  divider?: boolean;
+  shortcut?: string;
   children?: MenuItem[];
 }

@@ -1,0 +1,34 @@
+<span
+  class="erp-tag"
+  [class.erp-tag--default]="variant === 'default'"
+  [class.erp-tag--primary]="variant === 'primary'"
+  [class.erp-tag--success]="variant === 'success'"
+  [class.erp-tag--warning]="variant === 'warning'"
+  [class.erp-tag--danger]="variant === 'danger'"
+  [class.erp-tag--info]="variant === 'info'"
+  [class.erp-tag--purple]="variant === 'purple'"
+  [class.erp-tag--sm]="size === 'sm'"
+  [class.erp-tag--md]="size === 'md'"
+  [class.erp-tag--lg]="size === 'lg'"
+  [class.erp-tag--disabled]="disabled"
+>
+  @if (icon) {
+    <erp-icon [name]="icon" class="erp-tag-icon"></erp-icon>
+  }
+
+  <span class="erp-tag-label">
+    {{ label }}
+  </span>
+
+  @if (removable) {
+    <button
+      type="button"
+      class="erp-tag-remove"
+      [disabled]="disabled"
+      aria-label="Remove"
+      (click)="onRemove($event)"
+    >
+      <erp-icon name="close"></erp-icon>
+    </button>
+  }
+</span>

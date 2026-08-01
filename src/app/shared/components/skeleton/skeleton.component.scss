@@ -1,0 +1,132 @@
+:host {
+  display: block;
+}
+
+.erp-skeleton {
+  position: relative;
+
+  display: block;
+
+  overflow: hidden;
+
+  background: var(--surface-hover);
+
+  border-radius: var(--radius-sm);
+}
+
+/* ---------------------------------------------
+   Text sizes
+--------------------------------------------- */
+
+.erp-skeleton--xs {
+  height: 12px;
+}
+
+.erp-skeleton--sm {
+  height: 14px;
+}
+
+.erp-skeleton--md {
+  height: 16px;
+}
+
+.erp-skeleton--lg {
+  height: 20px;
+}
+
+.erp-skeleton--xl {
+  height: 24px;
+}
+
+/* ---------------------------------------------
+   Variants
+--------------------------------------------- */
+
+.erp-skeleton--text {
+  border-radius: 4px;
+}
+
+.erp-skeleton--rectangular {
+  border-radius: var(--radius-md);
+}
+
+.erp-skeleton--circular {
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+}
+
+/* ---------------------------------------------
+   Multiple text lines
+--------------------------------------------- */
+
+.erp-skeleton-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.erp-skeleton-group .erp-skeleton {
+  width: 100%;
+}
+
+.erp-skeleton-group .erp-skeleton:last-child {
+  width: 70%;
+}
+
+/* ---------------------------------------------
+   Pulse
+--------------------------------------------- */
+
+.erp-skeleton--pulse {
+  animation: erp-skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes erp-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* ---------------------------------------------
+   Wave
+--------------------------------------------- */
+
+.erp-skeleton--wave::after {
+  position: absolute;
+
+  inset: 0;
+
+  content: "";
+
+  transform: translateX(-100%);
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 45%),
+    transparent
+  );
+
+  animation: erp-skeleton-wave 1.4s infinite;
+}
+
+@keyframes erp-skeleton-wave {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ---------------------------------------------
+   No animation
+--------------------------------------------- */
+
+.erp-skeleton--none::after {
+  display: none;
+}

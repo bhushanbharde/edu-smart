@@ -1,0 +1,209 @@
+:host {
+  display: block;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.erp-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+
+  padding: 48px 24px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.erp-empty-state-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 56px;
+  height: 56px;
+
+  margin-bottom: 16px;
+
+  background: var(--surface-muted, #f1f5f9);
+
+  border: 1px solid var(--border-color, #e5e7eb);
+
+  border-radius: 12px;
+
+  color: var(--text-secondary, #64748b);
+}
+
+
+.erp-empty-state-icon erp-icon {
+  display: flex;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.erp-empty-state-content {
+  max-width: 440px;
+}
+
+
+.erp-empty-state-title {
+  margin: 0;
+
+  color: var(--text-primary, #1f2937);
+
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+
+.erp-empty-state-description {
+  margin: 6px 0 0;
+
+  color: var(--text-secondary, #64748b);
+
+  font-size: 13px;
+  line-height: 20px;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.erp-empty-state-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 20px;
+}
+
+
+.erp-empty-state-button {
+  min-height: 34px;
+
+  padding: 0 14px;
+
+  border-radius: 7px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+
+
+.erp-empty-state-button--primary {
+  border: 1px solid var(--primary, #2563eb);
+
+  background: var(--primary, #2563eb);
+
+  color: #ffffff;
+}
+
+
+.erp-empty-state-button--primary:hover {
+  filter: brightness(0.95);
+}
+
+
+.erp-empty-state-button--secondary {
+  border: 1px solid var(--border-color, #d1d5db);
+
+  background: var(--surface, #ffffff);
+
+  color: var(--text-primary, #374151);
+}
+
+
+.erp-empty-state-button--secondary:hover {
+  background: var(--surface-hover, #f8fafc);
+}
+
+
+/* =========================================================
+   SMALL
+   ========================================================= */
+
+.erp-empty-state--sm {
+  padding: 28px 20px;
+}
+
+
+.erp-empty-state--sm
+.erp-empty-state-icon {
+  width: 44px;
+  height: 44px;
+
+  margin-bottom: 12px;
+}
+
+
+.erp-empty-state--sm
+.erp-empty-state-title {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+
+.erp-empty-state--sm
+.erp-empty-state-description {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+
+/* =========================================================
+   LARGE
+   ========================================================= */
+
+.erp-empty-state--lg {
+  padding: 72px 24px;
+}
+
+
+.erp-empty-state--lg
+.erp-empty-state-icon {
+  width: 72px;
+  height: 72px;
+
+  margin-bottom: 20px;
+
+  border-radius: 16px;
+}
+
+
+.erp-empty-state--lg
+.erp-empty-state-title {
+  font-size: 18px;
+  line-height: 26px;
+}
+
+
+.erp-empty-state--lg
+.erp-empty-state-description {
+  font-size: 14px;
+  line-height: 22px;
+}

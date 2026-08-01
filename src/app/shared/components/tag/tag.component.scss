@@ -1,0 +1,211 @@
+:host {
+  display: inline-flex;
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+.erp-tag {
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content;
+
+  border: 1px solid transparent;
+
+  border-radius: 6px;
+
+  font-family: inherit;
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+/* =========================================================
+   SIZES
+   ========================================================= */
+
+.erp-tag--sm {
+  min-height: 22px;
+
+  padding: 0 7px;
+
+  gap: 4px;
+
+  border-radius: 5px;
+
+  font-size: 11px;
+}
+
+.erp-tag--md {
+  min-height: 26px;
+
+  padding: 0 8px;
+
+  gap: 5px;
+
+  border-radius: 6px;
+
+  font-size: 12px;
+}
+
+.erp-tag--lg {
+  min-height: 30px;
+
+  padding: 0 10px;
+
+  gap: 6px;
+
+  border-radius: 7px;
+
+  font-size: 13px;
+}
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.erp-tag-icon {
+  display: flex;
+
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   DEFAULT
+   ========================================================= */
+
+.erp-tag--default {
+  background: var(--surface-muted, #f1f5f9);
+
+  border-color: var(--border-color, #e2e8f0);
+
+  color: var(--text-secondary, #475569);
+}
+
+/* =========================================================
+   PRIMARY
+   ========================================================= */
+
+.erp-tag--primary {
+  background: color-mix(in srgb, var(--primary, #2563eb) 9%, transparent);
+
+  border-color: color-mix(in srgb, var(--primary, #2563eb) 20%, transparent);
+
+  color: var(--primary, #2563eb);
+}
+
+/* =========================================================
+   SUCCESS
+   ========================================================= */
+
+.erp-tag--success {
+  background: color-mix(in srgb, var(--success, #16a34a) 9%, transparent);
+
+  border-color: color-mix(in srgb, var(--success, #16a34a) 20%, transparent);
+
+  color: var(--success, #16a34a);
+}
+
+/* =========================================================
+   WARNING
+   ========================================================= */
+
+.erp-tag--warning {
+  background: color-mix(in srgb, var(--warning, #d97706) 10%, transparent);
+
+  border-color: color-mix(in srgb, var(--warning, #d97706) 22%, transparent);
+
+  color: var(--warning, #b45309);
+}
+
+/* =========================================================
+   DANGER
+   ========================================================= */
+
+.erp-tag--danger {
+  background: color-mix(in srgb, var(--error, #dc2626) 8%, transparent);
+
+  border-color: color-mix(in srgb, var(--error, #dc2626) 20%, transparent);
+
+  color: var(--error, #dc2626);
+}
+
+/* =========================================================
+   INFO
+   ========================================================= */
+
+.erp-tag--info {
+  background: color-mix(in srgb, var(--info, #0284c7) 9%, transparent);
+
+  border-color: color-mix(in srgb, var(--info, #0284c7) 20%, transparent);
+
+  color: var(--info, #0284c7);
+}
+
+/* =========================================================
+   PURPLE
+   ========================================================= */
+
+.erp-tag--purple {
+  background: color-mix(in srgb, #7c3aed 9%, transparent);
+
+  border-color: color-mix(in srgb, #7c3aed 20%, transparent);
+
+  color: #7c3aed;
+}
+
+/* =========================================================
+   REMOVE
+   ========================================================= */
+
+.erp-tag-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+  height: 18px;
+
+  margin-right: -4px;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 4px;
+
+  background: transparent;
+
+  color: currentColor;
+
+  cursor: pointer;
+
+  opacity: 0.65;
+}
+
+.erp-tag-remove:hover:not(:disabled) {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+
+  opacity: 1;
+}
+
+.erp-tag-remove:disabled {
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   DISABLED
+   ========================================================= */
+
+.erp-tag--disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}

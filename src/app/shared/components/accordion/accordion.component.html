@@ -1,0 +1,39 @@
+<div class="erp-accordion">
+  @for (item of items; track trackByIndex($index)) {
+    <section
+      class="erp-accordion-item"
+      [class.erp-accordion-item--expanded]="isExpanded($index)"
+      [class.erp-accordion-item--disabled]="item.disabled"
+    >
+      <button
+        type="button"
+        class="erp-accordion-header"
+        [disabled]="item.disabled"
+        [attr.aria-expanded]="isExpanded($index)"
+        (click)="toggle($index)"
+      >
+        <span class="erp-accordion-header-content">
+          @if (item.icon) {
+            <erp-icon class="erp-accordion-icon" [name]="item.icon"></erp-icon>
+          }
+
+          <span class="erp-accordion-title">
+            {{ item.title }}
+          </span>
+        </span>
+
+        <span class="erp-accordion-chevron">
+          <erp-icon name="chevronDown"></erp-icon>
+        </span>
+      </button>
+
+      @if (isExpanded($index)) {
+        <div class="erp-accordion-body">
+          <div class="erp-accordion-content">
+            {{ item.content }}
+          </div>
+        </div>
+      }
+    </section>
+  }
+</div>

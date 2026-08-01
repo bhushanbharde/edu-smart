@@ -1,0 +1,56 @@
+<div class="erp-pagination">
+  @if (showInfo) {
+    <div class="erp-pagination-info">
+      Showing
+      <strong>{{ startItem }}</strong>
+      –
+      <strong>{{ endItem }}</strong>
+      of
+      <strong>{{ totalItems }}</strong>
+    </div>
+  }
+
+  @if (totalPages > 1) {
+    <div
+      class="erp-pagination-controls"
+      role="navigation"
+      aria-label="Pagination"
+    >
+      <button
+        type="button"
+        class="erp-pagination-button erp-pagination-arrow"
+        [disabled]="currentPage === 1"
+        aria-label="Previous page"
+        (click)="previous()"
+      >
+        <erp-icon name="chevronLeft"></erp-icon>
+      </button>
+
+      @for (page of pages; track trackByPage($index, page)) {
+        @if (page === "ellipsis") {
+          <span class="erp-pagination-ellipsis"> ... </span>
+        } @else {
+          <button
+            type="button"
+            class="erp-pagination-button"
+            [class.erp-pagination-button--active]="page === currentPage"
+            [attr.aria-current]="page === currentPage ? 'page' : null"
+            (click)="goToPage(page)"
+          >
+            {{ page }}
+          </button>
+        }
+      }
+
+      <button
+        type="button"
+        class="erp-pagination-button erp-pagination-arrow"
+        [disabled]="currentPage === totalPages"
+        aria-label="Next page"
+        (click)="next()"
+      >
+        <erp-icon name="chevronRight"></erp-icon>
+      </button>
+    </div>
+  }
+</div>

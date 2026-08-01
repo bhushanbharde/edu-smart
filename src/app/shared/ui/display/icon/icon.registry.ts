@@ -7,6 +7,7 @@ export const APP_ICONS = {
   maximize: 'fullscreen_exit',
   DarkMode: 'dark_mode',
   LightMode: 'light_mode',
+  folderOpen: 'folder_open',
 
   menu: 'menu',
   close: 'close',
@@ -36,6 +37,7 @@ export const APP_ICONS = {
 
   chevronLeft: 'chevron_left',
   chevronRight: 'chevron_right',
+  chevronUpDown: 'unfold_more',
   chevronUp: 'expand_less',
   chevronDown: 'expand_more',
 
@@ -206,8 +208,8 @@ export const APP_ICONS = {
   academicYear: 'event',
 
   backup: 'backup',
-  checkCircle: 'check-circle',
-  alertCircle: 'alert-circle',
+  checkCircle: 'check_circle',
+  alertCircle: 'warning',
   check: 'check',
 } as const;
 

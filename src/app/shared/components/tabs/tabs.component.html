@@ -1,0 +1,33 @@
+<div
+  class="erp-tabs"
+  [class.erp-tabs--line]="variant === 'line'"
+  [class.erp-tabs--pill]="variant === 'pill'"
+  role="tablist"
+>
+  @for (tab of tabs; track trackByValue($index, tab)) {
+    <button
+      type="button"
+      class="erp-tab"
+      [class.erp-tab--active]="isActive(tab)"
+      [class.erp-tab--disabled]="tab.disabled"
+      [disabled]="tab.disabled"
+      role="tab"
+      [attr.aria-selected]="isActive(tab)"
+      (click)="selectTab(tab)"
+    >
+      @if (tab.icon) {
+        <erp-icon [name]="tab.icon"></erp-icon>
+      }
+
+      <span class="erp-tab-label">
+        {{ tab.label }}
+      </span>
+
+      @if (tab.badge !== undefined) {
+        <span class="erp-tab-badge">
+          {{ tab.badge }}
+        </span>
+      }
+    </button>
+  }
+</div>

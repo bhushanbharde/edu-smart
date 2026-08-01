@@ -1,0 +1,46 @@
+<div
+  class="erp-empty-state"
+  [class.erp-empty-state--sm]="size === 'sm'"
+  [class.erp-empty-state--md]="size === 'md'"
+  [class.erp-empty-state--lg]="size === 'lg'"
+>
+  <div class="erp-empty-state-icon">
+    <erp-icon [name]="icon" size="md"></erp-icon>
+  </div>
+
+  <div class="erp-empty-state-content">
+    <h3 class="erp-empty-state-title">
+      {{ title }}
+    </h3>
+
+    @if (description) {
+      <p class="erp-empty-state-description">
+        {{ description }}
+      </p>
+    }
+  </div>
+
+  @if (actionLabel || secondaryActionLabel) {
+    <div class="erp-empty-state-actions">
+      @if (actionLabel) {
+        <button
+          type="button"
+          class="erp-empty-state-button erp-empty-state-button--primary"
+          (click)="onAction()"
+        >
+          {{ actionLabel }}
+        </button>
+      }
+
+      @if (secondaryActionLabel) {
+        <button
+          type="button"
+          class="erp-empty-state-button erp-empty-state-button--secondary"
+          (click)="onSecondaryAction()"
+        >
+          {{ secondaryActionLabel }}
+        </button>
+      }
+    </div>
+  }
+</div>

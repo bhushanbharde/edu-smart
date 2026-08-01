@@ -1,0 +1,441 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+
+/* =========================================================
+   WRAPPER
+   ========================================================= */
+
+.erp-table-wrapper {
+  width: 100%;
+
+  background: var(--surface, #ffffff);
+
+  border-radius: 10px;
+
+  overflow: hidden;
+}
+
+
+.erp-table-wrapper--bordered {
+  border: 1px solid var(--border-color, #e5e7eb);
+}
+
+
+/* =========================================================
+   SCROLL
+   ========================================================= */
+
+.erp-table-scroll {
+  width: 100%;
+
+  overflow-x: auto;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.erp-table {
+  width: 100%;
+  min-width: 760px;
+
+  border-collapse: separate;
+  border-spacing: 0;
+
+  color: var(--text-primary, #374151);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.erp-table thead {
+  background: var(--surface-subtle, #f8fafc);
+}
+
+
+.erp-table th {
+  height: 46px;
+
+  padding: 0 14px;
+
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+
+  color: var(--text-secondary, #64748b);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 0.025em;
+
+  text-align: left;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+
+.erp-table-header--sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+
+.erp-table-header--sortable:hover {
+  color: var(--text-primary, #374151);
+}
+
+
+.erp-table-header-content {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+}
+
+
+.erp-table-header-content > erp-icon {
+  display: flex;
+}
+
+
+/* =========================================================
+   SORT
+   ========================================================= */
+
+.erp-table-sort {
+  display: inline-flex;
+
+  margin-left: 2px;
+
+  color: var(--text-muted, #9ca3af);
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+.erp-table td {
+  height: 56px;
+
+  padding: 8px 14px;
+
+  border-bottom: 1px solid var(--border-color, #eef0f3);
+
+  vertical-align: middle;
+}
+
+
+.erp-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+
+/* =========================================================
+   ROW
+   ========================================================= */
+
+.erp-table-row--clickable {
+  cursor: pointer;
+
+  transition:
+    background 120ms ease;
+}
+
+
+.erp-table-row--clickable:hover {
+  background: var(--surface-hover, #f8fafc);
+}
+
+
+.erp-table-row--selected {
+  background: color-mix(
+    in srgb,
+    var(--primary, #2563eb) 5%,
+    transparent
+  );
+}
+
+
+.erp-table-row--selected:hover {
+  background: color-mix(
+    in srgb,
+    var(--primary, #2563eb) 8%,
+    transparent
+  );
+}
+
+
+/* =========================================================
+   STRIPED
+   ========================================================= */
+
+.erp-table-wrapper--striped
+.erp-table tbody tr:nth-child(even) {
+  background: var(--surface-subtle, #fafbfc);
+}
+
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+.erp-table-selection-column {
+  width: 44px;
+
+  padding-right: 4px !important;
+  padding-left: 14px !important;
+
+  text-align: center;
+}
+
+
+.erp-checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  width: 18px;
+  height: 18px;
+
+  cursor: pointer;
+}
+
+
+.erp-checkbox input {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  opacity: 0;
+}
+
+
+.erp-checkbox-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 17px;
+  height: 17px;
+
+  background: var(--surface, #ffffff);
+
+  border: 1px solid var(--border-color, #cbd5e1);
+  border-radius: 4px;
+
+  transition:
+    background 120ms ease,
+    border-color 120ms ease;
+}
+
+
+.erp-checkbox input:checked
++ .erp-checkbox-box {
+  background: var(--primary, #2563eb);
+
+  border-color: var(--primary, #2563eb);
+}
+
+
+.erp-checkbox input:checked
++ .erp-checkbox-box::after {
+  content: '';
+
+  width: 8px;
+  height: 4px;
+
+  margin-top: -2px;
+
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+
+  transform: rotate(-45deg);
+}
+
+
+.erp-checkbox input:indeterminate
++ .erp-checkbox-box {
+  background: var(--primary, #2563eb);
+
+  border-color: var(--primary, #2563eb);
+}
+
+
+.erp-checkbox input:indeterminate
++ .erp-checkbox-box::after {
+  content: '';
+
+  width: 8px;
+  height: 2px;
+
+  background: #ffffff;
+
+  border: 0;
+}
+
+
+/* =========================================================
+   CELL
+   ========================================================= */
+
+.erp-table-cell-content {
+  display: inline-flex;
+  align-items: center;
+
+  max-width: 100%;
+}
+
+
+.erp-table-cell--center {
+  text-align: center !important;
+}
+
+
+.erp-table-cell--right {
+  text-align: right !important;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.erp-table-actions-column {
+  width: 58px;
+
+  text-align: center !important;
+}
+
+
+.erp-table-action-wrapper {
+  position: relative;
+
+  display: inline-flex;
+}
+
+
+.erp-table-action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  padding: 0;
+
+  border: 1px solid transparent;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: var(--text-secondary, #64748b);
+
+  cursor: pointer;
+
+  transition:
+    background 140ms ease,
+    color 140ms ease,
+    border-color 140ms ease;
+}
+
+
+.erp-table-action-button:hover,
+.erp-table-action-button[aria-expanded='true'] {
+  background: var(--surface-muted, #f1f5f9);
+
+  border-color: var(--border-color, #e5e7eb);
+
+  color: var(--text-primary, #374151);
+}
+
+
+.erp-table-action-button:focus-visible {
+  outline: 2px solid var(--primary, #2563eb);
+  outline-offset: 1px;
+}
+
+
+.erp-table-action-menu {
+  position: absolute;
+
+  z-index: 100;
+
+  top: calc(100% + 4px);
+  right: 0;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.erp-table-state {
+  height: 180px;
+
+  color: var(--text-secondary, #64748b);
+
+  text-align: center;
+}
+
+
+.erp-table-loading {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+
+.erp-table-loader {
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid var(--border-color, #e5e7eb);
+  border-top-color: var(--primary, #2563eb);
+
+  border-radius: 50%;
+
+  animation: erp-table-spin 700ms linear infinite;
+}
+
+
+@keyframes erp-table-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.erp-table-empty {
+  padding: 20px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .erp-table {
+    min-width: 760px;
+  }
+}

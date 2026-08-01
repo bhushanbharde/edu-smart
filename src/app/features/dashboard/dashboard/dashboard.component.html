@@ -1,442 +1,754 @@
 <div class="demo-wrapper">
-  <h3>Progress</h3>
+  <h3>Tags</h3>
+  <div style="display: flex; align-items: center; gap: 16px">
+    <erp-tag label="Active" variant="success" />
+
+    <erp-tag label="Pending" variant="warning" />
+
+    <erp-tag label="Inactive" variant="danger" />
+
+    <erp-tag label="New" variant="primary" icon="add" />
+    <erp-tag
+      label="Class VIII"
+      variant="primary"
+      [removable]="true"
+      (removed)="removeClass()"
+    />
+  </div>
+
+  <h3>Divider</h3>
+  <erp-divider />
+  <erp-divider label="Personal Information" />
+  <erp-divider label="Additional Details" variant="dashed" />
+  <div class="toolbar">
+    <button>Add</button>
+
+    <erp-divider orientation="vertical" />
+
+    <button>Export</button>
+  </div>
+
+  <h3>Stepper</h3>
   <div>
-
+    <erp-stepper
+      [steps]="steps"
+      [currentStep]="currentStep"
+      (stepChange)="currentStep = $event"
+    />
+    <div class="mb-2"></div>
+    <erp-stepper
+      [steps]="steps"
+      [currentStep]="currentStep"
+      orientation="vertical"
+      (stepChange)="currentStep = $event"
+    />
   </div>
-  
-  <h3>Progress</h3>
-  <div class="row">
-    <div class="col-6">
-      <erp-progress [value]="65" />
-      <erp-progress label="Fee Collection" [value]="75" [showValue]="true" />
-      <erp-progress
-        label="Attendance"
-        [value]="92"
-        color="success"
-        [showValue]="true"
-      />
-    </div>
-    <div class="col-6">
-      <erp-progress
-        label="Pending Fees"
-        [value]="25"
-        color="danger"
-        [showValue]="true"
-      />
-      <erp-progress
-        label="Students Present"
-        [value]="85"
-        [max]="100"
-        color="success"
-        size="lg"
-        [showValue]="true"
-      />
-      <erp-progress
-        label="Students Present(Striped/animated)"
-        [value]="60"
-        color="primary"
-        [striped]="true"
-        [animated]="true"
-      />
-    </div>
-  </div>
-
-  <h3>Search</h3>
-  <div class="row">
-    <div class="col-4">
-      <erp-search
-        placeholder="Search students..."
-        [(value)]="searchTerm"
-        (search)="onSearch($event)"
-      />
-    </div>
-    <div class="col-4">
-      <erp-search placeholder="Search..." [clearable]="false" />
-    </div>
-  </div>
-
-  <h3>Time Picker</h3>
-  <div class="row">
-    <div class="col-4">
-      <erp-time-picker label="Start Time" [(value)]="startTime" />
-    </div>
-    <div class="col-4">
-      <erp-time-picker
-        label="End Time"
-        [(value)]="endTime"
-        min="09:00"
-        max="18:00"
-        hint="School hours: 9:00 AM - 6:00 PM"
-      />
-    </div>
-
-    <div class="col-4">
-      <erp-time-picker label="Exam Time" value="10:30" [required]="true" />
-    </div>
-  </div>
-
-  <h3>Switch</h3>
-  <erp-switch
-    label="Enable notifications"
-    description="Receive important school notifications"
-    [(checked)]="notificationsEnabled"
+  <h3>Empty State</h3>
+  <erp-empty-state
+    icon="users"
+    title="No students found"
+    description="There are no students matching your current filters."
+    actionLabel="Add Student"
+    secondaryActionLabel="Clear Filters"
+    (action)="addStudent()"
+    (secondaryAction)="clearFilters()"
   />
 
-  <erp-switch label="Auto save" [(checked)]="autoSave" />
+  <h3>Pagination</h3>
+  <erp-pagination
+    [currentPage]="currentPage"
+    [totalItems]="totalStudents"
+    [pageSize]="10"
+    (pageChange)="currentPage = $event"
+  />
 
-  <erp-switch label="Disabled option" [checked]="true" [disabled]="true" />
+  <h3>Table</h3>
+  <div>
+    <div
+      class="erp-table-wrapper"
+      [class.erp-table-wrapper--bordered]="bordered"
+      [class.erp-table-wrapper--striped]="striped"
+    ></div>
 
-  <h3>Tooltip</h3>
-  <erp-tooltip text="Edit student">
-    <erp-button variant="ghost" icon="edit"> </erp-button>
-  </erp-tooltip>
+    <erp-table
+      [columns]="columns"
+      [data]="students"
+      [hoverable]="true"
+      [bordered]="true"
+      (rowClick)="onStudentClick($event)"
+      (sortChange)="onSort($event)"
+    />
 
-  <erp-tooltip text="Student information" position="top">
-    <erp-icon name="profile"></erp-icon>
-  </erp-tooltip>
+    <erp-table
+      [columns]="studentColumns"
+      [data]="students"
+      [rowActions]="studentActions"
+      [selectable]="true"
+      [hoverable]="true"
+      [bordered]="true"
+      (selectionChange)="onSelectionChange($event)"
+      (rowClick)="onStudentClick($event)"
+      (sortChange)="onSortChange($event)"
+      (actionSelected)="onActionSelected($event)"
+    />
 
-  <erp-tooltip text="Student information" position="right">
-    <erp-icon name="profile"></erp-icon>
-  </erp-tooltip>
-
-  <erp-tooltip text="Student information" position="bottom">
-    <erp-icon name="profile"></erp-icon>
-  </erp-tooltip>
-
-  <erp-tooltip text="Student information" position="left">
-    <erp-icon name="profile"></erp-icon>
-  </erp-tooltip>
-
-  <!-- ===== AVATAR ===== -->
-  <h3>Avatar</h3>
-  <erp-avatar
-    src="../../../../assets/images/bio.jpg"
-    alt="Aarav Sharma"
-    name="Aarav Sharma"
-  >
-  </erp-avatar>
-
-  <erp-avatar class="mr-2" name="Aarav Sharma" size="xs"></erp-avatar>
-
-  <erp-avatar class="mr-2" name="Aarav Sharma" size="sm"></erp-avatar>
-
-  <erp-avatar class="mr-2" name="Aarav Sharma" size="md"></erp-avatar>
-
-  <erp-avatar class="mr-2" name="Aarav Sharma" size="lg"></erp-avatar>
-
-  <erp-avatar class="mr-2" name="Aarav Sharma" size="xl"></erp-avatar>
-
-  <erp-avatar class="mr-2" name="Aarav Sharma" status="online"> </erp-avatar>
-
-  <erp-avatar class="mr-2" name="Rahul Patil" status="busy"> </erp-avatar>
-
-  <erp-avatar class="mr-2" name="Neha Joshi" status="away"> </erp-avatar>
-
-  <!-- ===== CHIP ===== -->
-  <h3>Chip</h3>
-  <div class="flex-wrap-container">
-    <erp-chip label="Student"></erp-chip>
-    <erp-chip label="Active" variant="success"> </erp-chip>
-    <erp-chip label="Pending" variant="warning"> </erp-chip>
-    <erp-chip label="Inactive" variant="danger"> </erp-chip>
-
-    <erp-chip label="Students" variant="primary" icon="profile"> </erp-chip>
-
-    <erp-chip label="Class 10" [removable]="true"> </erp-chip>
-
-    <erp-chip label="Archived" [disabled]="true"> </erp-chip>
-  </div>
-
-  <!-- ===== BADGE (first) ===== -->
-  <h3>Badge</h3>
-  <div class="flex-wrap-container">
-    <erp-badge variant="primary" text="New"></erp-badge>
-    <erp-badge variant="success" text="Active"></erp-badge>
-    <erp-badge variant="danger" text="Inactive"></erp-badge>
-    <erp-badge variant="warning" text="Pending"></erp-badge>
-    <erp-badge variant="info" text="Scholarship"></erp-badge>
-    <erp-badge variant="secondary" text="Transport"></erp-badge>
-  </div>
-
-  <!-- ===== STAT CARD ===== -->
-  <h3>Stat Card</h3>
-  <div class="row stat-row">
-    <div class="col-4">
-      <erp-stat-card
-        title="Students"
-        value="1,245"
-        icon="students"
-        color="primary"
-        trend="up"
-        percentage="12.4%"
-      ></erp-stat-card>
+    <h3>Accordian</h3>
+    <div>
+      <erp-accordion [items]="accordionItems" [multiple]="true" />
     </div>
-    <div class="col-4">
-      <erp-stat-card
-        title="Teachers"
-        value="82"
-        icon="teacher"
-        color="success"
-        trend="up"
-        percentage="3.1%"
-      ></erp-stat-card>
-    </div>
-    <div class="col-4">
-      <erp-stat-card
-        title="Pending Fees"
-        value="₹2.5L"
-        icon="fees"
-        color="warning"
-        trend="down"
-        percentage="8%"
-      ></erp-stat-card>
-    </div>
-    <div class="col-4">
-      <erp-stat-card
-        title="Attendance"
-        value="94%"
-        icon="attendance"
-        color="danger"
-        trend="up"
-        percentage="1.8%"
-      ></erp-stat-card>
-    </div>
-  </div>
 
-  <!-- ===== CARD (multiple) ===== -->
-  <h3>Card</h3>
-  <erp-card><erp-card-body>Simple Card</erp-card-body></erp-card>
-  <erp-card>
-    <erp-card-header
-      title="Students"
-      subtitle="Total registered students"
-    ></erp-card-header>
-    <erp-card-body>Student list goes here...</erp-card-body>
-  </erp-card>
-  <erp-card>
-    <erp-card-header title="Fee Collection" subtitle="Current academic year">
+    <h3>Tabs</h3>
+    <erp-tabs
+      tabs="tabs"
+      [activeValue]="activeTab"
+      (activeChange)="activeTab = $event"
+    />
+
+    <h3>Popover</h3>
+    <div style="display: flex; align-items: center">
+      <erp-popover
+        [open]="showPopover"
+        placement="bottom"
+        align="start"
+        (closed)="showPopover = false"
+      >
+        <erp-button
+          popover-trigger
+          type="button"
+          class="erp-btn erp-btn-secondary"
+          (click)="showPopover = !showPopover"
+          label="Options"
+          variant="outline"
+        ></erp-button>
+
+        <div class="popover-title">Quick Actions</div>
+
+        <div class="popover-description">
+          Choose an action for this student.
+        </div>
+      </erp-popover>
+
+      <erp-popover
+        [open]="showInfo"
+        placement="right"
+        align="center"
+        [width]="320"
+        (closed)="showInfo = false"
+      >
+        <erp-button
+          popover-trigger
+          type="button"
+          class="erp-icon-button mr-2"
+          (click)="showInfo = !showInfo"
+          leftIcon="info"
+        >
+          ></erp-button
+        >
+
+        <div>
+          <strong>Attendance information</strong>
+
+          <p>Attendance is calculated based on the current academic year.</p>
+        </div>
+      </erp-popover>
+    </div>
+
+    <h3>Menu</h3>
+    <div>
+      <erp-menu
+        [items]="menuItems"
+        (itemSelected)="onMenuItemSelected($event)"
+      />
+    </div>
+
+    <h3>Confirm Dialog</h3>
+    <div>
       <erp-button
-        variant="primary"
-        label="Export"
+        (click)="openConfirmDialog()"
+        label="Open Dialog"
+      ></erp-button>
+      <erp-button
+        (click)="openConfirmDialogDelete()"
+        label="Open Delete Dialog"
+        class="mr-2"
+      ></erp-button>
+
+      <erp-confirm-dialog
+        [open]="showDeleteDialog"
+        title="Delete Student?"
+        message="This action will permanently remove the student record. This cannot be undone."
+        confirmLabel="Delete Student"
+        cancelLabel="Cancel"
+        variant="danger"
+        [loading]="deleting"
+        (confirmed)="deleteStudent()"
+        (cancelled)="showDeleteDialog = false"
+      />
+      <erp-confirm-dialog
+        [open]="showDialog"
+        title="Deactivate Student?"
+        message="The student will no longer appear in active student records."
+        confirmLabel="Deactivate"
+        variant="warning"
+        (confirmed)="deactivateStudent()"
+        (cancelled)="showDialog = false"
+      />
+    </div>
+
+    <h3>Modal</h3>
+    <div>
+      <erp-button
+        type="button"
+        (click)="showModal = true"
+        label="Open Modal"
+      ></erp-button>
+
+      <erp-modal
+        [open]="showModal"
+        title="Add Student"
+        subtitle="Enter the student information below."
+        size="lg"
+        (closed)="showModal = false"
+      >
+        <p>Modal content goes here.</p>
+
+        <div modal-footer>
+          <erp-button
+            type="button"
+            label="Cancel"
+            variant="secondary"
+            (click)="showModal = false"
+            class="mr-2"
+          ></erp-button>
+          <erp-button
+            type="button"
+            label="Save Student"
+            variant="primary"
+          ></erp-button>
+        </div>
+      </erp-modal>
+    </div>
+
+    <h3>Alert</h3>
+    <div class="row">
+      <div class="col-6 mb-2">
+        <erp-alert status="info" message="Student records have been updated." />
+      </div>
+      <div class="col-6 mb-2">
+        <erp-alert
+          status="success"
+          title="Payment successful"
+          message="The fee payment has been recorded successfully."
+        />
+      </div>
+      <div class="col-6 mb-2">
+        <erp-alert
+          status="danger"
+          title="Unable to save"
+          message="Something went wrong while saving the student."
+          [dismissible]="true"
+          (dismissed)="onAlertDismissed()"
+        />
+      </div>
+      <div class="col-6 mb-2">
+        <erp-alert status="info" title="Academic Year">
+          <button type="button">Configure now</button>
+        </erp-alert>
+      </div>
+      <div class="col-6 mb-2">
+        <erp-alert
+          status="warning"
+          title="Unable to save"
+          message="Something went wrong while saving the student."
+          [dismissible]="true"
+          (dismissed)="onAlertDismissed()"
+        />
+      </div>
+      <div class="col-6"></div>
+    </div>
+
+    <h3>Skeleton</h3>
+    <div>
+      <erp-skeleton width="200px" size="md" />
+      <erp-skeleton width="300px" variant="text" [lines]="4" />
+      <erp-skeleton width="100%" height="180px" variant="rectangular" />
+      <erp-skeleton width="40px" height="40px" variant="circular" />
+      <div class="dashboard-card">
+        <erp-skeleton width="100px" size="sm" />
+
+        <erp-skeleton width="70%" height="32px" variant="text" />
+
+        <erp-skeleton width="100%" size="sm" />
+      </div>
+    </div>
+
+    <h3>Spinner</h3>
+    <div class="row">
+      <div class="col-4">
+        <erp-spinner size="lg" label="Loading students..." />
+      </div>
+      <div class="col-4">
+        <erp-spinner size="xs" color="primary" [label]="'xs'" />
+        <span class="mr-2"></span>
+        <erp-spinner size="sm" color="danger" [label]="'sm'" />
+        <span class="mr-2"></span>
+        <erp-spinner size="md" color="info" [label]="'md'" />
+        <span class="mr-2"></span>
+        <erp-spinner size="lg" color="secondary" [label]="'lg'" />
+        <span class="mr-2"></span>
+        <erp-spinner size="xl" color="warning" [label]="'xl'" />
+      </div>
+    </div>
+
+    <h3>Progress</h3>
+    <div class="row">
+      <div class="col-6">
+        <erp-progress [value]="65" />
+        <erp-progress label="Fee Collection" [value]="75" [showValue]="true" />
+        <erp-progress
+          label="Attendance"
+          [value]="92"
+          color="success"
+          [showValue]="true"
+        />
+      </div>
+      <div class="col-6">
+        <erp-progress
+          label="Pending Fees"
+          [value]="25"
+          color="danger"
+          [showValue]="true"
+        />
+        <erp-progress
+          label="Students Present"
+          [value]="85"
+          [max]="100"
+          color="success"
+          size="lg"
+          [showValue]="true"
+        />
+        <erp-progress
+          label="Students Present(Striped/animated)"
+          [value]="60"
+          color="primary"
+          [striped]="true"
+          [animated]="true"
+        />
+      </div>
+    </div>
+
+    <h3>Search</h3>
+    <div class="row">
+      <div class="col-4">
+        <erp-search
+          placeholder="Search students..."
+          [(value)]="searchTerm"
+          (search)="onSearch($event)"
+        />
+      </div>
+      <div class="col-4">
+        <erp-search placeholder="Search..." [clearable]="false" />
+      </div>
+    </div>
+
+    <h3>Time Picker</h3>
+    <div class="row">
+      <div class="col-4">
+        <erp-time-picker label="Start Time" [(value)]="startTime" />
+      </div>
+      <div class="col-4">
+        <erp-time-picker
+          label="End Time"
+          [(value)]="endTime"
+          min="09:00"
+          max="18:00"
+          hint="School hours: 9:00 AM - 6:00 PM"
+        />
+      </div>
+
+      <div class="col-4">
+        <erp-time-picker label="Exam Time" value="10:30" [required]="true" />
+      </div>
+    </div>
+
+    <h3>Switch</h3>
+    <erp-switch
+      label="Enable notifications"
+      description="Receive important school notifications"
+      [(checked)]="notificationsEnabled"
+    />
+
+    <erp-switch label="Auto save" [(checked)]="autoSave" />
+
+    <erp-switch label="Disabled option" [checked]="true" [disabled]="true" />
+
+    <h3>Tooltip</h3>
+    <erp-tooltip text="Edit student">
+      <erp-button variant="ghost" icon="edit"> </erp-button>
+    </erp-tooltip>
+
+    <erp-tooltip text="Student information" position="top">
+      <erp-icon name="profile"></erp-icon>
+    </erp-tooltip>
+
+    <erp-tooltip text="Student information" position="right">
+      <erp-icon name="profile"></erp-icon>
+    </erp-tooltip>
+
+    <erp-tooltip text="Student information" position="bottom">
+      <erp-icon name="profile"></erp-icon>
+    </erp-tooltip>
+
+    <erp-tooltip text="Student information" position="left">
+      <erp-icon name="profile"></erp-icon>
+    </erp-tooltip>
+
+    <!-- ===== AVATAR ===== -->
+    <h3>Avatar</h3>
+    <erp-avatar
+      src="../../../../assets/images/bio.jpg"
+      alt="Aarav Sharma"
+      name="Aarav Sharma"
+    >
+    </erp-avatar>
+
+    <erp-avatar class="mr-2" name="Aarav Sharma" size="xs"></erp-avatar>
+
+    <erp-avatar class="mr-2" name="Aarav Sharma" size="sm"></erp-avatar>
+
+    <erp-avatar class="mr-2" name="Aarav Sharma" size="md"></erp-avatar>
+
+    <erp-avatar class="mr-2" name="Aarav Sharma" size="lg"></erp-avatar>
+
+    <erp-avatar class="mr-2" name="Aarav Sharma" size="xl"></erp-avatar>
+
+    <erp-avatar class="mr-2" name="Aarav Sharma" status="online"> </erp-avatar>
+
+    <erp-avatar class="mr-2" name="Rahul Patil" status="busy"> </erp-avatar>
+
+    <erp-avatar class="mr-2" name="Neha Joshi" status="away"> </erp-avatar>
+
+    <!-- ===== CHIP ===== -->
+    <h3>Chip</h3>
+    <div class="flex-wrap-container">
+      <erp-chip label="Student"></erp-chip>
+      <erp-chip label="Active" variant="success"> </erp-chip>
+      <erp-chip label="Pending" variant="warning"> </erp-chip>
+      <erp-chip label="Inactive" variant="danger"> </erp-chip>
+
+      <erp-chip label="Students" variant="primary" icon="profile"> </erp-chip>
+
+      <erp-chip label="Class 10" [removable]="true"> </erp-chip>
+
+      <erp-chip label="Archived" [disabled]="true"> </erp-chip>
+    </div>
+
+    <!-- ===== BADGE (first) ===== -->
+    <h3>Badge</h3>
+    <div class="flex-wrap-container">
+      <erp-badge variant="primary" text="New"></erp-badge>
+      <erp-badge variant="success" text="Active"></erp-badge>
+      <erp-badge variant="danger" text="Inactive"></erp-badge>
+      <erp-badge variant="warning" text="Pending"></erp-badge>
+      <erp-badge variant="info" text="Scholarship"></erp-badge>
+      <erp-badge variant="secondary" text="Transport"></erp-badge>
+    </div>
+
+    <!-- ===== STAT CARD ===== -->
+    <h3>Stat Card</h3>
+    <div class="row stat-row">
+      <div class="col-4">
+        <erp-stat-card
+          title="Students"
+          value="1,245"
+          icon="students"
+          color="primary"
+          trend="up"
+          percentage="12.4%"
+        ></erp-stat-card>
+      </div>
+      <div class="col-4">
+        <erp-stat-card
+          title="Teachers"
+          value="82"
+          icon="teacher"
+          color="success"
+          trend="up"
+          percentage="3.1%"
+        ></erp-stat-card>
+      </div>
+      <div class="col-4">
+        <erp-stat-card
+          title="Pending Fees"
+          value="₹2.5L"
+          icon="fees"
+          color="warning"
+          trend="down"
+          percentage="8%"
+        ></erp-stat-card>
+      </div>
+      <div class="col-4">
+        <erp-stat-card
+          title="Attendance"
+          value="94%"
+          icon="attendance"
+          color="danger"
+          trend="up"
+          percentage="1.8%"
+        ></erp-stat-card>
+      </div>
+    </div>
+
+    <!-- ===== CARD (multiple) ===== -->
+    <h3>Card</h3>
+    <erp-card><erp-card-body>Simple Card</erp-card-body></erp-card>
+    <erp-card>
+      <erp-card-header
+        title="Students"
+        subtitle="Total registered students"
+      ></erp-card-header>
+      <erp-card-body>Student list goes here...</erp-card-body>
+    </erp-card>
+    <erp-card>
+      <erp-card-header title="Fee Collection" subtitle="Current academic year">
+        <erp-button
+          variant="primary"
+          label="Export"
+          leftIcon="download"
+        ></erp-button>
+      </erp-card-header>
+      <erp-card-body>Content...</erp-card-body>
+      <erp-card-footer>Last updated: Today</erp-card-footer>
+    </erp-card>
+
+    <!-- ===== BUTTONS ===== -->
+    <h3>Buttons</h3>
+    <div class="row button-group">
+      <erp-button label="Save"></erp-button>
+      <erp-button variant="secondary" label="Secondary"></erp-button>
+      <erp-button
+        variant="outline"
+        label="Outline"
         leftIcon="download"
       ></erp-button>
-    </erp-card-header>
-    <erp-card-body>Content...</erp-card-body>
-    <erp-card-footer>Last updated: Today</erp-card-footer>
-  </erp-card>
-
-  <!-- ===== BUTTONS ===== -->
-  <h3>Buttons</h3>
-  <div class="row button-group">
-    <erp-button label="Save"></erp-button>
-    <erp-button variant="secondary" label="Secondary"></erp-button>
-    <erp-button
-      variant="outline"
-      label="Outline"
-      leftIcon="download"
-    ></erp-button>
-    <erp-button variant="ghost" label="Ghost"></erp-button>
-    <erp-button variant="danger" label="Danger" leftIcon="delete"></erp-button>
-    <erp-button variant="success" label="Success"></erp-button>
-    <erp-button variant="warning" label="Warning"></erp-button>
-    <erp-button [loading]="true" label="Saving"></erp-button>
-    <erp-button [rounded]="true" leftIcon="add"></erp-button>
-    <div class="col-4">
-      <erp-button [fullWidth]="true" label="Login"></erp-button>
-    </div>
-  </div>
-
-  <!-- ===== DATE PICKER + FILE UPLOAD ===== -->
-  <div class="row">
-    <div class="col-4">
-      <h3>Date Picker</h3>
-      <erp-date-picker
-        label="Admission Date"
-        placeholder="Select admission date"
-      ></erp-date-picker>
-    </div>
-    <div class="col-4">
-      <h3>File Upload</h3>
-      <erp-file-upload label="Upload Profile Picture"></erp-file-upload>
-    </div>
-  </div>
-
-  <!-- ===== CHECKBOX & RADIO ===== -->
-  <h3>Checkbox</h3>
-  <div class="row">
-    <div class="col-6">
-      <div class="checkbox-group">
-        <erp-checkbox label="Active"></erp-checkbox>
-        <erp-checkbox label="Remember Me"></erp-checkbox>
-        <erp-checkbox
-          label="Accept Terms"
-          description="You must accept the terms before continuing."
-        ></erp-checkbox>
-        <erp-checkbox label="Disabled"></erp-checkbox>
-        <erp-checkbox
-          label="Partially Selected"
-          [indeterminate]="true"
-        ></erp-checkbox>
+      <erp-button variant="ghost" label="Ghost"></erp-button>
+      <erp-button
+        variant="danger"
+        label="Danger"
+        leftIcon="delete"
+      ></erp-button>
+      <erp-button variant="success" label="Success"></erp-button>
+      <erp-button variant="warning" label="Warning"></erp-button>
+      <erp-button [loading]="true" label="Saving"></erp-button>
+      <erp-button [rounded]="true" leftIcon="add"></erp-button>
+      <div class="col-4">
+        <erp-button [fullWidth]="true" label="Login"></erp-button>
       </div>
     </div>
-    <div class="col-6">
-      <h3>Radio Group</h3>
-      <erp-radio-group>
-        <erp-radio label="Male" value="male"></erp-radio>
-        <erp-radio label="Female" value="female"></erp-radio>
-        <erp-radio label="Other" value="other"></erp-radio>
-      </erp-radio-group>
+
+    <!-- ===== DATE PICKER + FILE UPLOAD ===== -->
+    <div class="row">
+      <div class="col-4">
+        <h3>Date Picker</h3>
+        <erp-date-picker
+          label="Admission Date"
+          placeholder="Select admission date"
+        ></erp-date-picker>
+      </div>
+      <div class="col-4">
+        <h3>File Upload</h3>
+        <erp-file-upload label="Upload Profile Picture"></erp-file-upload>
+      </div>
     </div>
-  </div>
 
-  <!-- ===== TEXTAREA ===== -->
-  <h3>Textarea</h3>
-  <div class="row">
-    <div class="col-6">
-      <erp-textarea label="Address" placeholder="Enter address"></erp-textarea>
-      <erp-textarea label="Remarks" [rows]="6" [maxLength]="500"></erp-textarea>
-      <erp-textarea
-        label="Reason"
-        status="danger"
-        error="Reason is required"
-      ></erp-textarea>
-    </div>
-  </div>
-
-  <!-- ===== INPUT DEMO ===== -->
-  <h3>Input Demo</h3>
-  <div class="row">
-    <div class="col-4 input-demo-grid">
-      <erp-input
-        label="Student Name"
-        placeholder="Enter student name"
-        prefixIcon="profile"
-      ></erp-input>
-      <erp-input type="email" label="Email" prefixIcon="mail"></erp-input>
-      <erp-input type="password" label="Password"></erp-input>
-      <erp-input
-        label="Search Student"
-        prefixIcon="search"
-        [clearable]="true"
-      ></erp-input>
-      <erp-input
-        label="Roll Number"
-        hint="Maximum 10 characters"
-        [maxLength]="10"
-      ></erp-input>
-      <erp-input
-        label="Admission Number"
-        status="danger"
-        error="Admission number already exists"
-      ></erp-input>
-    </div>
-  </div>
-
-  <!-- ===== AVATARS ===== -->
-  <h3>Avatars</h3>
-  <div class="avatar-stack">
-    <erp-avatar name="John Doe"></erp-avatar>
-    <erp-avatar name="Suchitra Pakhale"></erp-avatar>
-  </div>
-
-  <!-- ===== BADGES (second set) ===== -->
-  <h3>Badges</h3>
-  <div class="badge-stack">
-    <erp-badge text="New"></erp-badge>
-    <erp-badge text="Active" variant="success"></erp-badge>
-    <erp-badge text="Pending" variant="warning"></erp-badge>
-    <erp-badge text="Rejected" variant="danger"></erp-badge>
-    <erp-badge text="Administrator" appearance="solid"></erp-badge>
-    <erp-badge text="Teacher" appearance="outline"></erp-badge>
-  </div>
-
-  <!-- ===== STATUS CHIPS ===== -->
-  <h3>Status Chips</h3>
-  <div class="chip-stack">
-    <erp-status-chip status="active" label="Active"></erp-status-chip>
-    <erp-status-chip
-      status="pending"
-      label="Pending Approval"
-    ></erp-status-chip>
-    <erp-status-chip status="paid" label="Paid"></erp-status-chip>
-    <erp-status-chip status="present" label="Present"></erp-status-chip>
-    <erp-status-chip status="absent" label="Absent"></erp-status-chip>
-    <erp-status-chip
-      status="completed"
-      label="Completed"
-      [showDot]="false"
-    ></erp-status-chip>
-  </div>
-
-  <!-- ===== CARD with header/content/footer (erpCard* directives) ===== -->
-  <h3>Card</h3>
-  <erp-card>
-    <div
-      erpCardHeader
-      style="
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        align-items: center;
-      "
-    >
-      <div>
-        <div erpCardTitle style="font-weight: 600; font-size: 1.1rem">
-          Student Statistics
-        </div>
-        <div erpCardSubtitle style="color: #5f7a8f; font-size: 0.9rem">
-          Current academic year
+    <!-- ===== CHECKBOX & RADIO ===== -->
+    <h3>Checkbox</h3>
+    <div class="row">
+      <div class="col-6">
+        <div class="checkbox-group">
+          <erp-checkbox label="Active"></erp-checkbox>
+          <erp-checkbox label="Remember Me"></erp-checkbox>
+          <erp-checkbox
+            label="Accept Terms"
+            description="You must accept the terms before continuing."
+          ></erp-checkbox>
+          <erp-checkbox label="Disabled"></erp-checkbox>
+          <erp-checkbox
+            label="Partially Selected"
+            [indeterminate]="true"
+          ></erp-checkbox>
         </div>
       </div>
-      <div erpCardActions>
-        <erp-icon-button ariaLabel="Refresh"
-          ><erp-icon name="refresh"></erp-icon
-        ></erp-icon-button>
+      <div class="col-6">
+        <h3>Radio Group</h3>
+        <erp-radio-group>
+          <erp-radio label="Male" value="male"></erp-radio>
+          <erp-radio label="Female" value="female"></erp-radio>
+          <erp-radio label="Other" value="other"></erp-radio>
+        </erp-radio-group>
       </div>
     </div>
-    <div erpCardContent style="padding: 0.5rem 0">
-      Dashboard content goes here...
+
+    <!-- ===== TEXTAREA ===== -->
+    <h3>Textarea</h3>
+    <div class="row">
+      <div class="col-6">
+        <erp-textarea
+          label="Address"
+          placeholder="Enter address"
+        ></erp-textarea>
+        <erp-textarea
+          label="Remarks"
+          [rows]="6"
+          [maxLength]="500"
+        ></erp-textarea>
+        <erp-textarea
+          label="Reason"
+          status="danger"
+          error="Reason is required"
+        ></erp-textarea>
+      </div>
     </div>
-    <div
-      erpCardFooter
-      style="border-top: 1px solid #e4eaf0; padding-top: 0.7rem; color: #3e5c70"
+
+    <!-- ===== INPUT DEMO ===== -->
+    <h3>Input Demo</h3>
+    <div class="row">
+      <div class="col-4 input-demo-grid">
+        <erp-input
+          label="Student Name"
+          placeholder="Enter student name"
+          prefixIcon="profile"
+        ></erp-input>
+        <erp-input type="email" label="Email" prefixIcon="mail"></erp-input>
+        <erp-input type="password" label="Password"></erp-input>
+        <erp-input
+          label="Search Student"
+          prefixIcon="search"
+          [clearable]="true"
+        ></erp-input>
+        <erp-input
+          label="Roll Number"
+          hint="Maximum 10 characters"
+          [maxLength]="10"
+        ></erp-input>
+        <erp-input
+          label="Admission Number"
+          status="danger"
+          error="Admission number already exists"
+        ></erp-input>
+      </div>
+    </div>
+
+    <!-- ===== AVATARS ===== -->
+    <h3>Avatars</h3>
+    <div class="avatar-stack">
+      <erp-avatar name="John Doe"></erp-avatar>
+      <erp-avatar name="Suchitra Pakhale"></erp-avatar>
+    </div>
+
+    <!-- ===== BADGES (second set) ===== -->
+    <h3>Badges</h3>
+    <div class="badge-stack">
+      <erp-badge text="New"></erp-badge>
+      <erp-badge text="Active" variant="success"></erp-badge>
+      <erp-badge text="Pending" variant="warning"></erp-badge>
+      <erp-badge text="Rejected" variant="danger"></erp-badge>
+      <erp-badge text="Administrator" appearance="solid"></erp-badge>
+      <erp-badge text="Teacher" appearance="outline"></erp-badge>
+    </div>
+
+    <!-- ===== STATUS CHIPS ===== -->
+    <h3>Status Chips</h3>
+    <div class="chip-stack">
+      <erp-status-chip status="active" label="Active"></erp-status-chip>
+      <erp-status-chip
+        status="pending"
+        label="Pending Approval"
+      ></erp-status-chip>
+      <erp-status-chip status="paid" label="Paid"></erp-status-chip>
+      <erp-status-chip status="present" label="Present"></erp-status-chip>
+      <erp-status-chip status="absent" label="Absent"></erp-status-chip>
+      <erp-status-chip
+        status="completed"
+        label="Completed"
+        [showDot]="false"
+      ></erp-status-chip>
+    </div>
+
+    <!-- ===== CARD with header/content/footer (erpCard* directives) ===== -->
+    <h3>Card</h3>
+    <erp-card>
+      <div
+        erpCardHeader
+        style="
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          align-items: center;
+        "
+      >
+        <div>
+          <div erpCardTitle style="font-weight: 600; font-size: 1.1rem">
+            Student Statistics
+          </div>
+          <div erpCardSubtitle style="color: #5f7a8f; font-size: 0.9rem">
+            Current academic year
+          </div>
+        </div>
+        <div erpCardActions>
+          <erp-icon-button ariaLabel="Refresh"
+            ><erp-icon name="refresh"></erp-icon
+          ></erp-icon-button>
+        </div>
+      </div>
+      <div erpCardContent style="padding: 0.5rem 0">
+        Dashboard content goes here...
+      </div>
+      <div
+        erpCardFooter
+        style="
+          border-top: 1px solid #e4eaf0;
+          padding-top: 0.7rem;
+          color: #3e5c70;
+        "
+      >
+        Last updated: 2 minutes ago
+      </div>
+    </erp-card>
+
+    <!-- ===== DROPDOWN with avatar trigger ===== -->
+    <h3>Dropdown</h3>
+    <erp-dropdown
+      [items]="studentActions"
+      (itemSelected)="onStudentAction($event)"
     >
-      Last updated: 2 minutes ago
-    </div>
-  </erp-card>
+      <erp-icon name="menu"></erp-icon>
+    </erp-dropdown>
 
-  <!-- ===== DROPDOWN with avatar trigger ===== -->
-  <h3>Dropdown</h3>
-  <erp-dropdown
-    [items]="studentActions"
-    (itemSelected)="onStudentAction($event)"
-  >
-    <erp-icon name="menu"></erp-icon>
-  </erp-dropdown>
+    <!-- ===== INPUT (row with two cols) ===== -->
+    <h3>Input</h3>
+    <div class="row">
+      <div class="col-3">
+        <erp-input label="Email" placeholder="Enter your email"></erp-input>
+      </div>
+      <div class="col-3">
+        <erp-input
+          label="Password"
+          placeholder="Enter your password"
+          type="password"
+          ><erp-icon prefix name="user"></erp-icon
+        ></erp-input>
+      </div>
+    </div>
 
-  <!-- ===== INPUT (row with two cols) ===== -->
-  <h3>Input</h3>
-  <div class="row">
-    <div class="col-3">
-      <erp-input label="Email" placeholder="Enter your email"></erp-input>
+    <!-- ===== SELECT ===== -->
+    <h3>Select</h3>
+    <div class="row">
+      <div class="col-12">
+        <app-select-demo>Select component (demo)</app-select-demo>
+      </div>
     </div>
-    <div class="col-3">
-      <erp-input
-        label="Password"
-        placeholder="Enter your password"
-        type="password"
-        ><erp-icon prefix name="user"></erp-icon
-      ></erp-input>
-    </div>
+
+    <!-- no <br> – padding/margin handled by CSS -->
   </div>
-
-  <!-- ===== SELECT ===== -->
-  <h3>Select</h3>
-  <div class="row">
-    <div class="col-12">
-      <app-select-demo>Select component (demo)</app-select-demo>
-    </div>
-  </div>
-
-  <!-- no <br> – padding/margin handled by CSS -->
 </div>

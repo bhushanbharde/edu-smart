@@ -1,0 +1,328 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+
+/* =========================================================
+   STEPPER
+   ========================================================= */
+
+.erp-stepper {
+  display: flex;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   HORIZONTAL
+   ========================================================= */
+
+.erp-stepper--horizontal {
+  align-items: flex-start;
+}
+
+
+.erp-stepper--horizontal
+.erp-step {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+
+  flex: 1;
+}
+
+
+.erp-stepper--horizontal
+.erp-step:last-child {
+  flex: 0 auto;
+}
+
+
+/* =========================================================
+   VERTICAL
+   ========================================================= */
+
+.erp-stepper--vertical {
+  flex-direction: column;
+}
+
+
+.erp-stepper--vertical
+.erp-step {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+
+  min-height: 76px;
+}
+
+
+.erp-stepper--vertical
+.erp-step:last-child {
+  min-height: auto;
+}
+
+
+/* =========================================================
+   INDICATOR
+   ========================================================= */
+
+.erp-step-indicator {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 34px;
+  height: 34px;
+
+  padding: 0;
+
+  border: 1px solid var(--border-color, #d1d5db);
+  border-radius: 50%;
+
+  background: var(--surface, #ffffff);
+
+  color: var(--text-secondary, #64748b);
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+
+.erp-step-indicator:hover:not(:disabled) {
+  border-color: var(--primary, #2563eb);
+
+  color: var(--primary, #2563eb);
+}
+
+
+.erp-step-indicator:disabled {
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   NUMBER
+   ========================================================= */
+
+.erp-step-number {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   ACTIVE
+   ========================================================= */
+
+.erp-step--active
+.erp-step-indicator {
+  border-color: var(--primary, #2563eb);
+
+  background: var(--primary, #2563eb);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0 4px
+    color-mix(
+      in srgb,
+      var(--primary, #2563eb) 10%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   COMPLETED
+   ========================================================= */
+
+.erp-step--completed
+.erp-step-indicator {
+  border-color: var(--primary, #2563eb);
+
+  background: var(--primary, #2563eb);
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.erp-step--error
+.erp-step-indicator {
+  border-color: var(--error, #dc2626);
+
+  color: var(--error, #dc2626);
+}
+
+
+.erp-step--error.erp-step--active
+.erp-step-indicator {
+  background: var(--error, #dc2626);
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.erp-step-content {
+  min-width: 0;
+}
+
+
+.erp-step-label {
+  color: var(--text-primary, #374151);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  line-height: 34px;
+
+  white-space: nowrap;
+}
+
+
+.erp-step-description {
+  margin-top: 2px;
+
+  color: var(--text-secondary, #64748b);
+
+  font-size: 11px;
+
+  line-height: 16px;
+}
+
+
+/* =========================================================
+   HORIZONTAL CONTENT
+   ========================================================= */
+
+.erp-stepper--horizontal
+.erp-step-content {
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+
+.erp-stepper--horizontal
+.erp-step-label {
+  line-height: 34px;
+}
+
+
+/* =========================================================
+   VERTICAL CONTENT
+   ========================================================= */
+
+.erp-stepper--vertical
+.erp-step-content {
+  padding-left: 12px;
+
+  padding-bottom: 24px;
+}
+
+
+.erp-stepper--vertical
+.erp-step-label {
+  line-height: 34px;
+}
+
+
+/* =========================================================
+   CONNECTOR
+   ========================================================= */
+
+.erp-step-connector {
+  background: var(--border-color, #e5e7eb);
+}
+
+
+/* Horizontal */
+
+.erp-stepper--horizontal
+.erp-step-connector {
+  position: absolute;
+
+  top: 16px;
+  left: 34px;
+  right: 0;
+
+  height: 1px;
+}
+
+
+.erp-step--completed
+.erp-step-connector {
+  background: var(--primary, #2563eb);
+}
+
+
+/* Vertical */
+
+.erp-stepper--vertical
+.erp-step-connector {
+  position: absolute;
+
+  top: 34px;
+  left: 16px;
+
+  width: 1px;
+  height: calc(100% - 34px);
+}
+
+
+.erp-step--completed
+.erp-step-connector {
+  background: var(--primary, #2563eb);
+}
+
+
+/* =========================================================
+   DISABLED
+   ========================================================= */
+
+.erp-step--disabled {
+  opacity: 0.55;
+}
+
+
+.erp-step--disabled
+.erp-step-indicator {
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .erp-stepper--horizontal {
+    overflow-x: auto;
+
+    min-width: 600px;
+  }
+}

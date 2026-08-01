@@ -1,0 +1,97 @@
+@if (open) {
+
+  <div
+    class="erp-confirm-backdrop"
+    (click)="onBackdropClick($event)"
+  >
+
+    <section
+      class="erp-confirm-dialog"
+      [class.erp-confirm-dialog--danger]="variant === 'danger'"
+      [class.erp-confirm-dialog--warning]="variant === 'warning'"
+      [class.erp-confirm-dialog--info]="variant === 'info'"
+      [class.erp-confirm-dialog--success]="variant === 'success'"
+      role="alertdialog"
+      aria-modal="true"
+      [attr.aria-label]="title"
+      (click)="$event.stopPropagation()"
+    >
+
+      <!-- Icon -->
+      <div class="erp-confirm-icon">
+
+        @if (variant === 'danger') {
+          <erp-icon name="delete"></erp-icon>
+        }
+
+        @if (variant === 'warning') {
+          <erp-icon name="alertCircle"></erp-icon>
+        }
+
+        @if (variant === 'info') {
+          <erp-icon name="info"></erp-icon>
+        }
+
+        @if (variant === 'success') {
+          <erp-icon name="checkCircle"></erp-icon>
+        }
+
+      </div>
+
+
+      <!-- Content -->
+      <div class="erp-confirm-content">
+
+        <h2 class="erp-confirm-title">
+          {{ title }}
+        </h2>
+
+        @if (message) {
+          <p class="erp-confirm-message">
+            {{ message }}
+          </p>
+        }
+
+      </div>
+
+
+      <!-- Actions -->
+      <div class="erp-confirm-actions">
+
+        <button
+          type="button"
+          class="erp-confirm-button erp-confirm-button--cancel"
+          [disabled]="loading"
+          (click)="cancel()"
+        >
+          {{ cancelLabel }}
+        </button>
+
+        <button
+          type="button"
+          class="erp-confirm-button erp-confirm-button--confirm"
+          [class.erp-confirm-button--danger]="variant === 'danger'"
+          [class.erp-confirm-button--warning]="variant === 'warning'"
+          [class.erp-confirm-button--info]="variant === 'info'"
+          [class.erp-confirm-button--success]="variant === 'success'"
+          [disabled]="loading"
+          (click)="confirm()"
+        >
+
+          @if (loading) {
+            <span class="erp-confirm-spinner"></span>
+          }
+
+          <span>
+            {{ loading ? 'Please wait...' : confirmLabel }}
+          </span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+  </div>
+
+}
