@@ -250,6 +250,16 @@ erp-select {
   margin-bottom: 16px;
 }
 
+.bg-gray {
+  background-color: var(--surface-hover);
+  padding: 10px;
+}
+
+.border-gray {
+  border: 1px solid var(--border-color);
+  padding: 10px;
+}
+
 .avatar-group {
   display: flex;
   align-items: center;

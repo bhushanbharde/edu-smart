@@ -46,16 +46,23 @@ import { AccordionItem } from '../../../shared/components/accordion/accordion.ty
 import {
   TableAction,
   TableColumn,
-  TableRowAction,
-  TableSort,
+  TableFilter,
 } from '../../../shared/components/table/table.types';
 import { TableComponent } from '../../../shared/components/table/table.component';
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
-import { EmptyStateComponent } from "../../../shared/components/empty-state/empty-state.component";
-import { StepperComponent } from "../../../shared/components/stepper/stepper.component";
+import { EmptyStateComponent } from '../../../shared/components/empty-state/empty-state.component';
+import { StepperComponent } from '../../../shared/components/stepper/stepper.component';
 import { StepperItem } from '../../../shared/components/stepper/stepper.types';
-import { DividerComponent } from "../../../shared/components/divider/divider.component";
-import { TagComponent } from "../../../shared/components/tag/tag.component";
+import { DividerComponent } from '../../../shared/components/divider/divider.component';
+import { TagComponent } from '../../../shared/components/tag/tag.component';
+import { TableToolbarComponent } from '../../../shared/components/table-toolbar/table-toolbar.component';
+import { FilterPanelComponent } from '../../../shared/components/filter-panel/filter-panel.component';
+import { FilterField } from '../../../shared/components/filter-panel/filter-panel.types';
+import { ColumnOption } from '../../../shared/components/column-selector/column-selector.types';
+import { ColumnSelectorComponent } from '../../../shared/components/column-selector/column-selector.component';
+import { BulkActionBarComponent } from '../../../shared/components/bulk-action-bar/bulk-action-bar.component';
+import { BulkAction } from '../../../shared/components/bulk-action-bar/bulk-action-bar.types';
+import { TableCellComponent } from '../../../shared/components/table-cell/table-cell.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -102,11 +109,75 @@ import { TagComponent } from "../../../shared/components/tag/tag.component";
     StepperComponent,
     DividerComponent,
     TagComponent,
+    TableToolbarComponent,
+    FilterPanelComponent,
+    ColumnSelectorComponent,
+    BulkActionBarComponent,
+    TableCellComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
+openColumnSelector() {
+throw new Error('Method not implemented.');
+}
+openStudentFilters() {
+throw new Error('Method not implemented.');
+}
+  studentFilterFields: FilterField[] = [];
+  onStudentFilter($event: TableFilter[]) {
+    throw new Error('Method not implemented.');
+  }
+  exportStudents($event: void) {
+    throw new Error('Method not implemented.');
+  }
+  studentSearch: string = '';
+  onAction($event: { action: TableAction<any>; row: any }) {
+    throw new Error('Method not implemented.');
+  }
+  clearSelection() {
+    throw new Error('Method not implemented.');
+  }
+  onBulkAction(action: BulkAction): void {
+    switch (action.value) {
+      case 'status':
+        this.changeStatus();
+        break;
+
+      case 'export':
+        this.exportSelected();
+        break;
+
+      case 'delete':
+        this.deleteSelected();
+        break;
+    }
+  }
+  deleteSelected() {
+    throw new Error('Method not implemented.');
+  }
+  exportSelected() {
+    throw new Error('Method not implemented.');
+  }
+  changeStatus() {
+    throw new Error('Method not implemented.');
+  }
+  selectedStudents: any = 0;
+  // studentFilterValues: Record<string, string>;
+  applyFilters($event: Record<string, string>) {
+    throw new Error('Method not implemented.');
+  }
+  openColumns() {
+    throw new Error('Method not implemented.');
+  }
+  importStudents() {
+    throw new Error('Method not implemented.');
+  }
+  openFilters() {
+    throw new Error('Method not implemented.');
+  }
+  activeFilterCount: number = 0;
   removeClass() {
     throw new Error('Method not implemented.');
   }
@@ -133,7 +204,141 @@ export class DashboardComponent {
   showInfo: any;
   activeTab: string = '';
   tabs: any;
-  removable:boolean = true;
+  removable: boolean = true;
+  studentPage = 1;
+  studentPageSize = 10;
+  studentTotal = 125;
+
+  onStudentPageChange(page: number): void {
+    this.studentPage = page;
+
+    // Later:
+    // API call with page + pageSize
+  }
+
+  onStudentSearch(search: string): void {
+    this.studentSearch = search;
+
+    // API request later:
+    //
+    // GET /students?
+    // search=aarav
+    // &page=1
+    // &pageSize=10
+  }
+
+  onStudentPageSizeChange(size: number): void {
+    this.studentPageSize = size;
+
+    this.studentPage = 1;
+
+    // Later:
+    // API call with page + pageSize
+  }
+
+  bulkActions: BulkAction[] = [
+    {
+      label: 'Change Status',
+      value: 'status',
+      icon: 'edit',
+      variant: 'primary',
+    },
+    {
+      label: 'Export',
+      value: 'export',
+      icon: 'download',
+    },
+    {
+      label: 'Delete',
+      value: 'delete',
+      icon: 'delete',
+      variant: 'danger',
+    },
+  ];
+
+  columnsSelector: ColumnOption[] = [
+    {
+      key: 'student',
+      label: 'Student',
+      visible: true,
+      disabled: true,
+    },
+    {
+      key: 'admissionNo',
+      label: 'Admission No.',
+      visible: true,
+    },
+    {
+      key: 'class',
+      label: 'Class',
+      visible: true,
+    },
+    {
+      key: 'section',
+      label: 'Section',
+      visible: true,
+    },
+    {
+      key: 'status',
+      label: 'Status',
+      visible: true,
+    },
+    {
+      key: 'phone',
+      label: 'Phone',
+      visible: false,
+    },
+    {
+      key: 'createdAt',
+      label: 'Created At',
+      visible: false,
+    },
+  ];
+
+  onColumnsChange(columns: ColumnOption[]): void {
+    this.columns = columns;
+  }
+
+  studentFilters: FilterField[] = [
+    {
+      key: 'status',
+      label: 'Status',
+      type: 'select',
+      placeholder: 'Select status',
+      options: [
+        {
+          label: 'Active',
+          value: 'active',
+        },
+        {
+          label: 'Inactive',
+          value: 'inactive',
+        },
+      ],
+    },
+    {
+      key: 'class',
+      label: 'Class',
+      type: 'select',
+      placeholder: 'Select class',
+      options: [
+        {
+          label: 'Class VII',
+          value: '7',
+        },
+        {
+          label: 'Class VIII',
+          value: '8',
+        },
+      ],
+    },
+    {
+      key: 'admissionNo',
+      label: 'Admission Number',
+      type: 'text',
+      placeholder: 'Enter admission number',
+    },
+  ];
 
   steps: StepperItem[] = [
     {
@@ -259,47 +464,34 @@ export class DashboardComponent {
     },
   ];
 
-  studentColumns: TableColumn<any>[] = [
+  studentColumns: TableColumn[] = [
     {
       key: 'name',
       label: 'Student',
+      sortable: true,
+      visible: true,
     },
     {
       key: 'admissionNo',
       label: 'Admission No.',
       sortable: true,
+      visible: true,
     },
     {
       key: 'class',
       label: 'Class',
       sortable: true,
+      visible: true,
     },
     {
       key: 'section',
       label: 'Section',
+      visible: true,
     },
     {
       key: 'status',
       label: 'Status',
-    },
-  ];
-
-  studentActions: TableAction<any>[] = [
-    {
-      label: 'View',
-      value: 'view',
-      icon: 'add',
-    },
-    {
-      label: 'Edit',
-      value: 'edit',
-      icon: 'edit',
-    },
-    {
-      label: 'Delete',
-      value: 'delete',
-      icon: 'delete',
-      danger: true,
+      visible: true,
     },
   ];
 
@@ -313,27 +505,7 @@ export class DashboardComponent {
     console.log('Selected:', rows);
   }
 
-  onActionSelected(event: TableRowAction<Student>): void {
-    switch (event.action.value) {
-      case 'view':
-        // open student
-        break;
-
-      case 'edit':
-        // edit student
-        break;
-
-      case 'delete':
-        // delete student
-        break;
-    }
-  }
-
-  onSortChange($event: TableSort) {
-    throw new Error('Method not implemented.');
-  }
-
-  onSort($event: TableSort) {
+  onSort(event: any) {
     throw new Error('Method not implemented.');
   }
   onStudentClick($event: {
@@ -448,24 +620,43 @@ export class DashboardComponent {
     }
   }
 
-  // studentActions: DropdownItem[] = [
-  //   {
-  //     label: 'View Student',
-  //     value: 'view',
-  //     icon: 'profile',
-  //   },
-  //   {
-  //     label: 'Edit Student',
-  //     value: 'edit',
-  //     icon: 'edit',
-  //   },
-  //   {
-  //     label: 'Delete Student',
-  //     value: 'delete',
-  //     icon: 'delete',
-  //     danger: true,
-  //   },
-  // ];
+  studentDropdownActions: DropdownItem[] = [
+    {
+      label: 'View',
+      value: 'view',
+      icon: 'add',
+    },
+    {
+      label: 'Edit',
+      value: 'edit',
+      icon: 'edit',
+    },
+    {
+      label: 'Delete',
+      value: 'delete',
+      icon: 'delete',
+      danger: true,
+    },
+  ];
+
+  studentActions: TableAction[] = [
+    {
+      label: 'View',
+      value: 'view',
+      icon: 'add',
+    },
+    {
+      label: 'Edit',
+      value: 'edit',
+      icon: 'edit',
+    },
+    {
+      label: 'Delete',
+      value: 'delete',
+      icon: 'delete',
+      variant: 'danger',
+    },
+  ];
 
   onMenuClick(item: DropdownItem): void {
     console.log('Menu item clicked:', item);

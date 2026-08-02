@@ -1,12 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IconComponent } from '../../ui/display/icon';
 import { IconName } from '../../types';
+
 
 @Component({
   selector: 'erp-tag',
@@ -28,7 +23,7 @@ export class TagComponent {
     | 'info'
     | 'purple' = 'default';
 
-  @Input() size: 'sm' | 'md' | 'lg' = 'md';
+  @Input() size: 'sm' | 'md' = 'sm';
 
   @Input() icon?: IconName;
 
@@ -36,15 +31,7 @@ export class TagComponent {
 
   @Input() disabled = false;
 
-  @Output() removed = new EventEmitter<void>();
-
-  onRemove(event: MouseEvent): void {
-    event.stopPropagation();
-
-    if (this.disabled) {
-      return;
-    }
-
-    this.removed.emit();
+  onRemove(): void {
+    // Event can be added when required.
   }
 }

@@ -1,0 +1,56 @@
+@if (selectedCount > 0) {
+  <div class="erp-bulk-action-bar">
+    <!-- Selection -->
+
+    <div class="erp-bulk-selection">
+      <span class="erp-bulk-selection-count">
+        {{ selectedCount }}
+      </span>
+
+      <span class="erp-bulk-selection-label">
+        {{ selectedCount === 1 ? "item" : "items" }}
+        selected
+      </span>
+    </div>
+
+    <!-- Divider -->
+
+    <span class="erp-bulk-divider"></span>
+
+    <!-- Actions -->
+
+    <div class="erp-bulk-actions">
+      @for (action of actions; track action.value) {
+        <button
+          type="button"
+          class="erp-bulk-action"
+          [class.erp-bulk-action--primary]="action.variant === 'primary'"
+          [class.erp-bulk-action--danger]="action.variant === 'danger'"
+          [disabled]="action.disabled"
+          (click)="onAction(action)"
+        >
+          @if (action.icon) {
+            <erp-icon [name]="action.icon"></erp-icon>
+          }
+
+          <span>
+            {{ action.label }}
+          </span>
+        </button>
+      }
+    </div>
+
+    <!-- Clear -->
+
+    @if (showClear) {
+      <button
+        type="button"
+        class="erp-bulk-clear"
+        [attr.aria-label]="clearLabel"
+        (click)="onClear()"
+      >
+        <erp-icon name="close"></erp-icon>
+      </button>
+    }
+  </div>
+}

@@ -1,0 +1,80 @@
+<div class="erp-column-selector">
+
+  <!-- Header -->
+
+  <div class="erp-column-selector-header">
+
+    <div class="erp-column-selector-title">
+
+      <erp-icon name="columns"></erp-icon>
+
+      <span>
+        {{ title }}
+      </span>
+
+    </div>
+
+    @if (showReset) {
+
+      <button
+        type="button"
+        class="erp-column-selector-reset"
+        (click)="reset()"
+      >
+        Reset
+      </button>
+
+    }
+
+  </div>
+
+
+  <!-- Columns -->
+
+  <div class="erp-column-selector-list">
+
+    @for (
+      column of columns;
+      track trackByKey($index, column)
+    ) {
+
+      <label
+        class="erp-column-option"
+        [class.erp-column-option--disabled]="
+          column.disabled
+        "
+      >
+
+        <input
+          type="checkbox"
+          [checked]="column.visible"
+          [disabled]="column.disabled"
+          (change)="toggleColumn(column)"
+        />
+
+        <span class="erp-column-check">
+          @if (column.visible) {
+            <erp-icon name="check"></erp-icon>
+          }
+        </span>
+
+        <span class="erp-column-label">
+          {{ column.label }}
+        </span>
+
+      </label>
+
+    }
+
+
+    @if (columns.length === 0) {
+
+      <div class="erp-column-empty">
+        No columns available.
+      </div>
+
+    }
+
+  </div>
+
+</div>

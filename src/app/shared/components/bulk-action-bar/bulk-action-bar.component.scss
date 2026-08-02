@@ -1,0 +1,248 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+
+/* =========================================================
+   BAR
+   ========================================================= */
+
+.erp-bulk-action-bar {
+  display: flex;
+  align-items: center;
+
+  min-height: 46px;
+
+  width: 100%;
+
+  padding: 6px 8px;
+
+  gap: 8px;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--primary, #2563eb) 18%,
+      var(--border-color, #e5e7eb)
+    );
+
+  border-radius: 8px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--primary, #2563eb) 4%,
+      var(--surface, #ffffff)
+    );
+}
+
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+.erp-bulk-selection {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 0 6px;
+
+  white-space: nowrap;
+}
+
+
+.erp-bulk-selection-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 24px;
+  height: 24px;
+
+  padding: 0 6px;
+
+  border-radius: 6px;
+
+  background: var(--primary, #2563eb);
+
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+.erp-bulk-selection-label {
+  color: var(--text-secondary, #475569);
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.erp-bulk-divider {
+  width: 1px;
+  height: 22px;
+
+  background: var(--border-color, #e5e7eb);
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.erp-bulk-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+
+  flex: 1;
+
+  min-width: 0;
+
+  overflow-x: auto;
+}
+
+
+.erp-bulk-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 32px;
+
+  gap: 6px;
+
+  padding: 0 9px;
+
+  border: 0;
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: var(--text-secondary, #475569);
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+
+.erp-bulk-action:hover:not(:disabled) {
+  background: var(--surface-muted, #f1f5f9);
+
+  color: var(--text-primary, #334155);
+}
+
+
+.erp-bulk-action--primary {
+  color: var(--primary, #2563eb);
+}
+
+
+.erp-bulk-action--primary:hover:not(:disabled) {
+  background:
+    color-mix(
+      in srgb,
+      var(--primary, #2563eb) 8%,
+      transparent
+    );
+}
+
+
+.erp-bulk-action--danger {
+  color: var(--error, #dc2626);
+}
+
+
+.erp-bulk-action--danger:hover:not(:disabled) {
+  background:
+    color-mix(
+      in srgb,
+      var(--error, #dc2626) 8%,
+      transparent
+    );
+}
+
+
+.erp-bulk-action:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   CLEAR
+   ========================================================= */
+
+.erp-bulk-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 30px;
+  height: 30px;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: var(--text-secondary, #64748b);
+
+  cursor: pointer;
+}
+
+
+.erp-bulk-clear:hover {
+  background: var(--surface-muted, #f1f5f9);
+
+  color: var(--text-primary, #334155);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .erp-bulk-action-bar {
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+  }
+
+  .erp-bulk-actions {
+    order: 3;
+
+    flex-basis: 100%;
+
+    padding-top: 2px;
+  }
+
+  .erp-bulk-divider {
+    display: none;
+  }
+}

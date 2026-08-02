@@ -10,9 +10,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class DividerComponent {
   @Input() orientation: 'horizontal' | 'vertical' = 'horizontal';
 
+  @Input() spacing: 'none' | 'sm' | 'md' | 'lg' = 'md';
+
   @Input() label = '';
-
-  @Input() spacing: 'sm' | 'md' | 'lg' = 'md';
-
-  @Input() variant: 'solid' | 'dashed' | 'dotted' = 'solid';
 }

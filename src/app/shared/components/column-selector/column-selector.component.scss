@@ -1,0 +1,221 @@
+:host {
+  display: block;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.erp-column-selector {
+  width: 260px;
+
+  background: var(--surface, #ffffff);
+
+  border: 1px solid var(--border-color, #e5e7eb);
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 12px 30px
+    rgba(15, 23, 42, 0.10);
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.erp-column-selector-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 48px;
+
+  padding: 0 14px;
+
+  border-bottom: 1px solid
+    var(--border-color, #e5e7eb);
+}
+
+
+.erp-column-selector-title {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: var(--text-primary, #1f2937);
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+.erp-column-selector-title erp-icon {
+  display: flex;
+
+  color: var(--text-secondary, #64748b);
+}
+
+
+.erp-column-selector-reset {
+  padding: 4px 6px;
+
+  border: 0;
+
+  border-radius: 5px;
+
+  background: transparent;
+
+  color: var(--primary, #2563eb);
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+
+.erp-column-selector-reset:hover {
+  background: color-mix(
+    in srgb,
+    var(--primary, #2563eb) 7%,
+    transparent
+  );
+}
+
+
+/* =========================================================
+   LIST
+   ========================================================= */
+
+.erp-column-selector-list {
+  display: flex;
+  flex-direction: column;
+
+  padding: 6px;
+}
+
+
+/* =========================================================
+   OPTION
+   ========================================================= */
+
+.erp-column-option {
+  display: flex;
+  align-items: center;
+
+  min-height: 36px;
+
+  padding: 0 8px;
+
+  gap: 9px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  user-select: none;
+}
+
+
+.erp-column-option:hover:not(
+  .erp-column-option--disabled
+) {
+  background: var(--surface-muted, #f8fafc);
+}
+
+
+.erp-column-option input {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   CHECKBOX
+   ========================================================= */
+
+.erp-column-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 16px;
+  height: 16px;
+
+  flex-shrink: 0;
+
+  border: 1px solid var(--border-color, #cbd5e1);
+
+  border-radius: 4px;
+
+  background: var(--surface, #ffffff);
+
+  color: #ffffff;
+}
+
+
+.erp-column-option
+input:checked
+~ .erp-column-check {
+  border-color: var(--primary, #2563eb);
+
+  background: var(--primary, #2563eb);
+}
+
+
+.erp-column-check erp-icon {
+  display: flex;
+}
+
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.erp-column-label {
+  color: var(--text-primary, #475569);
+
+  font-size: 12px;
+
+  line-height: 18px;
+}
+
+
+/* =========================================================
+   DISABLED
+   ========================================================= */
+
+.erp-column-option--disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.erp-column-empty {
+  padding: 24px 12px;
+
+  text-align: center;
+
+  color: var(--text-secondary, #64748b);
+
+  font-size: 12px;
+}

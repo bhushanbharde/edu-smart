@@ -1,24 +1,31 @@
-<div
-  class="erp-divider"
-  [class.erp-divider--horizontal]="orientation === 'horizontal'"
-  [class.erp-divider--vertical]="orientation === 'vertical'"
-  [class.erp-divider--sm]="spacing === 'sm'"
-  [class.erp-divider--md]="spacing === 'md'"
-  [class.erp-divider--lg]="spacing === 'lg'"
-  [class.erp-divider--dashed]="variant === 'dashed'"
-  [class.erp-divider--dotted]="variant === 'dotted'"
-  role="separator"
-  [attr.aria-orientation]="orientation"
->
-  @if (label && orientation === "horizontal") {
-    <span class="erp-divider-line"></span>
+@if (orientation === "horizontal") {
+  <div
+    class="erp-divider erp-divider--horizontal"
+    [class.erp-divider--none]="spacing === 'none'"
+    [class.erp-divider--sm]="spacing === 'sm'"
+    [class.erp-divider--md]="spacing === 'md'"
+    [class.erp-divider--lg]="spacing === 'lg'"
+    role="separator"
+  >
+    @if (label) {
+      <span class="erp-divider-line"></span>
 
-    <span class="erp-divider-label">
-      {{ label }}
-    </span>
+      <span class="erp-divider-label">
+        {{ label }}
+      </span>
 
-    <span class="erp-divider-line"></span>
-  } @else {
-    <span class="erp-divider-line"></span>
-  }
-</div>
+      <span class="erp-divider-line"></span>
+    } @else {
+      <span class="erp-divider-line"></span>
+    }
+  </div>
+} @else {
+  <div
+    class="erp-divider erp-divider--vertical"
+    [class.erp-divider--none]="spacing === 'none'"
+    [class.erp-divider--sm]="spacing === 'sm'"
+    [class.erp-divider--md]="spacing === 'md'"
+    [class.erp-divider--lg]="spacing === 'lg'"
+    role="separator"
+  ></div>
+}

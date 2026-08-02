@@ -1,31 +1,116 @@
 <div class="demo-wrapper">
+  <h3>Table</h3>
+  <div>
+    <erp-table
+      [columns]="studentColumns"
+      [data]="students"
+      [selectable]="true"
+      [searchable]="true"
+      searchPlaceholder="Search students..."
+      [showFilter]="true"
+      [filterFields]="studentFilterFields"
+      [showColumns]="true"
+      [showExport]="true"
+      exportLabel="Export"
+      [actions]="studentActions"
+      [page]="studentPage"
+      [pageSize]="studentPageSize"
+      [totalItems]="studentTotal"
+      (selectionChange)="onSelectionChange($event)"
+      (actionClick)="onAction($event)"
+      (searchChange)="onStudentSearch($event)"
+      (filterChange)="onStudentFilter($event)"
+      (exportClick)="exportStudents($event)"
+      (pageChange)="onStudentPageChange($event)"
+      (pageSizeChange)="onStudentPageSizeChange($event)"
+    />
+  </div>
+
+  <h3>Table Cell</h3>
+  <erp-table-cell class="border-gray" type="text" value="Class VIII" />
+  <erp-table-cell
+    class="border-gray"
+    type="avatar"
+    value="Aarav Sharma"
+    secondary="ADM-001"
+    avatar="assets/images/avatar.jpg"
+  />
+  <br />
+  <erp-table-cell
+    class="border-gray"
+    type="status"
+    value="Active"
+    status="success"
+  />
+  <br />
+  <erp-table-cell class="border-gray" type="number" [value]="12500" /> <br />
+  <erp-table-cell class="border-gray" type="empty" />
+
+  <div class="row">
+    <div class="col-4">
+      <h3>Bulk Action Bar</h3>
+      <erp-bulk-action-bar
+        [selectedCount]="selectedStudents.length"
+        [actions]="bulkActions"
+        (actionClick)="onBulkAction($event)"
+        (clear)="clearSelection()"
+      />
+    </div>
+    <div class="col-4">
+      <h3>Column Selector</h3>
+      <erp-column-selector
+        [columns]="columnsSelector"
+        (columnsChange)="onColumnsChange($event)"
+      />
+    </div>
+    <div class="col-4">
+      <h3>Filter Panel</h3>
+      <erp-filter-panel
+        [fields]="studentFilters"
+        (apply)="applyFilters($event)"
+        (clear)="clearFilters()"
+        (close)="clearFilters()"
+      />
+    </div>
+    <div class="col-6"></div>
+  </div>
+
+  <h3>Table Toolbar</h3>
+  <div class="bg-gray">
+    <erp-table-toolbar
+      [searchValue]="studentSearch"
+      searchPlaceholder="Search students..."
+      [showFilter]="true"
+      [showColumns]="true"
+      [showExport]="true"
+      (searchChange)="onStudentSearch($event)"
+      (filterClick)="openStudentFilters()"
+      (columnsClick)="openColumnSelector()"
+      (exportClick)="exportStudents()"
+    />
+  </div>
+
   <h3>Tags</h3>
   <div style="display: flex; align-items: center; gap: 16px">
     <erp-tag label="Active" variant="success" />
 
     <erp-tag label="Pending" variant="warning" />
 
-    <erp-tag label="Inactive" variant="danger" />
+    <erp-tag label="Archived" variant="default" />
 
     <erp-tag label="New" variant="primary" icon="add" />
-    <erp-tag
-      label="Class VIII"
-      variant="primary"
-      [removable]="true"
-      (removed)="removeClass()"
-    />
+
+    <erp-tag label="Math" variant="purple" [removable]="true" />
   </div>
 
   <h3>Divider</h3>
   <erp-divider />
   <erp-divider label="Personal Information" />
-  <erp-divider label="Additional Details" variant="dashed" />
-  <div class="toolbar">
-    <button>Add</button>
-
+  <erp-divider spacing="sm" />
+  <div class="actions mb-2">
+    <erp-button label="Edit"></erp-button>
     <erp-divider orientation="vertical" />
-
-    <button>Export</button>
+    <erp-button label="Delete"></erp-button>
   </div>
 
   <h3>Stepper</h3>
@@ -62,36 +147,7 @@
     (pageChange)="currentPage = $event"
   />
 
-  <h3>Table</h3>
   <div>
-    <div
-      class="erp-table-wrapper"
-      [class.erp-table-wrapper--bordered]="bordered"
-      [class.erp-table-wrapper--striped]="striped"
-    ></div>
-
-    <erp-table
-      [columns]="columns"
-      [data]="students"
-      [hoverable]="true"
-      [bordered]="true"
-      (rowClick)="onStudentClick($event)"
-      (sortChange)="onSort($event)"
-    />
-
-    <erp-table
-      [columns]="studentColumns"
-      [data]="students"
-      [rowActions]="studentActions"
-      [selectable]="true"
-      [hoverable]="true"
-      [bordered]="true"
-      (selectionChange)="onSelectionChange($event)"
-      (rowClick)="onStudentClick($event)"
-      (sortChange)="onSortChange($event)"
-      (actionSelected)="onActionSelected($event)"
-    />
-
     <h3>Accordian</h3>
     <div>
       <erp-accordion [items]="accordionItems" [multiple]="true" />
@@ -340,14 +396,26 @@
     <h3>Search</h3>
     <div class="row">
       <div class="col-4">
-        <erp-search
+        <erp-search-box
           placeholder="Search students..."
-          [(value)]="searchTerm"
           (search)="onSearch($event)"
         />
       </div>
       <div class="col-4">
-        <erp-search placeholder="Search..." [clearable]="false" />
+        <erp-search-box
+          [value]="searchTerm"
+          placeholder="Search students..."
+          (valueChange)="searchTerm = $event"
+          (search)="onSearch($event)"
+        />
+      </div>
+      <div class="col-4">
+        <erp-search-box
+          size="lg"
+          placeholder="Search students..."
+          [debounce]="300"
+          (search)="onSearch($event)"
+        />
       </div>
     </div>
 
@@ -719,7 +787,7 @@
     <!-- ===== DROPDOWN with avatar trigger ===== -->
     <h3>Dropdown</h3>
     <erp-dropdown
-      [items]="studentActions"
+      [items]="studentDropdownActions"
       (itemSelected)="onStudentAction($event)"
     >
       <erp-icon name="menu"></erp-icon>

@@ -1,0 +1,144 @@
+<div class="erp-table-toolbar">
+
+  <!-- Search -->
+
+  @if (searchable) {
+
+    <div class="erp-table-search">
+
+      <erp-icon
+        name="search"
+      ></erp-icon>
+
+      <input
+        type="text"
+        [value]="searchValue"
+        [placeholder]="searchPlaceholder"
+        (input)="onSearch($event)"
+      />
+
+      @if (searchValue) {
+
+        <button
+          type="button"
+          class="erp-table-search-clear"
+          aria-label="Clear search"
+          (click)="clearSearch()"
+        >
+
+          <erp-icon
+            name="close"
+          ></erp-icon>
+
+        </button>
+
+      }
+
+    </div>
+
+  }
+
+
+  <div class="erp-table-toolbar-spacer"></div>
+
+
+  <!-- Custom Actions -->
+
+  @for (
+    action of actions;
+    track action.value
+  ) {
+
+    <button
+      type="button"
+      class="erp-table-toolbar-button"
+      [disabled]="action.disabled"
+      (click)="onAction(action)"
+    >
+
+      @if (action.icon) {
+
+        <erp-icon
+          [name]="action.icon"
+        ></erp-icon>
+
+      }
+
+      <span>
+        {{ action.label }}
+      </span>
+
+    </button>
+
+  }
+
+
+  <!-- Filter -->
+
+  @if (showFilter) {
+
+    <button
+      type="button"
+      class="erp-table-toolbar-button"
+      (click)="onFilter()"
+    >
+
+      <erp-icon
+        name="filter"
+      ></erp-icon>
+
+      <span>
+        Filter
+      </span>
+
+    </button>
+
+  }
+
+
+  <!-- Columns -->
+
+  @if (showColumns) {
+
+    <button
+      type="button"
+      class="erp-table-toolbar-button"
+      (click)="onColumns()"
+    >
+
+      <erp-icon
+        name="columns"
+      ></erp-icon>
+
+      <span>
+        Columns
+      </span>
+
+    </button>
+
+  }
+
+
+  <!-- Export -->
+
+  @if (showExport) {
+
+    <button
+      type="button"
+      class="erp-table-toolbar-button"
+      (click)="onExport()"
+    >
+
+      <erp-icon
+        name="download"
+      ></erp-icon>
+
+      <span>
+        {{ exportLabel }}
+      </span>
+
+    </button>
+
+  }
+
+</div>

@@ -1,207 +1,275 @@
-<div
-  class="erp-table-wrapper"
-  [class.erp-table-wrapper--bordered]="bordered"
-  [class.erp-table-wrapper--striped]="striped"
->
-  <!-- ======================================================
-       TABLE
-       ====================================================== -->
+<div class="erp-table-wrapper">
+  @if (searchable || showFilter || showColumns || showExport) {
+    <div class="erp-table-toolbar">
+      <!-- Search -->
 
-  <div class="erp-table-scroll">
-    <table class="erp-table">
-      <!-- ==================================================
-           HEADER
-           ================================================== -->
+      @if (searchable) {
+        <div class="erp-table-search">
+          <erp-icon name="search"></erp-icon>
 
-      <thead>
+          <input
+            type="text"
+            [value]="searchValue"
+            [placeholder]="searchPlaceholder"
+            (input)="onSearch($any($event.target).value)"
+          />
+
+          @if (searchValue) {
+            <button
+              type="button"
+              class="erp-table-search-clear"
+              (click)="onSearch('')"
+            >
+              <erp-icon name="close"></erp-icon>
+            </button>
+          }
+        </div>
+      }
+
+      <!-- Spacer -->
+
+      <div class="erp-table-toolbar-spacer"></div>
+
+      <!-- Filter -->
+
+      @if (showFilter) {
+        <div class="erp-table-toolbar-control">
+          <button
+            type="button"
+            class="erp-table-toolbar-button"
+            [class.erp-table-toolbar-button--active]="filterOpen"
+            (click)="toggleFilter()"
+          >
+            <erp-icon name="filter"></erp-icon>
+
+            <span> Filter </span>
+          </button>
+
+          @if (filterOpen) {
+            <div class="erp-table-toolbar-popover">
+              <erp-filter-panel
+                [fields]="filterFields"
+                (close)="closePanels()"
+                (apply)="onFilterChangeFromPanel($event)"
+                (clear)="onFilterClear()"
+              />
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Columns -->
+
+      @if (showColumns) {
+        <div class="erp-table-toolbar-control">
+          <button
+            type="button"
+            class="erp-table-toolbar-button"
+            [class.erp-table-toolbar-button--active]="columnSelectorOpen"
+            (click)="toggleColumnSelector()"
+          >
+            <erp-icon name="columns"></erp-icon>
+
+            <span> Columns </span>
+          </button>
+
+          @if (columnSelectorOpen) {
+            <div class="erp-table-toolbar-popover">
+              <erp-column-selector
+                [columns]="getColumnOptions()"
+                (columnsChange)="onColumnsChange($event)"
+              />
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Export -->
+
+      @if (showExport) {
+        <button
+          type="button"
+          class="erp-table-toolbar-button"
+          (click)="onExport()"
+        >
+          <erp-icon name="download"></erp-icon>
+
+          <span>
+            {{ exportLabel }}
+          </span>
+        </button>
+      }
+    </div>
+  }
+
+  <table class="erp-table">
+    <!-- Header -->
+
+    <thead>
+      <tr>
+        @if (selectable) {
+          <th class="erp-table-selection-column">
+            <input
+              type="checkbox"
+              [checked]="allSelected"
+              (change)="toggleAll()"
+            />
+          </th>
+        }
+
+        @for (column of visibleColumns; track column.key) {
+          <th
+            [style.width]="column.width"
+            [class.erp-table-align-center]="column.align === 'center'"
+            [class.erp-table-align-right]="column.align === 'right'"
+            [class.erp-table-sortable]="column.sortable"
+            (click)="sort(column)"
+          >
+            <div class="erp-table-header-cell">
+              <span>
+                {{ column.label }}
+              </span>
+
+              @if (column.sortable) {
+                @if (sortColumn?.key === column.key) {
+                  <erp-icon
+                    [name]="sortDirection === 'asc' ? 'sortUp' : 'sort'"
+                  ></erp-icon>
+                } @else {
+                  <erp-icon name="sort"></erp-icon>
+                }
+              }
+            </div>
+          </th>
+        }
+
+        @if (actions.length > 0) {
+          <th class="erp-table-actions-column">Actions</th>
+        }
+      </tr>
+    </thead>
+
+    <!-- Body -->
+
+    <tbody>
+      @if (loading) {
         <tr>
-          <!-- Selection -->
+          <td
+            [attr.colspan]="
+              visibleColumns.length +
+              (selectable ? 1 : 0) +
+              (actions.length > 0 ? 1 : 0)
+            "
+            class="erp-table-state"
+          >
+            Loading...
+          </td>
+        </tr>
+      } @else if (data.length === 0) {
+        <tr>
+          <td
+            [attr.colspan]="
+              visibleColumns.length +
+              (selectable ? 1 : 0) +
+              (actions.length > 0 ? 1 : 0)
+            "
+            class="erp-table-state"
+          >
+            <div class="erp-table-empty">
+              <erp-icon name="search"></erp-icon>
 
-          @if (selectable) {
-            <th class="erp-table-selection-column">
-              <label class="erp-checkbox">
+              <span>
+                {{ emptyText }}
+              </span>
+            </div>
+          </td>
+        </tr>
+      } @else {
+        @for (row of data; track getRowKey(row)) {
+          <tr
+            [class.erp-table-row-selected]="isSelected(row)"
+            (click)="onRowClick(row)"
+          >
+            @if (selectable) {
+              <td
+                class="erp-table-selection-column"
+                (click)="$event.stopPropagation()"
+              >
                 <input
                   type="checkbox"
-                  [checked]="isAllSelected()"
-                  [indeterminate]="isSomeSelected()"
-                  (change)="toggleAllSelection()"
+                  [checked]="isSelected(row)"
+                  (change)="toggleRow(row)"
                 />
+              </td>
+            }
 
-                <span class="erp-checkbox-box"></span>
-              </label>
-            </th>
-          }
+            @for (column of visibleColumns; track column.key) {
+              <td
+                [class.erp-table-align-center]="column.align === 'center'"
+                [class.erp-table-align-right]="column.align === 'right'"
+              >
+                {{ getCellValue(row, column) }}
+              </td>
+            }
 
-          <!-- Columns -->
+            @if (actions.length > 0) {
+              <td
+                class="erp-table-actions-column"
+                (click)="$event.stopPropagation()"
+              >
+                <div class="erp-table-actions">
+                  <button
+                    type="button"
+                    class="erp-table-action-trigger"
+                    aria-label="Row actions"
+                    (click)="toggleActions(row)"
+                  >
+                    <erp-icon name="menu"></erp-icon>
+                  </button>
 
-          @for (column of visibleColumns; track trackByColumn($index, column)) {
-            <th
-              [style.width]="column.width"
-              [class.erp-table-cell--center]="column.align === 'center'"
-              [class.erp-table-cell--right]="column.align === 'right'"
-              [class.erp-table-header--sortable]="column.sortable"
-              (click)="sort(column)"
-            >
-              <div class="erp-table-header-content">
-                @if (column.icon) {
-                  <erp-icon [name]="column.icon"></erp-icon>
-                }
+                  @if (
+                    openActionRow && getRowKey(openActionRow) === getRowKey(row)
+                  ) {
+                    <div class="erp-table-action-menu">
+                      @for (action of actions; track action.value) {
+                        <button
+                          type="button"
+                          class="erp-table-action-item"
+                          [class.erp-table-action-item--danger]="
+                            action.variant === 'danger'
+                          "
+                          [disabled]="action.disabled && action.disabled(row)"
+                          (click)="executeAction(action, row)"
+                        >
+                          @if (action.icon) {
+                            <erp-icon [name]="action.icon"></erp-icon>
+                          }
 
-                <span>
-                  {{ column.label }}
-                </span>
-
-                @if (column.sortable) {
-                  <span class="erp-table-sort">
-                    @if (!isSorted(column)) {
-                      <erp-icon name="chevronUpDown"></erp-icon>
-                    }
-
-                    @if (isAscending(column)) {
-                      <erp-icon name="chevronUp"></erp-icon>
-                    }
-
-                    @if (isSorted(column) && !isAscending(column)) {
-                      <erp-icon name="chevronDown"></erp-icon>
-                    }
-                  </span>
-                }
-              </div>
-            </th>
-          }
-
-          <!-- Actions -->
-
-          @if (rowActions.length) {
-            <th class="erp-table-actions-column">Actions</th>
-          }
-        </tr>
-      </thead>
-
-      <!-- ==================================================
-           BODY
-           ================================================== -->
-
-      <tbody>
-        <!-- Loading -->
-
-        @if (loading) {
-          <tr>
-            <td
-              class="erp-table-state"
-              [attr.colspan]="
-                visibleColumns.length +
-                (selectable ? 1 : 0) +
-                (rowActions.length ? 1 : 0)
-              "
-            >
-              <div class="erp-table-loading">
-                <span class="erp-table-loader"></span>
-
-                <span> Loading records... </span>
-              </div>
-            </td>
+                          <span>
+                            {{ action.label }}
+                          </span>
+                        </button>
+                      }
+                    </div>
+                  }
+                </div>
+              </td>
+            }
           </tr>
         }
+      }
+    </tbody>
+  </table>
 
-        <!-- Empty -->
-
-        @else if (!data.length) {
-          <tr>
-            <td
-              class="erp-table-state"
-              [attr.colspan]="
-                visibleColumns.length +
-                (selectable ? 1 : 0) +
-                (rowActions.length ? 1 : 0)
-              "
-            >
-              <div class="erp-table-empty">
-                {{ emptyMessage }}
-              </div>
-            </td>
-          </tr>
-        }
-
-        <!-- Rows -->
-
-        @else {
-          @for (row of data; track trackByRow($index, row)) {
-            <tr
-              [class.erp-table-row--selected]="isSelected(row)"
-              [class.erp-table-row--clickable]="hoverable"
-              (click)="onRowClick(row)"
-            >
-              <!-- Selection -->
-
-              @if (selectable) {
-                <td
-                  class="erp-table-selection-column"
-                  (click)="$event.stopPropagation()"
-                >
-                  <label class="erp-checkbox">
-                    <input
-                      type="checkbox"
-                      [checked]="isSelected(row)"
-                      (change)="toggleRowSelection(row)"
-                    />
-
-                    <span class="erp-checkbox-box"></span>
-                  </label>
-                </td>
-              }
-
-              <!-- Cells -->
-
-              @for (
-                column of visibleColumns;
-                track trackByColumn($index, column)
-              ) {
-                <td
-                  [class.erp-table-cell--center]="column.align === 'center'"
-                  [class.erp-table-cell--right]="column.align === 'right'"
-                >
-                  <span class="erp-table-cell-content">
-                    {{ getValue(row, column.key) }}
-                  </span>
-                </td>
-              }
-
-              <!-- Actions -->
-
-              @if (rowActions.length) {
-                <td
-                  class="erp-table-actions-column"
-                  (click)="$event.stopPropagation()"
-                >
-                  <div class="erp-table-action-wrapper">
-                    <button
-                      type="button"
-                      class="erp-table-action-button"
-                      aria-label="Row actions"
-                      [attr.aria-expanded]="openActionRow === row"
-                      (click)="toggleActionMenu($event, row)"
-                    >
-                      <erp-icon name="more"></erp-icon>
-                    </button>
-
-                    @if (openActionRow === row) {
-                      <div class="erp-table-action-menu">
-                        <erp-menu
-                          [items]="getRowMenuItems(row)"
-                          [minWidth]="170"
-                          (itemSelected)="onActionSelected(row, $event)"
-                          (closed)="closeActionMenu()"
-                        ></erp-menu>
-                      </div>
-                    }
-                  </div>
-                </td>
-              }
-            </tr>
-          }
-        }
-      </tbody>
-    </table>
-  </div>
+  @if (showPagination && totalItems > 0) {
+    <div class="erp-table-pagination">
+      <erp-pagination
+        [currentPage]="page"
+        [pageSize]="pageSize"
+        [totalItems]="totalItems"
+        (pageChange)="onPageChange($event)"
+        (pageSizeChange)="onPageSizeChange(pageSize)"
+      />
+    </div>
+  }
 </div>

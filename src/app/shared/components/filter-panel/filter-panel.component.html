@@ -1,0 +1,88 @@
+<div class="erp-filter-panel" [style.width.px]="width">
+  <!-- Header -->
+
+  <div class="erp-filter-panel-header">
+    <div class="erp-filter-panel-title">
+      <erp-icon name="filter"></erp-icon>
+
+      <span>
+        {{ title }}
+      </span>
+    </div>
+
+    <button
+      type="button"
+      class="erp-filter-panel-close"
+      aria-label="Close filters"
+      (click)="onClose()"
+    >
+      <erp-icon name="close"></erp-icon>
+    </button>
+  </div>
+
+  <!-- Body -->
+
+  <div class="erp-filter-panel-body">
+    @for (field of fields; track field.key) {
+      <div class="erp-filter-field">
+        <label class="erp-filter-label" [for]="'filter-' + field.key">
+          {{ field.label }}
+        </label>
+
+        @if (field.type === "select") {
+          <div class="erp-filter-select">
+            <select
+              [id]="'filter-' + field.key"
+              [value]="getValue(field.key)"
+              (change)="updateValue(field.key, $event)"
+            >
+              <option value="">
+                {{ field.placeholder ?? "Select..." }}
+              </option>
+
+              @for (option of field.options ?? []; track option.value) {
+                <option [value]="option.value">
+                  {{ option.label }}
+                </option>
+              }
+            </select>
+          </div>
+        }
+
+        @if (field.type === "text" || field.type === "number") {
+          <input
+            [id]="'filter-' + field.key"
+            [type]="field.type"
+            [value]="getValue(field.key)"
+            [placeholder]="field.placeholder ?? ''"
+            (input)="updateValue(field.key, $event)"
+          />
+        }
+      </div>
+    }
+
+    @if (fields.length === 0) {
+      <div class="erp-filter-empty">No filters available.</div>
+    }
+  </div>
+
+  <!-- Footer -->
+
+  <div class="erp-filter-panel-footer">
+    <button
+      type="button"
+      class="erp-filter-button erp-filter-button--secondary"
+      (click)="onClear()"
+    >
+      Clear
+    </button>
+
+    <button
+      type="button"
+      class="erp-filter-button erp-filter-button--primary"
+      (click)="onApply()"
+    >
+      Apply Filters
+    </button>
+  </div>
+</div>

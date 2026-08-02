@@ -21,7 +21,7 @@ export class IconComponent {
   name!: IconName;
 
   @Input()
-  size: ComponentSize = 'md';
+  size: ComponentSize = 'sm';
 
   @Input()
   color: ComponentColor = 'inherit';

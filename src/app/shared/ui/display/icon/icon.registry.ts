@@ -8,6 +8,9 @@ export const APP_ICONS = {
   DarkMode: 'dark_mode',
   LightMode: 'light_mode',
   folderOpen: 'folder_open',
+  columns: 'view_column',
+  sortUp: 'sort',
+  sortDown: 'sort_down',
 
   menu: 'menu',
   close: 'close',

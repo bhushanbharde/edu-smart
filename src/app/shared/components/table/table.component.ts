@@ -7,244 +7,323 @@ import {
 } from '@angular/core';
 
 
-
-import {
-  TableAction,
-  TableColumn,
-  TableRowAction,
-  TableSort,
-} from './table.types';
+import { TableAction, TableColumn, TableFilter } from './table.types';
 import { IconComponent } from '../../ui/display/icon';
-import { MenuComponent } from '../menu/menu.component';
-import { MenuItem } from '../menu/menu.types';
+import { PaginationComponent } from "../pagination/pagination.component";
+import { ColumnSelectorComponent } from '../column-selector/column-selector.component';
+import { FilterPanelComponent } from '../filter-panel/filter-panel.component';
+import { FilterField } from '../filter-panel/filter-panel.types';
+import { ColumnOption } from '../column-selector/column-selector.types';
 
 @Component({
   selector: 'erp-table',
   standalone: true,
-  imports: [IconComponent, MenuComponent],
+  imports: [
+    IconComponent,
+    PaginationComponent,
+    ColumnSelectorComponent,
+    FilterPanelComponent,
+  ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent<T = any> {
-  /* ========================================================
-     DATA
-     ======================================================== */
-
   @Input() columns: TableColumn<T>[] = [];
 
   @Input() data: T[] = [];
 
-  @Input() rowActions: TableAction<T>[] = [];
+  @Input() rowKey = 'id';
 
-  /* ========================================================
-     FEATURES
-     ======================================================== */
+  @Input() selectable = false;
 
-  @Input() selectable = true;
-
-  @Input() hoverable = true;
-
-  @Input() striped = false;
-
-  @Input() bordered = false;
+  @Input() actions: TableAction<T>[] = [];
 
   @Input() loading = false;
 
-  @Input() emptyMessage = 'No records found';
+  @Input() emptyText = 'No records found.';
 
-  /* ========================================================
-     EVENTS
-     ======================================================== */
+  @Input() page = 1;
 
-  @Output() rowClick = new EventEmitter<T>();
+  @Input() pageSize = 10;
+
+  @Input() totalItems = 0;
+
+  @Input() pageSizeOptions = [10, 25, 50, 100];
+
+  @Input() showPagination = true;
+
+  //Table Filter START
+  @Input() searchable = false;
+
+  @Input() searchPlaceholder = 'Search...';
+
+  @Input() searchValue = '';
+
+  @Input() clientSideSearch = false;
+
+  @Output() searchChange = new EventEmitter<string>();
+
+  @Output() filterChange = new EventEmitter<TableFilter[]>();
+  //Table Filter END
+
+  @Input() showFilter = false;
+
+  @Input() showColumns = false;
+
+  @Input() showExport = false;
+
+  @Input() exportLabel = 'Export';
+
+  @Input() filterFields: FilterField[] = [];
+
+  @Output() exportClick = new EventEmitter<void>();
+
+  @Output() pageChange = new EventEmitter<number>();
+
+  @Output() pageSizeChange = new EventEmitter<number>();
 
   @Output() selectionChange = new EventEmitter<T[]>();
 
-  @Output() sortChange = new EventEmitter<TableSort>();
+  @Output() rowClick = new EventEmitter<T>();
 
-  @Output() actionSelected = new EventEmitter<TableRowAction<T>>();
+  @Output() actionClick = new EventEmitter<{
+    action: TableAction<T>;
+    row: T;
+  }>();
 
-  /* ========================================================
-     STATE
-     ======================================================== */
+  @Output() sortChange = new EventEmitter<{
+    column: TableColumn<T>;
+    direction: 'asc' | 'desc';
+  }>();
 
-  selectedRows = new Set<T>();
+  filterOpen = false;
+
+  columnSelectorOpen = false;
+
+  activeFilters: TableFilter[] = [];
+
+  selectedRows: T[] = [];
 
   openActionRow: T | null = null;
 
-  currentSort: TableSort | null = null;
+  sortColumn?: TableColumn<T>;
 
-  /* ========================================================
-     COLUMNS
-     ======================================================== */
+  sortDirection: 'asc' | 'desc' = 'asc';
+
+  onFilterChangeFromPanel(filters: Record<string, string>): void {
+    const activeFilters: TableFilter[] = Object.entries(filters)
+      .filter(
+        ([, value]) => value !== null && value !== undefined && value !== '',
+      )
+      .map(([key, value]) => ({
+        key,
+        value,
+      }));
+
+    this.activeFilters = activeFilters;
+
+    this.filterChange.emit(activeFilters);
+
+    this.filterOpen = false;
+  }
+
+  onFilterClear(): void {
+    this.activeFilters = [];
+
+    this.filterChange.emit([]);
+
+    this.filterOpen = false;
+  }
+
+  getColumnOptions(): ColumnOption[] {
+    return this.columns.map((column) => ({
+      key: column.key,
+      label: column.label,
+      visible: column.visible !== false,
+    }));
+  }
+
+  onColumnsChange(options: ColumnOption[]): void {
+    const visibility = new Map(
+      options.map((option) => [option.key, option.visible]),
+    );
+
+    this.columns = this.columns.map((column) => ({
+      ...column,
+      visible: visibility.get(column.key) ?? column.visible,
+    }));
+
+    this.columnSelectorOpen = false;
+  }
+
+  toggleFilter(): void {
+    this.filterOpen = !this.filterOpen;
+    this.columnSelectorOpen = false;
+  }
+
+  toggleColumnSelector(): void {
+    this.columnSelectorOpen = !this.columnSelectorOpen;
+
+    this.filterOpen = false;
+  }
+
+  closePanels(): void {
+    this.filterOpen = false;
+    this.columnSelectorOpen = false;
+  }
+
+  onExport(): void {
+    this.exportClick.emit();
+  }
 
   get visibleColumns(): TableColumn<T>[] {
     return this.columns.filter((column) => column.visible !== false);
   }
 
-  /* ========================================================
-     SELECTION
-     ======================================================== */
-
-  isSelected(row: T): boolean {
-    return this.selectedRows.has(row);
-  }
-
-  isAllSelected(): boolean {
+  get allSelected(): boolean {
     return (
-      this.data.length > 0 &&
-      this.data.every((row) => this.selectedRows.has(row))
+      this.data.length > 0 && this.selectedRows.length === this.data.length
     );
   }
 
-  isSomeSelected(): boolean {
-    return this.selectedRows.size > 0 && !this.isAllSelected();
+  // Table Filter
+  onSearch(value: string): void {
+    this.searchValue = value;
+
+    this.searchChange.emit(value);
+
+    if (this.clientSideSearch) {
+      this.page = 1;
+    }
   }
 
-  toggleRowSelection(row: T): void {
-    if (this.selectedRows.has(row)) {
-      this.selectedRows.delete(row);
+  onFilterChange(filters: TableFilter[]): void {
+    this.activeFilters = filters;
+
+    this.filterChange.emit(filters);
+
+    if (this.clientSideSearch) {
+      this.page = 1;
+    }
+  }
+  // Table Filter
+
+  isSelected(row: T): boolean {
+    return this.selectedRows.some(
+      (selected) => this.getRowKey(selected) === this.getRowKey(row),
+    );
+  }
+
+  getRowKey(row: T): unknown {
+    return (row as any)[this.rowKey];
+  }
+
+  toggleAll(): void {
+    if (this.allSelected) {
+      this.selectedRows = [];
     } else {
-      this.selectedRows.add(row);
+      this.selectedRows = [...this.data];
     }
 
-    this.emitSelection();
+    this.selectionChange.emit(this.selectedRows);
   }
 
-  toggleAllSelection(): void {
-    if (this.isAllSelected()) {
-      this.data.forEach((row) => this.selectedRows.delete(row));
+  toggleRow(row: T): void {
+    if (this.isSelected(row)) {
+      this.selectedRows = this.selectedRows.filter(
+        (selected) => this.getRowKey(selected) !== this.getRowKey(row),
+      );
     } else {
-      this.data.forEach((row) => this.selectedRows.add(row));
+      this.selectedRows = [...this.selectedRows, row];
     }
 
-    this.emitSelection();
+    this.selectionChange.emit(this.selectedRows);
   }
-
-  clearSelection(): void {
-    this.selectedRows.clear();
-
-    this.emitSelection();
-  }
-
-  emitSelection(): void {
-    this.selectionChange.emit(Array.from(this.selectedRows));
-  }
-
-  /* ========================================================
-     ROW
-     ======================================================== */
 
   onRowClick(row: T): void {
     this.rowClick.emit(row);
   }
 
-  /* ========================================================
-     SORT
-     ======================================================== */
+  toggleActions(row: T): void {
+    if (
+      this.openActionRow &&
+      this.getRowKey(this.openActionRow) === this.getRowKey(row)
+    ) {
+      this.openActionRow = null;
+    } else {
+      this.openActionRow = row;
+    }
+  }
+
+  executeAction(action: TableAction<T>, row: T): void {
+    if (action.disabled && action.disabled(row)) {
+      return;
+    }
+
+    this.openActionRow = null;
+
+    this.actionClick.emit({
+      action,
+      row,
+    });
+  }
 
   sort(column: TableColumn<T>): void {
     if (!column.sortable) {
       return;
     }
 
-    if (
-      this.currentSort?.key === String(column.key) &&
-      this.currentSort.direction === 'asc'
-    ) {
-      this.currentSort = {
-        key: String(column.key),
-        direction: 'desc',
-      };
+    if (this.sortColumn?.key === column.key) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
     } else {
-      this.currentSort = {
-        key: String(column.key),
-        direction: 'asc',
-      };
+      this.sortColumn = column;
+
+      this.sortDirection = 'asc';
     }
 
-    this.sortChange.emit(this.currentSort);
-  }
-
-  isSorted(column: TableColumn<T>): boolean {
-    return this.currentSort?.key === String(column.key);
-  }
-
-  isAscending(column: TableColumn<T>): boolean {
-    return this.isSorted(column) && this.currentSort?.direction === 'asc';
-  }
-
-  /* ========================================================
-     ACTION MENU
-     ======================================================== */
-
-  toggleActionMenu(event: MouseEvent, row: T): void {
-    event.stopPropagation();
-
-    this.openActionRow = this.openActionRow === row ? null : row;
-  }
-
-  closeActionMenu(): void {
-    this.openActionRow = null;
-  }
-
-  getRowMenuItems(row: T): MenuItem[] {
-    return this.rowActions
-      .filter((action) => {
-        if (action.visible === undefined) {
-          return true;
-        }
-
-        if (typeof action.visible === 'function') {
-          return action.visible(row);
-        }
-
-        return action.visible;
-      })
-      .map((action) => ({
-        label: action.label,
-        value: action.value,
-        icon: action.icon,
-        danger: action.danger,
-        disabled: action.disabled,
-      }));
-  }
-
-  onActionSelected(row: T, menuItem: MenuItem): void {
-    const action = this.rowActions.find(
-      (item) => item.value === menuItem.value,
-    );
-
-    if (!action) {
-      return;
-    }
-
-    this.actionSelected.emit({
-      row,
-      action,
+    this.sortChange.emit({
+      column,
+      direction: this.sortDirection,
     });
-
-    this.closeActionMenu();
   }
 
-  /* ========================================================
-     VALUES
-     ======================================================== */
+  getCellValue(row: T, column: TableColumn<T>): unknown {
+    if (column.getValue) {
+      return column.getValue(row);
+    }
 
-  getValue(row: T, key: keyof T | string): unknown {
-    return (row as any)?.[key as any];
+    return (row as any)[column.key];
   }
 
-  /* ========================================================
-     TRACKING
-     ======================================================== */
+  //Pagination
+  get totalPages(): number {
+    if (this.totalItems === 0) {
+      return 0;
+    }
 
-  trackByColumn(index: number, column: TableColumn<T>): string {
-    return String(column.key);
+    return Math.ceil(this.totalItems / this.pageSize);
   }
 
-  trackByRow(index: number, row: T): number {
-    return index;
+  onPageChange(page: number): void {
+    this.page = page;
+
+    this.pageChange.emit(page);
+
+    this.clearActionMenu();
+  }
+
+  onPageSizeChange(size: number): void {
+    this.pageSize = size;
+
+    this.page = 1;
+
+    this.pageSizeChange.emit(size);
+
+    this.clearActionMenu();
+  }
+
+  clearActionMenu(): void {
+    this.openActionRow = null;
   }
 }

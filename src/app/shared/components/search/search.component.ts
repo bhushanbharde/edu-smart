@@ -5,60 +5,75 @@ import {
   Input,
   Output,
 } from '@angular/core';
-
 import { IconComponent } from '../../ui/display/icon';
-import { ComponentSize } from '../../types';
+
 
 @Component({
-  selector: 'erp-search',
+  selector: 'erp-search-box',
   standalone: true,
   imports: [IconComponent],
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  styleUrl: './search.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent {
   @Input() value = '';
+
   @Input() placeholder = 'Search...';
 
-  @Input() size: ComponentSize = 'md';
-
   @Input() disabled = false;
-  @Input() readonly = false;
+
+  @Input() size: 'sm' | 'md' | 'lg' = 'md';
+
+  @Input() debounce = 300;
 
   @Input() clearable = true;
 
-  @Input() ariaLabel = 'Search';
-
   @Output() valueChange = new EventEmitter<string>();
+
   @Output() search = new EventEmitter<string>();
-  @Output() cleared = new EventEmitter<void>();
+
+  private debounceTimer?: ReturnType<typeof setTimeout>;
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
 
     this.value = input.value;
+
     this.valueChange.emit(this.value);
+
+    this.emitSearchWithDebounce();
+  }
+
+  onSearch(): void {
+    this.search.emit(this.value);
+  }
+
+  clear(): void {
+    this.value = '';
+
+    this.valueChange.emit('');
+
+    this.search.emit('');
+  }
+
+  private emitSearchWithDebounce(): void {
+    if (this.debounceTimer) {
+      clearTimeout(this.debounceTimer);
+    }
+
+    this.debounceTimer = setTimeout(() => {
+      this.search.emit(this.value);
+    }, this.debounce);
   }
 
   onKeydown(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
-      this.search.emit(this.value);
+      this.onSearch();
     }
 
     if (event.key === 'Escape' && this.value) {
       this.clear();
     }
-  }
-
-  clear(): void {
-    if (this.disabled || this.readonly || !this.value) {
-      return;
-    }
-
-    this.value = '';
-
-    this.valueChange.emit('');
-    this.cleared.emit();
   }
 }

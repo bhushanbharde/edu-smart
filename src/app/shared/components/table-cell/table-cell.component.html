@@ -1,0 +1,96 @@
+<div
+  class="erp-table-cell"
+  [class.erp-table-cell--secondary]="type === 'secondary'"
+  [class.erp-table-cell--number]="type === 'number'"
+  [class.erp-table-cell--empty]="type === 'empty' || !value"
+>
+  @switch (type) {
+    <!-- Text -->
+
+    @case ("text") {
+      <span class="erp-table-cell-text">
+        {{ displayValue }}
+      </span>
+    }
+
+    <!-- Secondary -->
+
+    @case ("secondary") {
+      <div class="erp-table-cell-stack">
+        <span class="erp-table-cell-primary">
+          {{ displayValue }}
+        </span>
+
+        @if (secondary) {
+          <span class="erp-table-cell-secondary">
+            {{ secondary }}
+          </span>
+        }
+      </div>
+    }
+
+    <!-- Avatar -->
+
+    @case ("avatar") {
+      <div class="erp-table-cell-identity">
+        @if (avatar) {
+          <img class="erp-table-cell-avatar" [src]="avatar" alt="" />
+        } @else {
+          <span class="erp-table-cell-avatar-placeholder">
+            {{ displayValue.charAt(0).toUpperCase() }}
+          </span>
+        }
+
+        <div class="erp-table-cell-stack">
+          <span class="erp-table-cell-primary">
+            {{ displayValue }}
+          </span>
+
+          @if (secondary) {
+            <span class="erp-table-cell-secondary">
+              {{ secondary }}
+            </span>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Status -->
+
+    @case ("status") {
+      <erp-tag [label]="displayValue" [variant]="status" size="sm" />
+    }
+
+    <!-- Icon -->
+
+    @case ("icon") {
+      @if (icon) {
+        <erp-icon [name]="icon"></erp-icon>
+      }
+    }
+
+    <!-- Number -->
+
+    @case ("number") {
+      <span class="erp-table-cell-number">
+        {{ displayValue }}
+      </span>
+    }
+
+    <!-- Date -->
+
+    @case ("date") {
+      <span class="erp-table-cell-text">
+        {{ displayValue }}
+      </span>
+    }
+
+    <!-- Empty -->
+
+    @case ("empty") {
+      <span class="erp-table-cell-empty">
+        {{ emptyText }}
+      </span>
+    }
+  }
+</div>
